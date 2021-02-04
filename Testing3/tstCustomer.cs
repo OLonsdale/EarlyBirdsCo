@@ -15,6 +15,15 @@ namespace Testing3
         }
 
         [TestMethod]
+        public void CustomerIdPropertyOK()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            int TestData = 1;
+            ACustomer.CustomerId = TestData;
+            Assert.AreEqual(ACustomer.CustomerId, TestData);
+        }
+
+        [TestMethod]
         public void NamePropertyOK()
         {
             clsCustomer ACustomer = new clsCustomer();
