@@ -9,6 +9,30 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Label ID="lblCustomerId" runat="server" Text="Customer ID"></asp:Label>
+            <asp:TextBox ID="txtCustomerId" runat="server"></asp:TextBox>
+            <br />
+            <asp:Label ID="lblName" runat="server" Text="Name" width="100px"></asp:Label>
+            <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+            <br />
+            <asp:Label ID="lblDateOfBirth" runat="server" Text="Date of birth" width="100px"></asp:Label>
+            <asp:TextBox ID="txtDateOfBirth" runat="server"></asp:TextBox>
+            <br />
+            <asp:Label ID="lblAddress" runat="server" Text="Address" width="100px"></asp:Label>
+            <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
+            <br />
+            <asp:Label ID="lblEmail" runat="server" Text="Email" width="100px"></asp:Label>
+            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+            <br />
+            <asp:Label ID="lblPassword" runat="server" Text="Password" width="100px"></asp:Label>
+            <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
+            <br />
+            <asp:CheckBox ID="chkIsMember" runat="server" Text="Membership" />
+            <br />
+            <asp:Label ID="lblError" runat="server" width="100px"></asp:Label>
+            <br />
+            <asp:Button ID="btnOk" runat="server" OnClick="btnOk_Click" Text="OK" />
+            <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
         </div>
     </form>
 </body>

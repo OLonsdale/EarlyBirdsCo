@@ -4,6 +4,7 @@ namespace ClassLibrary
 {
     public class clsCustomer
     {
+        public int CustomerId { get; set; }
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Address { get; set; }
