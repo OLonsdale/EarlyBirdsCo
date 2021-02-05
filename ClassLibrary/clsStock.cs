@@ -6,7 +6,7 @@ namespace ClassLibrary
     {
         public int itemID { get; set; }
         public string itemName { get; set; }
-        public float price { get; set; }
+        public double price { get; set; }
         public string material { get; set; }
         public bool inStock { get; set; }
         public DateTime lastPurchased { get; set; }
