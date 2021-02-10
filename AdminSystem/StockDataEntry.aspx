@@ -5,11 +5,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+        #form1 {
+            height: 333px;
+        }
+    </style>
 </head>
-<body>
+<body style="height: 329px">
     <form id="form1" runat="server">
-        <div>
-        </div>
+        <asp:Label ID="lblItemId" runat="server" Text="Item ID " width="93px"></asp:Label>
+        <asp:TextBox ID="txtItemId" runat="server"></asp:TextBox>
+        <br />
+        <asp:Label ID="lblItemName" runat="server" Text="Item Name" width="88px"></asp:Label>
+&nbsp;<asp:TextBox ID="txtItemName" runat="server"></asp:TextBox>
+        <br />
+        <asp:Label ID="lblQuantity" runat="server" Text="Quantity" width="93px"></asp:Label>
+        <asp:TextBox ID="txtQuantity" runat="server"></asp:TextBox>
+        <br />
+        <asp:Label ID="lblPrice" runat="server" Text="Price" width="93px"></asp:Label>
+        <asp:TextBox ID="txtPrice" runat="server"></asp:TextBox>
+        <br />
+        <asp:Label ID="lblMaterial" runat="server" Text="Material" width="93px"></asp:Label>
+        <asp:TextBox ID="txtMaterial" runat="server"></asp:TextBox>
+        <br />
+        <asp:Label ID="lblLastPurchased" runat="server" Text="Last Purchased"></asp:Label>
+        <asp:TextBox ID="txtLastPurchased" runat="server"></asp:TextBox>
+        <br />
+        <br />
+        <asp:CheckBox ID="chkInStock" runat="server" Text="In Stock" />
+        <br />
+        <br />
+        <asp:Label ID="lblError" runat="server"></asp:Label>
+        <br />
+        <br />
+        <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" Text="OK" />
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
     </form>
 </body>
 </html>
