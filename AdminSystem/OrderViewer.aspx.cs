@@ -12,16 +12,16 @@ public partial class _1Viewer : System.Web.UI.Page
     {
         clsOrder AnOrder = new clsOrder();
         AnOrder = (clsOrder)Session["AnOrder"];
-        Response.Write(AnOrder.orderId);
+        Response.Write(AnOrder.OrderId);
         Response.Write("<br>");
-        Response.Write(AnOrder.dateFinalised);
+        Response.Write(AnOrder.DateFinalised);
         Response.Write("<br>");
-        Response.Write(AnOrder.itemId);
+        Response.Write(AnOrder.ItemId);
         Response.Write("<br>");
-        Response.Write(AnOrder.quantity);
+        Response.Write(AnOrder.Quantity);
         Response.Write("<br>");
-        Response.Write(AnOrder.totalPrice);
+        Response.Write(AnOrder.TotalPrice);
         Response.Write("<br>");
-        Response.Write(AnOrder.isEmpty);
+        Response.Write(AnOrder.IsEmpty);
     }
 }
