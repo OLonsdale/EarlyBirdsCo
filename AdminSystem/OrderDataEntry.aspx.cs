@@ -16,12 +16,12 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnOK_Click(object sender, EventArgs e)
     {
         clsOrder AnOrder = new clsOrder();
-        AnOrder.orderId = txtOrderId.Text;
-        AnOrder.dateFinalised = Convert.ToDateTime(txtDateFinalised.Text);
-        AnOrder.itemId = txtItemId.Text;
-        AnOrder.quantity = Convert.ToInt16(txtQuantity.Text);
-        AnOrder.totalPrice = Convert.ToDouble(txtTotalPrice.Text);
-        AnOrder.isEmpty = chkIsEmpty.Checked;
+        AnOrder.OrderId = txtOrderId.Text;
+        AnOrder.DateFinalised = Convert.ToDateTime(txtDateFinalised.Text);
+        AnOrder.ItemId = txtItemId.Text;
+        AnOrder.Quantity = Convert.ToInt16(txtQuantity.Text);
+        AnOrder.TotalPrice = Convert.ToDouble(txtTotalPrice.Text);
+        AnOrder.IsEmpty = chkIsEmpty.Checked;
         Session["AnOrder"] = AnOrder;
         Response.Redirect("OrderViewer.aspx");
     }
