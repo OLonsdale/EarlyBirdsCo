@@ -15,20 +15,21 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        //create instance of staffMember class
-        //at the moment just blindly parses inputs to match
-        clsStaff staffMember = new clsStaff();
-        staffMember.staffNumber = int.Parse(txtStaffNumber.Text);
-        staffMember.firstName = txtFirstName.Text;
-        staffMember.lastName = txtLastName.Text;
-        staffMember.hourlyRate = decimal.Parse(txtHourlyRate.Text);
-        //staffMember.isManager = bool.Parse(chkIsManager.Text);    //don't know how to parse the value returned by a checkbox
-        staffMember.phoneNumber = txtPhoneNumber.Text;
-        staffMember.startDate = System.DateTime.Parse(txtStartDate.Text);
-        Session["staffMember"] = staffMember;
+        //create instance of StaffMember class
+        //at the moment just blindly parses inputs to match the needed datatype with no validation. Will crash easily.
+        clsStaff StaffMember = new clsStaff();
+        StaffMember.StaffNumber = int.Parse(txtStaffNumber.Text);
+        StaffMember.FirstName = txtFirstName.Text;
+        StaffMember.LastName = txtLastName.Text;
+        StaffMember.HourlyRate = decimal.Parse(txtHourlyRate.Text);
+        StaffMember.IsManager = chkIsManager.Checked;
+        StaffMember.PhoneNumber = txtPhoneNumber.Text;
+        StaffMember.StartDate = System.DateTime.Parse(txtStartDate.Text);
+        Session["StaffMember"] = StaffMember;
         Response.Redirect("StaffViewer.aspx");
     }
 
+    //not sure if needed
     protected void chkIsManager_CheckedChanged(object sender, EventArgs e)
     {
 
