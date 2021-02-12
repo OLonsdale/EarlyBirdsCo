@@ -10,8 +10,8 @@ public partial class _1Viewer : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        clsStaff staffMember = new clsStaff();
-        staffMember = (clsStaff)Session["staffMember"];
-        Response.Write(staffMember.staffNumber);
+        clsStaff StaffMember = new clsStaff();
+        StaffMember = (clsStaff)Session["StaffMember"];
+        Response.Write(StaffMember.StaffNumber);
     }
 }
