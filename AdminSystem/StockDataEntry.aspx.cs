@@ -18,13 +18,13 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instance of clsStock
         clsStock AnItem = new clsStock();
         //obtain the item's properties
-        AnItem.itemID = int.Parse(txtItemId.Text);
-        AnItem.itemName = txtItemName.Text;
-        AnItem.quantity = int.Parse(txtQuantity.Text);
-        AnItem.price = double.Parse(txtPrice.Text);
-        AnItem.material = txtMaterial.Text;
-        AnItem.lastPurchased = DateTime.Parse(txtLastPurchased.Text);
-        AnItem.inStock = chkInStock.Checked;
+        AnItem.ItemId = int.Parse(txtItemId.Text);
+        AnItem.ItemName = txtItemName.Text;
+        AnItem.Quantity = int.Parse(txtQuantity.Text);
+        AnItem.Price = double.Parse(txtPrice.Text);
+        AnItem.Material = txtMaterial.Text;
+        AnItem.LastPurchased = DateTime.Parse(txtLastPurchased.Text);
+        AnItem.InStock = chkInStock.Checked;
         //store the properties in the session object
         Session["AnItem"] = AnItem;
         //navigate to the viewer page

@@ -15,13 +15,13 @@ public partial class _1Viewer : System.Web.UI.Page
         //receive the data from the session object
         AnItem = (clsStock)Session["AnItem"];
         //display the item properties for this entry 
-        Response.Write(AnItem.itemID);
-        Response.Write(AnItem.itemName);
-        Response.Write(AnItem.quantity);
-        Response.Write(AnItem.price);
-        Response.Write(AnItem.material);
-        Response.Write(AnItem.lastPurchased);
-        Response.Write(AnItem.inStock);
+        Response.Write(AnItem.ItemId);
+        Response.Write(AnItem.ItemName);
+        Response.Write(AnItem.Quantity);
+        Response.Write(AnItem.Price);
+        Response.Write(AnItem.Material);
+        Response.Write(AnItem.LastPurchased);
+        Response.Write(AnItem.InStock);
        
         
     }
