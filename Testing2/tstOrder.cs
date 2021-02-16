@@ -19,7 +19,7 @@ namespace Testing2
         public void OrderIdOK()
         {
             clsOrder AnOrder = new clsOrder();
-            String TestData = "ID121";
+            int TestData = 5;
             AnOrder.OrderId = TestData;
             Assert.AreEqual(AnOrder.OrderId, TestData);
 
@@ -70,7 +70,7 @@ namespace Testing2
         {
             clsOrder AnOrder = new clsOrder();
             Boolean Found = false;
-            String OrderId = "Find123";
+            int OrderId = 5;
             Found = AnOrder.Find(OrderId);
             Assert.IsTrue(Found);
         }
@@ -81,9 +81,9 @@ namespace Testing2
             clsOrder AnOrder = new clsOrder();
             Boolean Found = false;
             Boolean OK = true;
-            String OrderId = "Find123";
+            int OrderId = 5;
             Found = AnOrder.Find(OrderId);
-            if (AnOrder.OrderId != "Find123")
+            if (AnOrder.OrderId != 5)
             {
                 OK = false;
             }
@@ -96,9 +96,9 @@ namespace Testing2
             clsOrder AnOrder = new clsOrder();
             Boolean Found = false;
             Boolean OK = true;
-            String OrderId = "Find123";
+            int OrderId = 5;
             Found = AnOrder.Find(OrderId);
-            if (AnOrder.DateFinalised != Convert.ToDateTime("11/02/2021"))
+            if (AnOrder.DateFinalised != Convert.ToDateTime("12/12/2012"))
             {
                 OK = false;
             }
@@ -111,9 +111,9 @@ namespace Testing2
             clsOrder AnOrder = new clsOrder();
             Boolean Found = false;
             Boolean OK = true;
-            String OrderId = "Find123";
+            int OrderId = 5;
             Found = AnOrder.Find(OrderId);
-            if (AnOrder.ItemId != "Item1234")
+            if (AnOrder.ItemId != "24")
             {
                 OK = false;
             }
@@ -126,9 +126,9 @@ namespace Testing2
             clsOrder AnOrder = new clsOrder();
             Boolean Found = false;
             Boolean OK = true;
-            String OrderId = "Find123";
+            int OrderId = 5;
             Found = AnOrder.Find(OrderId);
-            if (AnOrder.Quantity != 3)
+            if (AnOrder.Quantity != 2)
             {
                 OK = false;
             }
@@ -141,9 +141,9 @@ namespace Testing2
             clsOrder AnOrder = new clsOrder();
             Boolean Found = false;
             Boolean OK = true;
-            String OrderId = "Find123";
+            int OrderId = 5;
             Found = AnOrder.Find(OrderId);
-            if (AnOrder.TotalPrice != 6.97)
+            if (AnOrder.TotalPrice != 7.5)
             {
                 OK = false;
             }
@@ -156,7 +156,7 @@ namespace Testing2
             clsOrder AnOrder = new clsOrder();
             Boolean Found = false;
             Boolean OK = true;
-            String OrderId = "Find123";
+            int OrderId = 5;
             Found = AnOrder.Find(OrderId);
             if (AnOrder.IsEmpty != false)
             {

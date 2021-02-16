@@ -4,8 +4,8 @@ namespace ClassLibrary
 {
     public class clsOrder
     {
-        private string mOrderId;
-        public string OrderId {
+        private int mOrderId;
+        public int OrderId {
             get
             {
                 return mOrderId;
@@ -28,8 +28,8 @@ namespace ClassLibrary
             }
         }
 
-        private string mItemId;
-        public string ItemId {
+        private String mItemId;
+        public String ItemId {
             get
             {
                 return mItemId;
@@ -76,15 +76,26 @@ namespace ClassLibrary
             }
         }
 
-        public bool Find(String OrderId)
+        public bool Find(int OrderId)
         {
-            mOrderId = "Find123";
-            mDateFinalised = Convert.ToDateTime("11/02/2021");
-            mItemId = "Item1234";
-            mQuantity = 3;
-            mTotalPrice = 6.97;
-            mIsEmpty = false;
-            return true;
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@OrderId", OrderId);
+            DB.Execute("spoc_tblOrder_FilerByOrderId");
+
+            if (DB.Count == 1)
+            {
+                mOrderId = Convert.ToInt32(DB.DataTable.Rows[0]["OrderNum"]);
+                mDateFinalised = Convert.ToDateTime(DB.DataTable.Rows[0]["DateFinalised"]);
+                mItemId = Convert.ToString(DB.DataTable.Rows[0]["ItemId"]);
+                mQuantity = Convert.ToInt32(DB.DataTable.Rows[0]["Quantity"]);
+                mTotalPrice = Convert.ToDouble(DB.DataTable.Rows[0]["TotalPrice"]);
+                mIsEmpty = Convert.ToBoolean(DB.DataTable.Rows[0]["IsEmpty"]);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
