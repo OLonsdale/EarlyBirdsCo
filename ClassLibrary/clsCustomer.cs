@@ -80,16 +80,26 @@ namespace ClassLibrary
         }
         public string UserPassword { get; set; }
 
-        public bool Find(int customerNo)
+        public bool Find(int CustomerId)
         {
-            mCustomerId = 21;
-            mName = "Gordon Freeman";
-            mDateOfBirth = Convert.ToDateTime("21/10/1970");
-            mAddress = "109 Black Mesa Street";
-            mEmail = "g.freeman@blackmesa.com";
-            mIsMember = true;
+            clsDataConnection db = new clsDataConnection();
+            db.AddParameter("CustomerId", CustomerId);
+            db.Execute("sproc_tblCustomer_FilterByCustomerId");
 
-            return true;
+            if (db.Count == 1)
+            {
+                mCustomerId = Convert.ToInt32(db.DataTable.Rows[0]["CustomerId"]);
+                mName = Convert.ToString(db.DataTable.Rows[0]["Name"]);
+                mDateOfBirth = Convert.ToDateTime(db.DataTable.Rows[0]["DateOfBirth"]);
+                mAddress = Convert.ToString(db.DataTable.Rows[0]["Address"]);
+                mEmail = Convert.ToString(db.DataTable.Rows[0]["Email"]);
+                mIsMember = Convert.ToBoolean(db.DataTable.Rows[0]["IsMember"]);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
