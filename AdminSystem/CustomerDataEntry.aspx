@@ -11,21 +11,19 @@
         <div>
             <asp:Label ID="lblCustomerId" runat="server" Text="Customer ID"></asp:Label>
             <asp:TextBox ID="txtCustomerId" runat="server"></asp:TextBox>
+            <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" Text="Find" />
             <br />
             <asp:Label ID="lblName" runat="server" Text="Name" width="100px"></asp:Label>
-            <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtName" runat="server" width="168px"></asp:TextBox>
             <br />
             <asp:Label ID="lblDateOfBirth" runat="server" Text="Date of birth" width="100px"></asp:Label>
-            <asp:TextBox ID="txtDateOfBirth" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtDateOfBirth" runat="server" width="168px"></asp:TextBox>
             <br />
             <asp:Label ID="lblAddress" runat="server" Text="Address" width="100px"></asp:Label>
-            <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtAddress" runat="server" width="168px"></asp:TextBox>
             <br />
             <asp:Label ID="lblEmail" runat="server" Text="Email" width="100px"></asp:Label>
-            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="lblPassword" runat="server" Text="Password" width="100px"></asp:Label>
-            <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtEmail" runat="server" width="168px"></asp:TextBox>
             <br />
             <asp:CheckBox ID="chkIsMember" runat="server" Text="Membership" />
             <br />
