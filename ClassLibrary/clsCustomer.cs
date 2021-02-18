@@ -10,7 +10,9 @@ namespace ClassLibrary
         private string mAddress;
         private string mEmail;
         private bool mIsMember;
-        private string mUserPassword;
+        //private string mUserPassword;
+        //commented this out for the unused warning. -oliver
+
 
         public int CustomerId
         {
