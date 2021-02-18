@@ -94,12 +94,7 @@ namespace Testing1
         }
 
 
-        /// 
-        /// some scuffed stuff here
-        /// Currently all fake
-        /// "searches" for a specific record (that of staff number 112233)
-        /// Checks if the data from 112233 has been correctly "loaded"
-        /// 
+        /// Tests searching the database for a given record via the staff number
 
         //General check
         [TestMethod]
@@ -107,7 +102,7 @@ namespace Testing1
         {
             clsStaff staffMember = new clsStaff();
             Boolean Found = false;
-            int StaffNumber = 22345;
+            int StaffNumber = 10005;
             Found = staffMember.Find(StaffNumber);
             Assert.IsTrue(Found);
         }
@@ -119,7 +114,7 @@ namespace Testing1
             clsStaff staffMemeber = new clsStaff();
             bool Found = false;
             bool OK = true;
-            int StaffNumber = 112233;
+            int StaffNumber = 10005;
             Found = staffMemeber.Find(StaffNumber);
             if (staffMemeber.StaffNumber != 112233)
             {
@@ -135,7 +130,7 @@ namespace Testing1
             clsStaff staffMemeber = new clsStaff();
             bool Found = false;
             bool OK = true;
-            int StaffNumber = 112233;
+            int StaffNumber = 10005;
             Found = staffMemeber.Find(StaffNumber);
             if (staffMemeber.FirstName != "Barney")
             {
@@ -151,7 +146,7 @@ namespace Testing1
             clsStaff staffMemeber = new clsStaff();
             bool Found = false;
             bool OK = true;
-            int StaffNumber = 112233;
+            int StaffNumber = 10005;
             Found = staffMemeber.Find(StaffNumber);
             if (staffMemeber.LastName != "Calhoun")
             {
@@ -167,7 +162,7 @@ namespace Testing1
             clsStaff staffMemeber = new clsStaff();
             bool Found = false;
             bool OK = true;
-            int StaffNumber = 112233;
+            int StaffNumber = 10005;
             Found = staffMemeber.Find(StaffNumber);
             if (staffMemeber.IsManager != true)
             { 
@@ -183,7 +178,7 @@ namespace Testing1
             clsStaff staffMemeber = new clsStaff();
             bool Found = false;
             bool OK = true;
-            int StaffNumber = 112233;
+            int StaffNumber = 10005;
             Found = staffMemeber.Find(StaffNumber);
             if (staffMemeber.HourlyRate != 19.02m)
             {
@@ -200,7 +195,7 @@ namespace Testing1
             clsStaff staffMemeber = new clsStaff();
             bool Found = false;
             bool OK = true;
-            int StaffNumber = 112233;
+            int StaffNumber = 10005;
             Found = staffMemeber.Find(StaffNumber);
             if (staffMemeber.PhoneNumber != "01724280808")
             {
@@ -218,9 +213,9 @@ namespace Testing1
             clsStaff staffMemeber = new clsStaff();
             bool Found = false;
             bool OK = true;
-            int StaffNumber = 112233;
+            int StaffNumber = 10005;
             Found = staffMemeber.Find(StaffNumber);
-            if (staffMemeber.StartDate != Convert.ToDateTime("2008-10-10"))
+            if (staffMemeber.StartDate != Convert.ToDateTime("10/10/2008"))
             {
                 OK = false;
             }
