@@ -107,7 +107,7 @@ namespace Testing1
             Assert.IsTrue(Found);
         }
 
-        //Staff Number
+        //Staff Number (I think this is worthless and should be removed?)
         [TestMethod]
         public void TestStaffNumberFound()
         {
@@ -116,7 +116,7 @@ namespace Testing1
             bool OK = true;
             int StaffNumber = 10005;
             Found = staffMemeber.Find(StaffNumber);
-            if (staffMemeber.StaffNumber != 112233)
+            if (staffMemeber.StaffNumber != 10005)
             {
                 OK = false;
             }

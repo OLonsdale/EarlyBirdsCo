@@ -110,6 +110,7 @@ namespace ClassLibrary
             DB.Execute("sproc_tblStaff_FilterByStaffNumber");
             if (DB.Count == 1)
             {
+                mStaffNumber = Convert.ToInt32(DB.DataTable.Rows[0]["StaffNumber"]);
                 mFirstName   = Convert.ToString(DB.DataTable.Rows[0]["FirstName"]);
                 mLastName    = Convert.ToString(DB.DataTable.Rows[0]["LastName"]);
                 mStartDate   = Convert.ToDateTime(DB.DataTable.Rows[0]["StartDate"]);
