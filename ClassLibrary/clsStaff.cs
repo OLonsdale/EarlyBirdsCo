@@ -102,15 +102,27 @@ namespace ClassLibrary
 
         public bool Find(int StaffNumber)
         {
-            mStaffNumber = 112233;
-            mFirstName = "Barney";
-            mLastName = "Calhoun";
-            mStartDate = new DateTime(2008,10,10);
-            mPhoneNumber = "01724280808";
-            mIsManager = true;
-            mHourlyRate = 19.02m;
+            //create instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //Add the parameter for the stored procedure
+            DB.AddParameter("@StaffNumber", StaffNumber);
+            //Run the stored procedure
+            DB.Execute("sproc_tblStaff_FilterByStaffNumber");
+            if (DB.Count == 1)
+            {
+                mStaffNumber = Convert.ToInt32(DB.DataTable.Rows[0]["StaffNumber"]);
+                mFirstName   = Convert.ToString(DB.DataTable.Rows[0]["FirstName"]);
+                mLastName    = Convert.ToString(DB.DataTable.Rows[0]["LastName"]);
+                mStartDate   = Convert.ToDateTime(DB.DataTable.Rows[0]["StartDate"]);
+                mPhoneNumber = Convert.ToString(DB.DataTable.Rows[0]["PhoneNumber"]);
+                mIsManager   = Convert.ToBoolean(DB.DataTable.Rows[0]["IsManager"]);
+                mHourlyRate  = Convert.ToDecimal(DB.DataTable.Rows[0]["HourlyRate"]);
+
+                return true;
+            }
+
+            else return false;
             
-            return true;
         }
     }
 }
