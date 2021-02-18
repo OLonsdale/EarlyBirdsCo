@@ -129,7 +129,7 @@ namespace ClassLibrary
             mLastPurchased = Convert.ToDateTime("25/01/2021");
             mQuantity = 50; 
             //always return true
-            return true;
+            return true; 
         }
     }
 }
