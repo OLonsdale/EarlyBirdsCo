@@ -28,7 +28,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //store the properties in the session object
         Session["AnItem"] = AnItem;
         //navigate to the viewer page
-        Response.Redirect("StockViewer.aspx");
+        Response.Redirect("StockViewer.aspx");//
     }
 
    /* protected void btnFind_Click(object sender, EventArgs e)
