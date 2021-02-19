@@ -30,6 +30,19 @@ namespace Testing5
         }
 
         [TestMethod]
+        public void ItemNameOK()
+        {
+            //create an instance of clsStock
+            clsStock AnItem = new clsStock();
+            //create some test data to assign to the property
+            string TestData = "WASD Keycaps Set";
+            //assign the data to the property
+            AnItem.ItemName = TestData;
+            //test to see that the two values are the same
+            Assert.AreEqual(AnItem.ItemName, TestData);
+        }
+
+        [TestMethod]
         public void PriceOK()
         {
             //create an instance of clsStock
@@ -45,14 +58,18 @@ namespace Testing5
         [TestMethod]
         public void MaterialOK()
         {
+            //create an instance of clsStock
             clsStock AnItem = new clsStock();
+            //create some test data to assign to the property
             string TestData = "Metal";
+            //assign the data to the property
             AnItem.Material = TestData;
+            //test to see that the two values are the same
             Assert.AreEqual(AnItem.Material, TestData);
         }
 
         [TestMethod]
-        public void inStockOK()
+        public void InStockOK()
         {
             //create an instance of clsStock
             clsStock AnItem = new clsStock();
@@ -78,7 +95,7 @@ namespace Testing5
         }
 
         [TestMethod]
-        public void quantityOK()
+        public void QuantityOK()
         {
             //create an instance of clsStock
             clsStock AnItem = new clsStock();
@@ -98,7 +115,7 @@ namespace Testing5
             //boolean variable to store the result of the search
             Boolean Found = false;
             //create some test data to use with the method
-            Int32 itemId = 21;
+            Int32 itemId = 2;
             //invoke the method
             Found = AnItem.Find(itemId);
             //test to see that the result is correct
@@ -115,11 +132,11 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ItemId = 21;
+            Int32 ItemId = 2;
             //invoke the method
             Found = AnItem.Find(ItemId);
             //check the property
-            if (AnItem.ItemId != 21)
+            if (AnItem.ItemId != 2)
             {
                 OK = false;
             }
@@ -137,11 +154,11 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ItemId = 21;
+            Int32 ItemId = 2;
             //invoke the method
             Found = AnItem.Find(ItemId);
             //check the property
-            if (AnItem.ItemName != "Keycap1")
+            if (AnItem.ItemName != "Avengers Thor Esc Keycap                          ")
             {
                 OK = false;
             }
@@ -159,11 +176,11 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ItemId = 21;
+            Int32 ItemId = 2;
             //invoke the method
             Found = AnItem.Find(ItemId);
             //check the property
-            if (AnItem.Price != 2.49)
+            if (AnItem.Price != 35.00)
             {
                 OK = false;
             }
@@ -181,11 +198,11 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ItemId = 21;
+            Int32 ItemId = 2;
             //invoke the method
             Found = AnItem.Find(ItemId);
             //check the property
-            if (AnItem.Material != "Steel")
+            if (AnItem.Material != "Aluminium           ")
             {
                 OK = false;
             }
@@ -203,7 +220,7 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ItemId = 21;
+            Int32 ItemId = 2;
             //invoke the method
             Found = AnItem.Find(ItemId);
             //check the property
@@ -225,11 +242,11 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ItemId = 21;
+            Int32 ItemId = 2;
             //invoke the method
             Found = AnItem.Find(ItemId);
             //check the property
-            if (AnItem.LastPurchased != Convert.ToDateTime("25/01/2021"))
+            if (AnItem.LastPurchased != Convert.ToDateTime("15/01/2021"))
             {
                 OK = false;
             }
@@ -247,11 +264,11 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ItemId = 21;
+            Int32 ItemId = 2;
             //invoke the method
             Found = AnItem.Find(ItemId);
             //check the property
-            if (AnItem.Quantity != 50)
+            if (AnItem.Quantity != 7)
             {
                 OK = false;
             }
