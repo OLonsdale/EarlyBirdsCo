@@ -15,6 +15,7 @@
     <form id="form1" runat="server">
         <asp:Label ID="lblItemId" runat="server" Text="Item ID " width="93px"></asp:Label>
         <asp:TextBox ID="txtItemId" runat="server"></asp:TextBox>
+        <asp:Button ID="btnFind" runat="server" Height="22px" Text="Find" Width="42px" />
         <br />
         <asp:Label ID="lblItemName" runat="server" Text="Item Name" width="88px"></asp:Label>
 &nbsp;<asp:TextBox ID="txtItemName" runat="server"></asp:TextBox>

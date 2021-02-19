@@ -30,4 +30,23 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //navigate to the viewer page
         Response.Redirect("StockViewer.aspx");
     }
+
+   /* protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //create an instance of clsStock
+        clsStock AnItem = new clsStock();
+        Int32 ItemId;
+        Boolean Found = false;
+        ItemId = Convert.ToInt32(txtItemId.Text);
+        if (Found == true)
+        {
+            //display the values of the properties in the form
+            txtItemName.Text = AnItem.ItemName;
+            txtQuantity.Text = AnItem.Quantity;
+            txtPrice.Text = AnItem.Price;
+            txtMaterial.Text = AnItem.Material;
+            txtLastPurchased.Text = AnItem.LastPurchased.ToString();          
+      
+        }
+    } */
 }
