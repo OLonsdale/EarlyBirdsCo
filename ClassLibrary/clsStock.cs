@@ -120,7 +120,7 @@ namespace ClassLibrary
 
         public bool Find(int ItemId)
         {
-            //create am instance of the data connection
+            //create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();
             //add the parameter for the item to search for
             DB.AddParameter("@ItemId", ItemId);

@@ -15,7 +15,7 @@
     <form id="form1" runat="server">
         <asp:Label ID="lblItemId" runat="server" Text="Item ID " width="93px"></asp:Label>
         <asp:TextBox ID="txtItemId" runat="server"></asp:TextBox>
-        <asp:Button ID="btnFind" runat="server" Height="22px" Text="Find" Width="42px" />
+        <asp:Button ID="btnFind" runat="server" Height="22px" Text="Find" Width="42px" OnClick="btnFind_Click" />
         <br />
         <asp:Label ID="lblItemName" runat="server" Text="Item Name" width="88px"></asp:Label>
 &nbsp;<asp:TextBox ID="txtItemName" runat="server"></asp:TextBox>
@@ -36,7 +36,7 @@
         <asp:CheckBox ID="chkInStock" runat="server" Text="In Stock" />
         <br />
         <br />
-        <asp:Label ID="lblError" runat="server"></asp:Label>
+        <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
         <br />
         <br />
         <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" Text="OK" />
