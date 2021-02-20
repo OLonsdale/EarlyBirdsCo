@@ -13,6 +13,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     }
 
+    //OK button
     protected void btnOK_Click(object sender, EventArgs e)
     {
         //create a new instance of clsStock
@@ -31,22 +32,43 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Response.Redirect("StockViewer.aspx");
     }
 
-   /* protected void btnFind_Click(object sender, EventArgs e)
+    //Find button
+
+    protected void btnFind_Click(object sender, EventArgs e)
     {
         //create an instance of clsStock
         clsStock AnItem = new clsStock();
+        //variable to store the primary key
         Int32 ItemId;
+        //variable to store the result of the find operation
         Boolean Found = false;
+        //get the primary key entered by the user
         ItemId = Convert.ToInt32(txtItemId.Text);
-        if (Found == true)
+        //Find the record
+        Found = AnItem.Find(ItemId);
+        //if found...
+        if (Found)
         {
             //display the values of the properties in the form
             txtItemName.Text = AnItem.ItemName;
-            txtQuantity.Text = AnItem.Quantity;
-            txtPrice.Text = AnItem.Price;
+            txtQuantity.Text = AnItem.Quantity.ToString();
+            txtPrice.Text = AnItem.Price.ToString();
             txtMaterial.Text = AnItem.Material;
-            txtLastPurchased.Text = AnItem.LastPurchased.ToString();          
-      
+            txtLastPurchased.Text = AnItem.LastPurchased.ToString();
+            chkInStock.Checked = AnItem.InStock;
         }
-    } */
+        //if record does not exist...
+        else
+        {
+            //reset the text boxes to empty
+            txtItemName.Text = "";
+            txtQuantity.Text = "";
+            txtPrice.Text = "";
+            txtMaterial.Text = "";
+            txtLastPurchased.Text = "";
+            chkInStock.Checked = false;
+            //output an error message
+            lblError.Text = "Error! No Such Item Exists.";
+        }
+    }
 }
