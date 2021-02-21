@@ -7,6 +7,14 @@ namespace Testing5
     [TestClass]
     public class tstStock
     {
+        //good test data
+        //test data that will pass the method
+        string ItemName = "Keycap";
+        string Price = "7.50";
+        string Material = "Resin";
+        string LastPurchased = DateTime.Now.Date.ToString();
+        string Quantity = "25";
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -275,5 +283,18 @@ namespace Testing5
             //test to see that the result is correct
             Assert.IsTrue(OK);
         } 
+
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            //create an instance of clsStock
+            clsStock AnItem = new clsStock();
+            //variable to store error message
+            String Error = "";
+            //invoke the method
+            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            //test to see the result is correct
+            Assert.AreEqual(Error, "");           
+        }
     }
 }

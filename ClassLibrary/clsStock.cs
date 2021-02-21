@@ -143,5 +143,14 @@ namespace ClassLibrary
                 return false;
             }
         }
+
+        public string Valid(string ItemName,
+                            string Price,
+                            string Material,
+                            string LastPurchased,
+                            string Quantity)
+        {
+            return "";
+        }
     }
 }
