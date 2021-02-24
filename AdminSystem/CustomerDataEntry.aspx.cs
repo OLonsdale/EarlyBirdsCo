@@ -17,16 +17,30 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         clsCustomer ACustomer = new clsCustomer();
 
-        ACustomer.CustomerId = Convert.ToInt32(txtCustomerId.Text);
-        ACustomer.Name = txtName.Text;
-        // ACustomer.DateOfBirth = "";
-        ACustomer.Address = txtAddress.Text;
-        ACustomer.Email = txtEmail.Text;
-        // ACustomer.UserPassword = txtPassword.Text;
-        ACustomer.IsMember = chkIsMember.Checked;
+        string Name = txtName.Text;
+        string DateOfBirth = txtDateOfBirth.Text;
+        string Address = txtAddress.Text;
+        string Email = txtEmail.Text;
 
-        Session["ACustomer"] = ACustomer;
-        Response.Redirect("CustomerViewer.aspx");
+        string Error = "";
+        Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+
+        if (Error == "")
+        {
+            ACustomer.CustomerId = Convert.ToInt32(txtCustomerId.Text);
+            ACustomer.Name = Name;
+            ACustomer.DateOfBirth = Convert.ToDateTime(DateOfBirth);
+            ACustomer.Address = Address;
+            ACustomer.Email = Email;
+            ACustomer.IsMember = chkIsMember.Checked;
+
+            Session["ACustomer"] = ACustomer;
+            Response.Redirect("CustomerViewer.aspx");
+        }
+        else
+        {
+            lblError.Text = Error;
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
