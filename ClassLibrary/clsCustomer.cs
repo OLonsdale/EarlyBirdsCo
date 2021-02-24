@@ -103,5 +103,60 @@ namespace ClassLibrary
                 return false;
             }
         }
+
+        public string Valid(string Name, string DateOfBirth, string Address, string Email)
+        {
+            String Error = "";
+            DateTime DateTemp;
+            DateTime MinDate = new DateTime(1900, 1, 1);
+            DateTime MaxDate;
+            MaxDate = DateTime.Now.Date;
+            MaxDate = MaxDate.AddYears(-13);
+
+            if (Name.Length == 0)
+            {
+                Error = Error + "Name may not be blank. ";
+            }
+            if (Name.Length > 50)
+            {
+                Error = Error + "Name may not be longer than 50 characters. ";
+            }
+
+            try
+            {
+                DateTemp = Convert.ToDateTime(DateOfBirth);
+                if (DateTemp < MinDate)
+                {
+                    Error = Error + "The date cannot be earlier than 1/01/1900. ";
+                }
+                if (DateTemp > MaxDate)
+                {
+                    Error = Error + "The date cannot be later than today's date minus 13 years. ";
+                }
+            } catch
+            {
+                Error = Error + "Invalid date. ";
+            }
+
+            if (Address.Length == 0)
+            {
+                Error = Error + "Address may not be blank. ";
+            }
+            if (Address.Length > 50)
+            {
+                Error = Error + "Address may not be longer than 50 characters. ";
+            }
+
+            if (Email.Length == 0)
+            {
+                Error = Error + "Email may not be blank. ";
+            }
+            if (Email.Length > 50)
+            {
+                Error = Error + "Email may not be longer than 50 characters. ";
+            }
+
+            return Error;
+        }
     }
 }
