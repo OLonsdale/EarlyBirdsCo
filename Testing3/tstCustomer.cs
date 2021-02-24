@@ -7,6 +7,11 @@ namespace Testing3
     [TestClass]
     public class tstCustomer
     {
+        string Name = "Alyx Vance";
+        string DateOfBirth = new DateTime(1990, 6, 19).ToString();
+        string Address = "17 City Street";
+        string Email = "alyx.v@whiteforest.com";
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -175,6 +180,369 @@ namespace Testing3
                 OK = false;
             }
             Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMinLessOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Name = "";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMin()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Name = "a";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMinPlusOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Name = "aa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMaxLessOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMax()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMid()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Name = "aaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMaxPlusOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameExtremeMax()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Name = "";
+            Name = Name.PadRight(500, 'a');
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateOfBirthExtremeMin()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate = new DateTime(1900, 1, 1);
+            TestDate = TestDate.AddYears(-100);
+            String DateOfBirth = TestDate.ToString();
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateOfBirthMinLessOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate = new DateTime(1900, 1, 1);
+            TestDate = TestDate.AddDays(-1);
+            String DateOfBirth = TestDate.ToString();
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateOfBirthMin()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate = new DateTime(1900, 1, 1);
+            String DateOfBirth = TestDate.ToString();
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateOfBirthMinPlusOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate = new DateTime(1900, 1, 1);
+            TestDate = TestDate.AddDays(1);
+            String DateOfBirth = TestDate.ToString();
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateOfBirthExtremeMax()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddYears(-13);
+            TestDate = TestDate.AddYears(100);
+            String DateOfBirth = TestDate.ToString();
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateOfBirthMaxLessOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddYears(-13);
+            TestDate = TestDate.AddDays(-1);
+            String DateOfBirth = TestDate.ToString();
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateOfBirthMax()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddYears(-13);
+            String DateOfBirth = TestDate.ToString();
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateOfBirthMid()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate;
+            TestDate = new DateTime(1900, 1, 1);
+            TestDate = TestDate.AddYears(54); // Just an estimate, no idea how to calculate a mid date
+            String DateOfBirth = TestDate.ToString();
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateOfBirthInvalidData()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String DateOfBirth = "this is not a date";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMinLessOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Address = "";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMin()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Address = "a";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMinPlusOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Address = "aa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMaxLessOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Address = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMax()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Address = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMaxPlusOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Address = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMid()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Address = "aaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressExtremeMax()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Address = "";
+            Address = Address.PadRight(500, 'a');
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMinLessOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Email = "";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMin()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Email = "a";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMinPlusOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Email = "aa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMaxLessOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMax()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMaxPlusOne()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMid()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Email = "aaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailExtremeMax()
+        {
+            clsCustomer ACustomer = new clsCustomer();
+            String Error = "";
+            String Email = "";
+            Email = Email.PadRight(500, 'a');
+            Error = ACustomer.Valid(Name, DateOfBirth, Address, Email);
+            Assert.AreNotEqual(Error, "");
         }
     }
 }
