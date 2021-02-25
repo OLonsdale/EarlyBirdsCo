@@ -76,11 +76,11 @@ namespace ClassLibrary
             }
         }
 
-        public bool Find(int OrderId)
+        public bool Find(int OrderNum)
         {
             clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@OrderId", OrderId);
-            DB.Execute("spoc_tblOrder_FilerByOrderId");
+            DB.AddParameter("@OrderNum", OrderNum);
+            DB.Execute("sproc_tblOrder_FilterByOrderId");
 
             if (DB.Count == 1)
             {
