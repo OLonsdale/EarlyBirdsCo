@@ -7,7 +7,8 @@ namespace Testing1
     [TestClass]
     public class tstStaff
     {
-        [TestMethod]
+
+    [TestMethod]
         public void InstanceOK()
         {
             //create a new instance of the class
@@ -187,7 +188,6 @@ namespace Testing1
             Assert.IsTrue(OK);
         }
 
-
         //Phone Number
         [TestMethod]
         public void TestPhoneNumberFound()
@@ -203,8 +203,6 @@ namespace Testing1
             }
             Assert.IsTrue(OK);
         }
-
-
 
         //Start Date
         [TestMethod]
@@ -223,7 +221,34 @@ namespace Testing1
         }
 
 
+        ////Testing the validation method
+
+        //Valid Data
+        string FirstName = "James";
+        string LastName = "Bond";
+        string StartDate = "1953";
+        string PhoneNumber = "07492278399";
+        string HourlyRate = "30";
 
 
+        [TestMethod]
+
+        public void ValidMethodOK()
+        {
+            clsStaff staffMember = new clsStaff();
+            String Error = "";
+            Error = staffMember.Valid(FirstName, LastName, StartDate, PhoneNumber, HourlyRate);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void FirstNameValidMinMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string FirstName = "";
+            string Error = "";
+            Error = staffMemeber.Valid(FirstName, LastName, StartDate, PhoneNumber, HourlyRate);
+            Assert.AreNotEqual(Error, "");
+        }
     }
 }
