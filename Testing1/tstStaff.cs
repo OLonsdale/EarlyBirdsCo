@@ -224,6 +224,7 @@ namespace Testing1
         ////Testing the validation method
 
         //Valid Data
+        string StaffNumber = "10000";
         string FirstName = "James";
         string LastName = "Bond";
         string StartDate = "2018-01-01";
@@ -236,13 +237,72 @@ namespace Testing1
         public void ValidMethodOK()
         {
             clsStaff staffMember = new clsStaff();
-            String Error = "";
-            Error += staffMember.ValidName(FirstName);
-            Error += staffMember.ValidName(LastName);
-            Error += staffMember.ValidHourlyRate(HourlyRate);
-            Error += staffMember.ValidPhoneNumber(PhoneNumber);
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual(true, staffMember.Valid(StaffNumber, FirstName, LastName, PhoneNumber, HourlyRate, StartDate));
         }
+
+        /// Staff Number Valid
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////
+
+        [TestMethod]
+        public void StaffNumberValidExtremeMin()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StaffNum = "";
+            string Error = "";
+            Error = staffMemeber.ValidStaffNumber(StaffNum);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void StaffNumberValidMaxMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StaffNum = "1000";
+            string Error = "";
+            Error = staffMemeber.ValidStaffNumber(StaffNum);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void StaffNumberValidMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StaffNum = "10000";
+            string Error = "";
+            Error = staffMemeber.ValidStaffNumber(StaffNum);
+            Assert.AreEqual(Error, ""); //should not error
+        }
+
+        [TestMethod]
+        public void StaffNumberValidMaxPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StaffNum = "100000";
+            string Error = "";
+            Error = staffMemeber.ValidStaffNumber(StaffNum);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void StaffNumberValidExtremeMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StaffNum = "1000000000000000000000000";
+            string Error = "";
+            Error = staffMemeber.ValidStaffNumber(StaffNum);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void StaffNumberValidInvalid()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StaffNum = "number";
+            string Error = "";
+            Error = staffMemeber.ValidStaffNumber(StaffNum);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
 
         /// First Name Valid
         /// //////////////////////////////////////////////////////////////////////////////////////////////////

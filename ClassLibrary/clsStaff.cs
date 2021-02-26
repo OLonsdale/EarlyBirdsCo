@@ -81,18 +81,33 @@ namespace ClassLibrary
 
         //Testing validitiy of inputs
 
+        public string ValidStaffNumber(string number)
+        {
+            string error = "";
+            if (number.Length == 0) { error = "Please enter a staff number. "; return error; }
+
+            if (number.Length != 5) error += "Staff number must be five digits long. ";
+
+            if (number.All(char.IsDigit) == false) error += "Staff number must only have numbers. ";
+
+            return error;
+        }
+
         public string ValidName(string name)
         {
             string errorMessage = "";
-            if (name.Length < 1)          errorMessage += "Name too short\n";
-            if (name.Length > 50)    errorMessage += "Name too long\n";
-            if (name.Any(char.IsDigit))   errorMessage += "Name contains a number\n";
+            if (name.Length == 0) { errorMessage = "Please enter a name. "; return errorMessage; }
+            if (name.Length < 1)          errorMessage += "Name too short. ";
+            if (name.Length > 50)    errorMessage += "Name too long. ";
+            if (name.Any(char.IsDigit))   errorMessage += "Name contains a number. ";
             return errorMessage;
         }
 
         public string ValidStartDate(string date)
         {
             string errorMessage = "";
+
+            if (date.Length == 0) { errorMessage = "Please enter a date"; return errorMessage; }
 
             string tmp = "1900-01-01";
             DateTime inputDate = DateTime.Parse(tmp);
@@ -101,10 +116,10 @@ namespace ClassLibrary
             DateTime maxDate = DateTime.Today.AddYears(1);
 
             try { inputDate = DateTime.Parse(date); }
-            catch { errorMessage += "Start date invalid\n"; return errorMessage; }
+            catch { errorMessage += "Start date invalid. "; return errorMessage; }
 
-            if (inputDate.CompareTo(minDate) < 0) errorMessage +=      "Start date too early (must be after 2015-01-01)\n";
-            else if (inputDate.CompareTo(maxDate) > 0) errorMessage += "Start date too late (must be no more than one year from today)\n";
+            if (inputDate.CompareTo(minDate) < 0) errorMessage += "Start date too early (must be after 2015-01-01). ";
+            else if (inputDate.CompareTo(maxDate) > 0) errorMessage += "Start date too late (must be no more than one year from today). ";
             return errorMessage;
         }
 
@@ -112,35 +127,56 @@ namespace ClassLibrary
         {
             string errorMessage = "";
 
-            if (phoneNum.Length == 0) { errorMessage += "Phone number missing\n"; return errorMessage; }
-            if (phoneNum.Length < 6) errorMessage += "Phone number too short\n";
-            else if (phoneNum.Length > 20) errorMessage += "Phone number too long\n";
+            if (phoneNum.Length == 0) { errorMessage += "Please enter a phone number. "; return errorMessage; }
+            if (phoneNum.Length < 6) errorMessage += "Phone number too short. ";
+            else if (phoneNum.Length > 20) errorMessage += "Phone number too long. ";
 
             if (phoneNum[0] == '+')
             {
                 string substring = phoneNum.Substring(1);
-                if (substring.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +\n";
+                if (substring.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +. ";
             }
             else
             {
-                if (phoneNum.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +\n";
+                if (phoneNum.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +. ";
             }
 
             return errorMessage;
 
         }
+
         public string ValidHourlyRate(string rate)
         {
             string errorMessage = "";
 
+            if (rate.Length == 0) { errorMessage = "Please enter an hourly rate. "; return errorMessage; }
+
             Decimal hourlyRate = -1;
 
             try { hourlyRate = Decimal.Parse(rate); }
-            catch { errorMessage += "Hourly rate wrong format or too large\n"; return errorMessage; }
+            catch { errorMessage += "Hourly rate wrong format or too large. "; return errorMessage; }
 
-            if (hourlyRate < 0) errorMessage += "Hourly rate cannot be negative\n";
+            if (hourlyRate < 0) errorMessage += "Hourly rate cannot be negative. ";
 
             return errorMessage;
+        }
+
+        public bool Valid(string snum, string fname, string lname, string phone, string rate, string start)
+        {
+            string error = "";
+
+            error += ValidStaffNumber(snum);
+            error += ValidName(fname);
+            error += ValidName(lname);
+            error += ValidPhoneNumber(phone);
+            error += ValidHourlyRate(rate);
+            error += ValidStartDate(start);
+
+            if (error == "")
+            {
+                return true;
+            }
+            else return false;
         }
        
     }
