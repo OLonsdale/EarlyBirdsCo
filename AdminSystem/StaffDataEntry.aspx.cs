@@ -37,15 +37,15 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
         else
         {
-            StaffMember.StaffNumber = int.Parse(txtStaffNumber.Text);
-            StaffMember.FirstName = txtFirstName.Text;
-            StaffMember.LastName = txtLastName.Text;
-            StaffMember.HourlyRate = decimal.Parse(txtHourlyRate.Text);
+            StaffMember.StaffNumber = int.Parse(staffNum);
+            StaffMember.FirstName = firstName;
+            StaffMember.LastName = lastName;
+            StaffMember.HourlyRate = decimal.Parse(hourlyRate);
             StaffMember.IsManager = chkIsManager.Checked;
-            StaffMember.PhoneNumber = txtPhoneNumber.Text;
-            StaffMember.StartDate = System.DateTime.Parse(txtStartDate.Text);
+            StaffMember.PhoneNumber = phoneNumber;
+            StaffMember.StartDate = DateTime.Parse(startDate);
             Session["StaffMember"] = StaffMember;
-            Response.Redirect("StaffViewer.aspx");
+            Response.Write("StaffViewer.aspx");
         }
     }
 
