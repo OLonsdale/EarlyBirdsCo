@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ClassLibrary
 {
@@ -78,91 +79,69 @@ namespace ClassLibrary
             else return false;
         }
 
-        //Takes the fields that needs validating, returns an error message or an empty string.
-        public string Valid(string FirstName, string LastName, string StartDate, string PhoneNumber, string HourlyRate)
+        //Testing validitiy of inputs
+
+        public string ValidName(string name)
         {
-            string Error = "";
-
-            ////First Name////
-
-            //First Name too short
-            if (FirstName.Length < 1)
-            {
-                Error = Error + "First name too short, ";
-            }
-
-            //First name too long
-            if(FirstName.Length > 50)
-            {
-                Error = Error + "First name too long, ";
-            }
-
-            char[] name = FirstName.ToCharArray();
-
-            for (int i = 0; i != name.Length ; i++){
-                if(name[i] == '0' || 
-                   name[i] == '1' || 
-                   name[i] == '2' || 
-                   name[i] == '3' || 
-                   name[i] == '4' || 
-                   name[i] == '5' || 
-                   name[i] == '6' || 
-                   name[i] == '7' || 
-                   name[i] == '8' || 
-                   name[i] == '9'){
-                    Error = Error + "First name contains number, "; break; }
-            }
-
-            ////Last Name////
-
-            if (LastName.Length < 1)
-            {
-                Error = Error + "Last name too short, ";
-            }
-
-            //Last name too long
-            if (LastName.Length > 50)
-            {
-                Error = Error + "Last name too long, ";
-            }
-
-            name = LastName.ToCharArray();
-
-            for (int i = 0; i != name.Length; i++)
-            {
-                if(name[i] == '0' ||
-                   name[i] == '1' ||
-                   name[i] == '2' ||
-                   name[i] == '3' ||
-                   name[i] == '4' ||
-                   name[i] == '5' ||
-                   name[i] == '6' ||
-                   name[i] == '7' ||
-                   name[i] == '8' ||
-                   name[i] == '9') {
-                    Error = Error + "Last name contains number, "; break;
-                }
-            }
-
-            
-            ////Start Date////
-            
-
-
-
-
-
-            //Phone Number
-
-
-
-            //Hourly Rate
-
-
-
-
-
-            return Error;
+            string errorMessage = "";
+            if (name.Length < 1)          errorMessage += "Name too short\n";
+            if (name.Length > 50)    errorMessage += "Name too long\n";
+            if (name.Any(char.IsDigit))   errorMessage += "Name contains a number\n";
+            return errorMessage;
         }
+
+        public string ValidStartDate(string date)
+        {
+            string errorMessage = "";
+
+            string tmp = "1900-01-01";
+            DateTime inputDate = DateTime.Parse(tmp);
+            tmp = "2015-01-01";
+            DateTime minDate = DateTime.Parse(tmp);
+            DateTime maxDate = DateTime.Today.AddYears(1);
+
+            try { inputDate = DateTime.Parse(date); }
+            catch { errorMessage += "Start date invalid\n"; return errorMessage; }
+
+            if (inputDate.CompareTo(minDate) < 0) errorMessage +=      "Start date too early (must be after 2015-01-01)\n";
+            else if (inputDate.CompareTo(maxDate) > 0) errorMessage += "Start date too late (must be no more than one year from today)\n";
+            return errorMessage;
+        }
+
+        public string ValidPhoneNumber(string phoneNum)
+        {
+            string errorMessage = "";
+
+            if (phoneNum.Length == 0) { errorMessage += "Phone number missing\n"; return errorMessage; }
+            if (phoneNum.Length < 6) errorMessage += "Phone number too short\n";
+            else if (phoneNum.Length > 20) errorMessage += "Phone number too long\n";
+
+            if (phoneNum[0] == '+')
+            {
+                string substring = phoneNum.Substring(1);
+                if (substring.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +\n";
+            }
+            else
+            {
+                if (phoneNum.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +\n";
+            }
+
+            return errorMessage;
+
+        }
+        public string ValidHourlyRate(string rate)
+        {
+            string errorMessage = "";
+
+            Decimal hourlyRate = -1;
+
+            try { hourlyRate = Decimal.Parse(rate); }
+            catch { errorMessage += "Hourly rate wrong format or too large\n"; return errorMessage; }
+
+            if (hourlyRate < 0) errorMessage += "Hourly rate cannot be negative\n";
+
+            return errorMessage;
+        }
+       
     }
 }

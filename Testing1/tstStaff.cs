@@ -8,7 +8,7 @@ namespace Testing1
     public class tstStaff
     {
 
-    [TestMethod]
+        [TestMethod]
         public void InstanceOK()
         {
             //create a new instance of the class
@@ -166,7 +166,7 @@ namespace Testing1
             int StaffNumber = 10005;
             Found = staffMemeber.Find(StaffNumber);
             if (staffMemeber.IsManager != true)
-            { 
+            {
                 OK = false;
             }
             Assert.IsTrue(OK);
@@ -226,7 +226,7 @@ namespace Testing1
         //Valid Data
         string FirstName = "James";
         string LastName = "Bond";
-        string StartDate = "1953";
+        string StartDate = "2018-01-01";
         string PhoneNumber = "07492278399";
         string HourlyRate = "30";
 
@@ -237,9 +237,15 @@ namespace Testing1
         {
             clsStaff staffMember = new clsStaff();
             String Error = "";
-            Error = staffMember.Valid(FirstName, LastName, StartDate, PhoneNumber, HourlyRate);
+            Error += staffMember.ValidName(FirstName);
+            Error += staffMember.ValidName(LastName);
+            Error += staffMember.ValidHourlyRate(HourlyRate);
+            Error += staffMember.ValidPhoneNumber(PhoneNumber);
             Assert.AreEqual(Error, "");
         }
+
+        /// First Name Valid
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////
 
         [TestMethod]
         public void FirstNameValidMinMinusOne()
@@ -247,8 +253,522 @@ namespace Testing1
             clsStaff staffMemeber = new clsStaff();
             string FirstName = "";
             string Error = "";
-            Error = staffMemeber.Valid(FirstName, LastName, StartDate, PhoneNumber, HourlyRate);
-            Assert.AreNotEqual(Error, "");
+            Error = staffMemeber.ValidName(FirstName);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void FirstNameValidMin()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string FirstName = "A";
+            string Error = "";
+            Error = staffMemeber.ValidName(FirstName);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void FirstNameValidMinPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string FirstName = "Aa";
+            string Error = "";
+            Error = staffMemeber.ValidName(FirstName);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void FirstNameValidMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string FirstName = "Wolfeschlegelsteinhausenbergerdorffwelchevordgjyte";   //50 chars, part of a real name!
+            string Error = "";
+            Error = staffMemeber.ValidName(FirstName);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void FirstNameValidMaxPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string FirstName = "Wolfeschlegelsteinhausenbergerdorffwelchevordepeufht";   //51 chars
+            string Error = "";
+            Error = staffMemeber.ValidName(FirstName);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void FirstNameValidMaxMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string FirstName = "Wolfeschlegelsteinhausenbergerdorffwelchevorfjefk";   //49 chars
+            string Error = "";
+            Error = staffMemeber.ValidName(FirstName);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void FirstNameValidMid()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string FirstName = "Wolfeschlegelsteinhausenb";   //25 chars
+            string Error = "";
+            Error = staffMemeber.ValidName(FirstName);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void FirstNameValidExtremeMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string FirstName = "Davidddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"; //100 chars
+            string Error = "";
+            Error = staffMemeber.ValidName(FirstName);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void FirstNameValidInvalid()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string FirstName = "Dav9d";   //51 chars
+            string Error = "";
+            Error = staffMemeber.ValidName(FirstName);
+            Assert.AreNotEqual(Error, ""); //should error
+
+        }
+
+        /// Last Name Valid
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        [TestMethod]
+        public void LastNameValidMinMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string LastName = "";
+            string Error = "";
+            Error = staffMemeber.ValidName(LastName);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void LastNameValidMin()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string LastName = "A";
+            string Error = "";
+            Error = staffMemeber.ValidName(LastName);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void LastNameValidMinPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string LastName = "Aa";
+            string Error = "";
+            Error = staffMemeber.ValidName(LastName);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void LastNameValidMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string LastName = "Wolfeschlegelsteinhausenbergerdorffwelchevordgjyte";   //50 chars, part of a real name!
+            string Error = "";
+            Error = staffMemeber.ValidName(LastName);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void LastNameValidMaxPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string LastName = "Wolfeschlegelsteinhausenbergerdorffwelchevordepeufht";   //51 chars
+            string Error = "";
+            Error = staffMemeber.ValidName(LastName);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void LastNameValidMaxMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string LastName = "Wolfeschlegelsteinhausenbergerdorffwelchevorfjefk";   //49 chars
+            string Error = "";
+            Error = staffMemeber.ValidName(LastName);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void LastNameValidMid()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string LastName = "Wolfeschlegelsteinhausenb";   //25 chars
+            string Error = "";
+            Error = staffMemeber.ValidName(LastName);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void LastNameValidExtremeMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string LastName = "Richardddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"; //100 chars
+            string Error = "";
+            Error = staffMemeber.ValidName(LastName);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void LastNameValidInvalid()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string LastName = "R8chardson";   //Contains a number
+            string Error = "";
+            Error = staffMemeber.ValidName(LastName);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+
+        /// Hourly Rate Valid
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        [TestMethod]
+        public void HourlyRateValidExtremeMin()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string HourlyRate = "-10000";
+            string Error = "";
+            Error = staffMemeber.ValidHourlyRate(HourlyRate);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void HourlyRateValidMinMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string HourlyRate = "-1";
+            string Error = "";
+            Error = staffMemeber.ValidHourlyRate(HourlyRate);
+            Assert.AreNotEqual(Error, ""); //should be error
+        }
+
+        [TestMethod]
+        public void HourlyRateValidMin()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string HourlyRate = "0";
+            string Error = "";
+            Error = staffMemeber.ValidHourlyRate(HourlyRate);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void HourlyRateValidMinPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string HourlyRate = "1";
+            string Error = "";
+            Error = staffMemeber.ValidHourlyRate(HourlyRate);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void HourlyRateValidMaxMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string HourlyRate = (Decimal.MaxValue - 1).ToString();
+            string Error = "";
+            Error = staffMemeber.ValidHourlyRate(HourlyRate);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void HourlyRateValidMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string HourlyRate = (Decimal.MaxValue).ToString(); ;
+            string Error = "";
+            Error = staffMemeber.ValidHourlyRate(HourlyRate);
+            Assert.AreEqual(Error, ""); //should be no error
+        }
+
+        [TestMethod]
+        public void HourlyRateValidMaxPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string HourlyRate = "79228162514264337593543950336";
+            //max value of a decial + 1. Too annoying to try and actually store, for obvious reasons
+            string Error = "";
+            Error = staffMemeber.ValidHourlyRate(HourlyRate);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void HourlyRateValidExtremeMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string HourlyRate = "7902281625142643375935439503360000";
+            //Greatly exceeds the max value of a decimal
+            string Error = "";
+            Error = staffMemeber.ValidHourlyRate(HourlyRate);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void HourlyRateValidInvalid()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string HourlyRate = "David";
+            string Error = "";
+            Error = staffMemeber.ValidHourlyRate(HourlyRate);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+
+        /// Start Date Valid
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////
+
+        [TestMethod]
+        public void StartDateValidExtremeMin()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StartDate = DateTime.Now.AddYears(-100).ToString();
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void StartDateValidMinMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            //string StartDate = DateTime.Parse("2014-12-31").ToString();
+            string StartDate = "2014-12-31";
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void StartDateValidMin()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StartDate = "2015-01-01";
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreEqual(Error, ""); //should not be error
+        }
+
+        [TestMethod]
+        public void StartDateValidMinPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StartDate = "2015-01-02";
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreEqual(Error, ""); //should not be error
+        }
+
+        [TestMethod]
+        public void StartDateValidMaxMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StartDate = DateTime.Today.AddDays(364).ToString();
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreEqual(Error, ""); //should not be error
+        }
+
+        [TestMethod]
+        public void StartDateValidMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StartDate = DateTime.Today.AddDays(365).ToString();
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreEqual(Error, ""); //should not be error
+        }
+
+        [TestMethod]
+        public void StartDateValidMaxPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StartDate = DateTime.Today.AddDays(366).ToString();
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void StartDateValidMid()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string StartDate = DateTime.Today.ToString();
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreEqual(Error, ""); //should not error
+        }
+
+        [TestMethod]
+        public void StartDateValidExtremeMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            //string StartDate = DateTime.Parse("2014-12-31").ToString();
+            string StartDate = "3000-01-01";
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void StartDateValidInvalidChars()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            //string StartDate = DateTime.Parse("2014-12-31").ToString();
+            string StartDate = "David";
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void StartDateValidInvalidDate()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            //string StartDate = DateTime.Parse("2014-12-31").ToString();
+            string StartDate = "2020-13-13";
+            string Error = "";
+            Error = staffMemeber.ValidStartDate(StartDate);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        /// Phone Number Valid
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////
+
+        [TestMethod]
+        public void PhoneNumberValidExtremeMin()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "";
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void PhoneNumberValidMinMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "12345";
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreNotEqual(Error, ""); //should error
+        }
+
+        [TestMethod]
+        public void PhoneNumberValidMin()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "123456";
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreEqual(Error, ""); //should not
+        }
+
+        [TestMethod]
+        public void PhoneNumberValidMinPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "1234567";
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreEqual(Error, ""); //should not
+        }
+
+        [TestMethod]
+        public void PhoneNumberValidMaxMinusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "1234567891012131415"; //19 chars length
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreEqual(Error, ""); //should not
+        }
+
+
+        [TestMethod]
+        public void PhoneNumberValidMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "12345678910121314150"; //20 chars length
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreEqual(Error, ""); //should not
+        }
+
+        [TestMethod]
+        public void PhoneNumberValidMaxPlusOne()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "123456789101213141500"; //21 chars length
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreNotEqual(Error, ""); //should give error
+        }
+
+        [TestMethod]
+        public void PhoneNumberValidMid()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "1234567891012"; //13 chars length
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreEqual(Error, ""); //should not
+        }
+
+        [TestMethod]
+        public void PhoneNumberValidExtremeMax()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "12345678910121314150000000000000000000000000000000000000000000000000000000000000"; //80 chars length
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreNotEqual(Error, ""); //should give error
+        }
+
+        [TestMethod]
+        public void PhoneNumberValidInvalid()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "1234567891w1"; //cheeky w in there
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreNotEqual(Error, ""); //should give error
+        }
+
+        [TestMethod]
+        public void PhoneNumberValidStartWithPlus()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "+123456789"; //valid. Starts with +
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreEqual(Error, ""); //should not give error
+        }
+
+        [TestMethod]
+        public void PhoneNumberValidInvalidStartWithPlus()
+        {
+            clsStaff staffMemeber = new clsStaff();
+            string PhoneNumber = "+123456789d"; //Invalid. Starts with +, and has a letter at end
+            string Error = "";
+            Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
+            Assert.AreNotEqual(Error, ""); //should give error
         }
     }
 }
