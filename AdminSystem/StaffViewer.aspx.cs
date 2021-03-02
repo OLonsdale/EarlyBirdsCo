@@ -14,4 +14,9 @@ public partial class _1Viewer : System.Web.UI.Page
         StaffMember = (clsStaff)Session["StaffMember"];
         Response.Write(StaffMember.StaffNumber);
     }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StaffDataEntry.aspx");
+    }
 }
