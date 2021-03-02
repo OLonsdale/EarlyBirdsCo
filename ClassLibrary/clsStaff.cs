@@ -84,10 +84,9 @@ namespace ClassLibrary
         public string ValidStaffNumber(string number)
         {
             string error = "";
+
             if (number.Length == 0) { error = "Please enter a staff number. "; return error; }
-
             if (number.Length != 5) error += "Staff number must be five digits long. ";
-
             if (number.All(char.IsDigit) == false) error += "Staff number must only have numbers. ";
 
             return error;
@@ -131,14 +130,17 @@ namespace ClassLibrary
             if (phoneNum.Length < 6) errorMessage += "Phone number too short. ";
             else if (phoneNum.Length > 20) errorMessage += "Phone number too long. ";
 
+            //if not all number
+            if (phoneNum.All(char.IsDigit) == false)
+  
             if (phoneNum[0] == '+')
             {
                 string substring = phoneNum.Substring(1);
-                if (substring.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +. ";
+                if (substring.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +. error a";
             }
             else
             {
-                if (phoneNum.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +. ";
+                if (phoneNum.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +. error b";
             }
 
             return errorMessage;
@@ -161,11 +163,10 @@ namespace ClassLibrary
             return errorMessage;
         }
 
-        public bool Valid(string snum, string fname, string lname, string phone, string rate, string start)
+        public bool Valid(string fname, string lname, string phone, string rate, string start)
         {
             string error = "";
 
-            error += ValidStaffNumber(snum);
             error += ValidName(fname);
             error += ValidName(lname);
             error += ValidPhoneNumber(phone);
@@ -176,8 +177,10 @@ namespace ClassLibrary
             {
                 return true;
             }
-            else return false;
+            return false;
         }
        
     }
 }
+
+

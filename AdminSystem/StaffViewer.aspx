@@ -9,8 +9,13 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            test
+            Hello. This is the staff viewer page.<br />
+            <br />
+            If you&#39;re seeing this, it means the data you entered was all in the correct format.<br />
+            <br />
+            Press this button to go back to the data entry page:<br />
         </div>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Back" />
     </form>
 </body>
 </html>

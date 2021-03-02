@@ -237,7 +237,7 @@ namespace Testing1
         public void ValidMethodOK()
         {
             clsStaff staffMember = new clsStaff();
-            Assert.AreEqual(true, staffMember.Valid(StaffNumber, FirstName, LastName, PhoneNumber, HourlyRate, StartDate));
+            Assert.AreEqual(true, staffMember.Valid(FirstName, LastName, PhoneNumber, HourlyRate, StartDate));
         }
 
         /// Staff Number Valid
@@ -825,7 +825,7 @@ namespace Testing1
         public void PhoneNumberValidInvalidStartWithPlus()
         {
             clsStaff staffMemeber = new clsStaff();
-            string PhoneNumber = "+123456789d"; //Invalid. Starts with +, and has a letter at end
+            string PhoneNumber = "+123456789d2"; //Invalid. Starts with +, and has a letter at end
             string Error = "";
             Error = staffMemeber.ValidPhoneNumber(PhoneNumber);
             Assert.AreNotEqual(Error, ""); //should give error

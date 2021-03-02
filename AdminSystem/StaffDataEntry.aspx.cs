@@ -26,9 +26,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
         string phoneNumber = txtPhoneNumber.Text;
         string startDate = txtStartDate.Text;
 
-        if (StaffMember.Valid(staffNum, firstName, lastName, hourlyRate, phoneNumber, startDate) == false)
+        if (StaffMember.Valid(firstName, lastName, phoneNumber, hourlyRate, startDate) == false)
         {
-            lblStaffNumberError.Text = StaffMember.ValidStaffNumber(staffNum);
             lblFirstNameError.Text = StaffMember.ValidName(firstName);
             lblLastNameError.Text = StaffMember.ValidName(lastName);
             lblHourlyRateError.Text = StaffMember.ValidHourlyRate(hourlyRate);
@@ -44,9 +43,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
             StaffMember.IsManager = chkIsManager.Checked;
             StaffMember.PhoneNumber = phoneNumber;
             StaffMember.StartDate = DateTime.Parse(startDate);
+
             Session["StaffMember"] = StaffMember;
-            Response.Write("StaffViewer.aspx");
+            Response.Redirect("StaffViewer.aspx");
         }
+        
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
