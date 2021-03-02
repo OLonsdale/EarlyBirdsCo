@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ClassLibrary
 {
@@ -144,13 +145,100 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(string ItemName,
-                            string Price,
-                            string Material,
-                            string LastPurchased,
-                            string Quantity)
+        public string Valid(string itemName, string price, string material, string lastPurchased, string quantity)
         {
-            return "";
+            //create a string variable to store the error
+            String Error = "";
+            //create temporary variable to store date values
+            DateTime DateTemp;
+            //create temporary variable to store price values
+            Decimal PriceTemp = -1;
+            //create temporary variable to store quantity values
+            Int32 QuantityTemp;
+
+            //if the ItemName is blank
+            if (itemName.Length == 0)
+            {
+                //record the error
+                Error += "The item name may not be blank : ";
+            }
+            if (itemName.Length > 80)
+            {
+                //record the error
+                Error += "The item name must be less than 80 characters : ";
+            }
+            try
+            {
+                DateTemp = Convert.ToDateTime(lastPurchased);
+                //if the DateTemp is greater than today's date
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error += "The date cannot be in the future : ";
+                }
+                //ADD MORE CONDITIONS FOR LASTPURCHASED TESTS
+            }
+            catch
+            {
+                //record the error
+                Error += "The date was not a valid date : ";
+            }
+            if (price.Length == 0)
+            {
+                //record the error
+                Error += "The price cannot be blank : ";
+            }
+            try
+            {
+                PriceTemp = Decimal.Parse(price);
+            }
+            catch
+            {
+                Error += "The price is invalid or too large : ";
+            }
+
+            if (PriceTemp < 0)
+            {
+                //record the error
+                Error += "The price cannot be negative : ";
+            }
+            if (material.Length == 0)
+            {
+                //record the error
+                Error += "The material cannot be blank : ";
+            }
+            if (material.Length > 20)
+            {
+                //record the error
+                Error += "The material must be less than 20 characters : ";
+            }
+            if (material.Any(char.IsDigit)) 
+            {
+                //record the error
+                Error += "The material cannot contain any numbers : ";
+
+            }     
+            if (quantity.Length == 0)
+            {
+                //record the error
+                Error += "The quantity cannot be left blank : ";
+            }
+            if (quantity.All(char.IsDigit) == false)
+            {
+                //record the error
+                Error += "The quantity must be an integer : ";
+            }
+            try
+            {
+                QuantityTemp = Int32.Parse(quantity);
+            }
+            catch
+            {
+                //record the error
+                Error += "The quantity is too high (cannot exceed the Max Value of an Integer) : ";
+            }
+            //return any appropraite error messages
+            return Error;
         }
     }
 }
