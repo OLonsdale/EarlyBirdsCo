@@ -8,7 +8,7 @@ namespace ClassLibrary
         //private data members for the properties
         private Int32 mItemId;
         private string mItemName;
-        private Double mPrice;
+        private Decimal mPrice;
         private string mMaterial;
         private Boolean mInStock;
         private DateTime mLastPurchased;
@@ -45,7 +45,7 @@ namespace ClassLibrary
         }
 
         //public property for Price
-        public double Price
+        public decimal Price
         {
             get
             {
@@ -132,7 +132,7 @@ namespace ClassLibrary
             {
                 mItemId = Convert.ToInt32(DB.DataTable.Rows[0]["ItemId"]);
                 mItemName = Convert.ToString(DB.DataTable.Rows[0]["ItemName"]);
-                mPrice = Convert.ToDouble(DB.DataTable.Rows[0]["Price"]);
+                mPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["Price"]);
                 mMaterial = Convert.ToString(DB.DataTable.Rows[0]["Material"]);
                 mLastPurchased = Convert.ToDateTime(DB.DataTable.Rows[0]["LastPurchased"]);
                 mQuantity = Convert.ToInt32(DB.DataTable.Rows[0]["Quantity"]);
@@ -145,48 +145,37 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(string itemName, string price, string material, string lastPurchased, string quantity)
-        {
-            //create a string variable to store the error
-            String Error = "";
-            //create temporary variable to store date values
-            DateTime DateTemp;
-            //create temporary variable to store price values
-            Decimal PriceTemp = -1;
-            //create temporary variable to store quantity values
-            Int32 QuantityTemp;
+        //Validation
 
-            //if the ItemName is blank
+        public string ValidItemName(string itemName)
+        {
+            //store error message
+            String Error = "";
+
+            //if no item name is input
             if (itemName.Length == 0)
             {
-                //record the error
-                Error += "The item name may not be blank : ";
+                Error += "The item name must not be blank : ";
             }
-            else if (itemName.Length > 80)
+            //if item name input exceeds 80 characters
+            if (itemName.Length > 80)
             {
-                //record the error
                 Error += "The item name must be less than 80 characters : ";
             }
-            try
-            {
-                DateTemp = Convert.ToDateTime(lastPurchased);
-                //if the DateTemp is greater than today's date
-                if (DateTemp > DateTime.Now.Date)
-                {
-                    //record the error
-                    Error += "The date cannot be in the future : ";
-                }
-                //ADD MORE CONDITIONS FOR LASTPURCHASED TESTS
-            }
-            catch
-            {
-                //record the error
-                Error += "The date was not a valid date : ";
-            }
+            return Error;
+        }
 
+        public string ValidPrice(string price)
+        {
+            //store error message
+            String Error = "";
+            //temporary variable to hold price data
+            Decimal PriceTemp = -1;
+
+
+            //if no price is input
             if (price.Length == 0)
             {
-                //record the error
                 Error += "The price cannot be blank : ";
             }
             try
@@ -196,35 +185,108 @@ namespace ClassLibrary
             catch
             {
                 Error += "The price is in invalid format or too large : ";
-            } 
+            }
+            //if price input is negative
             if (PriceTemp < 0)
             {
                 //record the error
                 Error += "The price cannot be negative : ";
             }
+            return Error;
+        }
 
+        public string ValidMaterial(string material)
+        {
+            //store error message
+            String Error = "";
+
+            //if no material is input
             if (material.Length == 0)
             {
                 //record the error
                 Error += "The material cannot be blank : ";
             }
+            //if material input exceeds 20 characters
             if (material.Length > 20)
             {
                 //record the error
                 Error += "The material must be less than 20 characters : ";
             }
-            if (material.Any(char.IsDigit)) 
+            //if material input contains any numbers
+            if (material.Any(char.IsDigit))
             {
                 //record the error
                 Error += "The material cannot contain any numbers : ";
 
             }
+            if (material.Any(char.IsSymbol))
+            {
+                //record the error
+                Error += "The material cannot contain any symbols : ";
+            }
+            return Error;
+        }
+
+        
+        public string ValidLastPurchased(string lastPurchased) 
+        {
+            //store error message
+            String Error = "";
+            //temporary variable to hold date data
+            DateTime DateTemp;
+            //store minimum date
+            DateTime MinimumDate = Convert.ToDateTime("2015-01-01");
+
+            try
+            {
+                DateTemp = Convert.ToDateTime(lastPurchased);
+                //if date input is in the future
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error += "The date cannot be in the future : ";
+                }
+                //if date input is earlier than the minimum date
+                if (DateTemp < MinimumDate)
+                {
+                    //record the error
+                    Error += "The date must not be earlier than 2015-01-01 : ";
+                }
+            }
+            catch
+            {
+                //record the error
+                Error += "The date is not a valid date : ";
+            }
+            try
+            {
+                DateTime DateInput = DateTime.Parse(lastPurchased);
+            }
+            catch
+            {
+                //record the error
+                Error += "The date is not in a valid format (Year-Month-Day) : ";
+            }
+                    
+            return Error;
+        } 
+
+
+        public string ValidQuantity(string quantity)
+        {
+            //store error message
+            String Error = "";
+            //temporary variable to store quantity data
+            Int32 QuantityTemp;
+
+            //if no quantity is input
             if (quantity.Length == 0)
             {
                 //record the error
                 Error += "The quantity cannot be left blank : ";
             }
-            else if (quantity.All(char.IsDigit) == false)
+            //if any non-integer value(s) are input
+            if (quantity.All(char.IsDigit) == false)
             {
                 //record the error
                 Error += "The quantity must be an integer : ";
@@ -236,10 +298,29 @@ namespace ClassLibrary
             catch
             {
                 //record the error
-                Error += "The quantity is too high : ";
+                Error += "The quantity is in invalid format or too large : ";
             }
-            //return any appropraite error messages
             return Error;
         }
+
+
+        public bool Valid(string itemName, string price, string material, string lastPurchased, string quantity)
+        {
+            //string variable to store the error
+            String Error = "";
+
+            //concatenate any appropariate errors to the Error message
+            Error += ValidItemName(itemName);
+            Error += ValidPrice(price);
+            Error += ValidMaterial(material);
+            Error += ValidLastPurchased(lastPurchased);
+            Error += ValidQuantity(quantity);
+
+            if (Error == "")
+            {
+                return true;
+            }
+            return false;
+        } 
     }
 }

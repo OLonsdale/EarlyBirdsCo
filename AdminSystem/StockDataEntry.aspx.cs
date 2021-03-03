@@ -18,22 +18,28 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create a new instance of clsStock
         clsStock AnItem = new clsStock();
+
         //obtain the item's properties
-        //string ItemId = txtItemId.Text;
         string ItemName = txtItemName.Text;
         string Price = txtPrice.Text;
         string Material = txtMaterial.Text;
         string LastPurchased = txtLastPurchased.Text;
         string Quantity = txtQuantity.Text;
-        //store error message
-        string Error = "";
+
         //validate data
-        Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
-        if (Error == "")
+        if (AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity) == false)
+        {
+            lblError.Text += AnItem.ValidItemName(ItemName);
+            lblError.Text += AnItem.ValidPrice(Price);
+            lblError.Text += AnItem.ValidMaterial(Material);
+            lblError.Text += AnItem.ValidMaterial(LastPurchased);
+            lblError.Text += AnItem.ValidQuantity(Quantity);
+        }
+        else
         {
             //capture the properties
             AnItem.ItemName = ItemName;
-            AnItem.Price = Double.Parse(Price);
+            AnItem.Price = Decimal.Parse(Price);
             AnItem.Material = Material;
             AnItem.LastPurchased = Convert.ToDateTime(LastPurchased);
             AnItem.Quantity = Int32.Parse(Quantity);
@@ -42,15 +48,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //navigate to the viewer page
             Response.Redirect("StockViewer.aspx");
         }
-        else
-        {
-            //display error message
-            lblError.Text = Error;
-        }
+
     }
 
     //Find button
-
     protected void btnFind_Click(object sender, EventArgs e)
     {
         //create an instance of clsStock
