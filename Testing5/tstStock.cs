@@ -56,7 +56,7 @@ namespace Testing5
             //create an instance of clsStock
             clsStock AnItem = new clsStock();
             //create some test data to assign to the property
-            double TestData = 5.75;
+            decimal TestData = 5.75m; //the m suffix indicates a decimal. More accuracy than Double.
             //assign the data to the property
             AnItem.Price = TestData;
             //test to see that the two values are the same
@@ -188,7 +188,7 @@ namespace Testing5
             //invoke the method
             Found = AnItem.Find(ItemId);
             //check the property
-            if (AnItem.Price != 35.00)
+            if (AnItem.Price != 35.00m)
             {
                 OK = false;
             }
@@ -289,12 +289,9 @@ namespace Testing5
         {
             //create an instance of clsStock
             clsStock AnItem = new clsStock();
-            //variable to store error message
-            String Error = "";
-            //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
-            //test to see the result is correct
-            Assert.AreEqual(Error, "");           
+            //invoke the method and test to see result is correct
+            Assert.AreEqual(true, AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity));
+    
         }
 
         /// ItemName Validation
@@ -308,11 +305,11 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //create test data to pass to the method
-            string ItemName = ""; //should trigger an error
+            string ItemName = "";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidItemName(ItemName);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(Error, ""); //should fail
         }
 
         [TestMethod]
@@ -323,11 +320,11 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //create test data to pass to the method
-            string ItemName = "xy"; //should pass
+            string ItemName = "xy";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidItemName(ItemName);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual(Error, ""); //should pass
         }
 
         [TestMethod] 
@@ -339,11 +336,11 @@ namespace Testing5
             String Error = "";
             //create test data to pass to the method
             string ItemName = "";
-            ItemName = ItemName.PadRight(79, 'x'); //should pass
+            ItemName = ItemName.PadRight(79, 'x');
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidItemName(ItemName);       
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual(Error, ""); //should pass
         }
 
         [TestMethod]
@@ -355,11 +352,11 @@ namespace Testing5
             String Error = "";
             //create test data to pass to the method
             string ItemName = "";
-            ItemName = ItemName.PadRight(80, 'x'); //should pass
+            ItemName = ItemName.PadRight(80, 'x');
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidItemName(ItemName);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual(Error, ""); //should pass
         }
 
         [TestMethod]
@@ -371,11 +368,11 @@ namespace Testing5
             String Error = "";
             //create test data to pass to the method
             string ItemName = "";
-            ItemName = ItemName.PadRight(40, 'x'); //should pass
+            ItemName = ItemName.PadRight(40, 'x');
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidItemName(ItemName);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual(Error, ""); //should pass
         }
 
         [TestMethod]
@@ -387,11 +384,12 @@ namespace Testing5
             String Error = "";
             //create test data to pass to the method
             string ItemName = ""; 
-            ItemName = ItemName.PadRight(81, 'x'); //should fail
+            ItemName = ItemName.PadRight(81, 'x');
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidItemName(ItemName);
+
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(Error, ""); //should fail
         }
 
         [TestMethod]
@@ -403,11 +401,12 @@ namespace Testing5
             String Error = "";
             //create test data to pass to the method
             string ItemName = ""; 
-            ItemName = ItemName.PadRight(300, 'x'); //should fail
+            ItemName = ItemName.PadRight(300, 'x');
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidItemName(ItemName);
+
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(Error, ""); //should fail
         }
 
         /// LastPurchased Validation
@@ -417,13 +416,35 @@ namespace Testing5
         [TestMethod]
         public void LastPurchasedMinLessOne()
         {
-           
+            //create an instance of clsStock
+            clsStock AnItem = new clsStock();
+            //string variable to store any error message
+            String Error = "";
+            //store the minimum date
+            DateTime MinimumDate = Convert.ToDateTime("2015-01-01");
+            //set date to MinimumDate subtract 1 day
+            String LastPurchased = MinimumDate.AddDays(-1).ToString();
+            //invoke the method
+            Error = AnItem.ValidLastPurchased(LastPurchased);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, ""); //should fail           
         }
 
         [TestMethod]
         public void LastPurchasedMinPlusOne()
         {
-
+            //create an instance of clsStock
+            clsStock AnItem = new clsStock();
+            //string variable to store any error message
+            String Error = "";
+            //store the minimum date
+            DateTime MinimumDate = Convert.ToDateTime("2015-01-01");
+            //set date to MinimumDate plus 1 day.
+            String LastPurchased = MinimumDate.AddDays(1).ToString();
+            //invoke the method
+            Error = AnItem.ValidLastPurchased(LastPurchased);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, ""); //should pass           
         }
 
         [TestMethod]
@@ -442,9 +463,9 @@ namespace Testing5
             //convert the date to a string
             string LastPurchased = TestDate.ToString();
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidLastPurchased(LastPurchased);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual(Error, ""); //should pass
         }
 
         [TestMethod]
@@ -459,15 +480,28 @@ namespace Testing5
             //change the date to today's date
             TestDate = DateTime.Now.Date;
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidLastPurchased(LastPurchased);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual(Error, ""); //should pass
         }
 
         [TestMethod]
         public void LastPurchasedMid()
         {
-
+            //create an instance of clsStock
+            clsStock AnItem = new clsStock();
+            //string variable to store any error message
+            String Error = "";
+            //create test data to pass to the method
+            DateTime TestDate;
+            //change the date to today's date
+            TestDate = DateTime.Now.Date;
+            //set the date to a little in the past
+            TestDate = TestDate.AddYears(-5);
+            //invoke the method
+            Error = AnItem.ValidLastPurchased(LastPurchased);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, ""); //should pass
         }
 
         [TestMethod]
@@ -486,9 +520,9 @@ namespace Testing5
             //convert the date to a string
             string LastPurchased = TestDate.ToString();
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidLastPurchased(LastPurchased);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(Error, ""); //should fail
         }
 
         [TestMethod]
@@ -507,9 +541,9 @@ namespace Testing5
             //convert the date to a string
             string LastPurchased = TestDate.ToString();
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidLastPurchased(LastPurchased);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(Error, ""); //should fail
         }
 
         [TestMethod]
@@ -528,9 +562,9 @@ namespace Testing5
             //convert the date to a string
             string LastPurchased = TestDate.ToString();
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidLastPurchased(LastPurchased);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(Error, ""); //should fail
         } 
 
         [TestMethod]
@@ -541,11 +575,11 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the LastPurchased to a non date value
-            string LastPurchased = "this is not a date!";
+            string LastPurchased = "an invalid date input";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidLastPurchased(LastPurchased);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(Error, ""); //should fail
         }
 
         /// Price Validation 
@@ -561,7 +595,7 @@ namespace Testing5
             //set the test data to -1
             string Price = "-1";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -576,7 +610,7 @@ namespace Testing5
             //set the test data to 1
             string Price = "1";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -591,7 +625,7 @@ namespace Testing5
             //set the test data to Decimal's max value subtract 1
             string Price = (Decimal.MaxValue - 1).ToString();
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -606,7 +640,7 @@ namespace Testing5
             //set the test data to Decimal's max value 
             string Price = (Decimal.MaxValue).ToString();
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -621,7 +655,7 @@ namespace Testing5
             //set the test data to half of Decimal's max value
             string Price = (Decimal.MaxValue / 2).ToString();
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -636,7 +670,7 @@ namespace Testing5
             //set the test data to Decimal's max value subtract 1
             string Price = "79228162514264337593543950336"; //replacement for Decimal.MaxValue + 1 (difficult to store)
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -651,7 +685,7 @@ namespace Testing5
             //set the test data to Decimal's max value multiplied by 2
             string Price = "7902281625142643375935439503360000"; //replacement for Decimal.MaxValue * 2 (difficult to store)
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -666,7 +700,7 @@ namespace Testing5
             //set the test data to -1
             string Price = "-10000";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -681,7 +715,7 @@ namespace Testing5
             //set the test data to -1
             string Price = "Fifty";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -700,7 +734,7 @@ namespace Testing5
             //test data to pass to the method
             string Material = "";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -715,7 +749,7 @@ namespace Testing5
             //test data to pass to the method
             string Material = "xX";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -731,7 +765,7 @@ namespace Testing5
             string Material = "x";
             Material = Material.PadRight(19, 'x');
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -747,7 +781,7 @@ namespace Testing5
             string Material = "x";
             Material = Material.PadRight(20, 'x');
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -762,7 +796,7 @@ namespace Testing5
             //test data to pass to the method (10 characters)
             string Material = "xxxxxxxxxx";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -778,7 +812,7 @@ namespace Testing5
             string Material = "x";
             Material = Material.PadRight(21, 'x');
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -794,7 +828,7 @@ namespace Testing5
             string Material = "x";
             Material = Material.PadRight(100, 'x');
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -809,7 +843,7 @@ namespace Testing5
             //test data to pass to the method (invalid)
             string Material = "M3tal";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -827,7 +861,7 @@ namespace Testing5
             //test data to pass to the method
             string Quantity = "-1";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -842,7 +876,7 @@ namespace Testing5
             //test data to pass to the method
             string Quantity = "1";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -857,7 +891,7 @@ namespace Testing5
             //test data to pass to the method
             string Quantity = (Int32.MaxValue - 1).ToString();
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -872,7 +906,7 @@ namespace Testing5
             //test data to pass to the method
             string Quantity = (Int32.MaxValue).ToString();
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass
         }
@@ -887,7 +921,7 @@ namespace Testing5
             //test data to pass to the method
             string Quantity = (Int32.MaxValue / 1).ToString();
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
             Assert.AreEqual(Error, ""); //should pass          
         }
@@ -902,7 +936,7 @@ namespace Testing5
             //test data to pass to the method
             string Quantity = "2147483648"; //replacement for Int32.MaxValue + 1 (difficult to implement)
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -917,7 +951,7 @@ namespace Testing5
             //test data to pass to the method
             string Quantity = "4294967294"; //replacement for Int32.MaxValue * 2 (difficult to implement)
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
@@ -930,12 +964,11 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Quantity = "Fifty"; 
+            string Quantity = "Fifty";
             //invoke the method
-            Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+            Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, ""); //should fail
         }
-
     }
 }
