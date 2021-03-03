@@ -19,17 +19,34 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instance of clsStock
         clsStock AnItem = new clsStock();
         //obtain the item's properties
-        AnItem.ItemId = int.Parse(txtItemId.Text);
-        AnItem.ItemName = txtItemName.Text;
-        AnItem.Quantity = int.Parse(txtQuantity.Text);
-        AnItem.Price = double.Parse(txtPrice.Text);
-        AnItem.Material = txtMaterial.Text;
-        AnItem.LastPurchased = DateTime.Parse(txtLastPurchased.Text);
-        AnItem.InStock = chkInStock.Checked;
-        //store the properties in the session object
-        Session["AnItem"] = AnItem;
-        //navigate to the viewer page
-        Response.Redirect("StockViewer.aspx");
+        //string ItemId = txtItemId.Text;
+        string ItemName = txtItemName.Text;
+        string Price = txtPrice.Text;
+        string Material = txtMaterial.Text;
+        string LastPurchased = txtLastPurchased.Text;
+        string Quantity = txtQuantity.Text;
+        //store error message
+        string Error = "";
+        //validate data
+        Error = AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity);
+        if (Error == "")
+        {
+            //capture the properties
+            AnItem.ItemName = ItemName;
+            AnItem.Price = Double.Parse(Price);
+            AnItem.Material = Material;
+            AnItem.LastPurchased = Convert.ToDateTime(LastPurchased);
+            AnItem.Quantity = Int32.Parse(Quantity);
+            //store the properties in the session object
+            Session["AnItem"] = AnItem;
+            //navigate to the viewer page
+            Response.Redirect("StockViewer.aspx");
+        }
+        else
+        {
+            //display error message
+            lblError.Text = Error;
+        }
     }
 
     //Find button
