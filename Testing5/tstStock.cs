@@ -166,7 +166,7 @@ namespace Testing5
             //invoke the method
             Found = AnItem.Find(ItemId);
             //check the property
-            if (AnItem.ItemName != "Avengers Thor Esc Keycap                          ")
+            if (AnItem.ItemName != "Avengers Thor Esc Keycap")
             {
                 OK = false;
             }
@@ -210,7 +210,7 @@ namespace Testing5
             //invoke the method
             Found = AnItem.Find(ItemId);
             //check the property
-            if (AnItem.Material != "Aluminium           ")
+            if (AnItem.Material != "Aluminium")
             {
                 OK = false;
             }
@@ -296,6 +296,9 @@ namespace Testing5
             //test to see the result is correct
             Assert.AreEqual(Error, "");           
         }
+
+        /// ItemName Validation
+        /// ///////////////////////////// 
 
         [TestMethod]
         public void ItemNameMinLessOne()
@@ -407,7 +410,7 @@ namespace Testing5
             Assert.AreNotEqual(Error, "");
         }
 
-        /// ItemName Validation
+        /// LastPurchased Validation
         /// ///////////////////////////// 
 
 

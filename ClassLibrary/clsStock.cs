@@ -162,7 +162,7 @@ namespace ClassLibrary
                 //record the error
                 Error += "The item name may not be blank : ";
             }
-            if (itemName.Length > 80)
+            else if (itemName.Length > 80)
             {
                 //record the error
                 Error += "The item name must be less than 80 characters : ";
@@ -183,6 +183,7 @@ namespace ClassLibrary
                 //record the error
                 Error += "The date was not a valid date : ";
             }
+
             if (price.Length == 0)
             {
                 //record the error
@@ -194,14 +195,14 @@ namespace ClassLibrary
             }
             catch
             {
-                Error += "The price is invalid or too large : ";
-            }
-
+                Error += "The price is in invalid format or too large : ";
+            } 
             if (PriceTemp < 0)
             {
                 //record the error
                 Error += "The price cannot be negative : ";
             }
+
             if (material.Length == 0)
             {
                 //record the error
@@ -217,13 +218,13 @@ namespace ClassLibrary
                 //record the error
                 Error += "The material cannot contain any numbers : ";
 
-            }     
+            }
             if (quantity.Length == 0)
             {
                 //record the error
                 Error += "The quantity cannot be left blank : ";
             }
-            if (quantity.All(char.IsDigit) == false)
+            else if (quantity.All(char.IsDigit) == false)
             {
                 //record the error
                 Error += "The quantity must be an integer : ";
@@ -235,7 +236,7 @@ namespace ClassLibrary
             catch
             {
                 //record the error
-                Error += "The quantity is too high (cannot exceed the Max Value of an Integer) : ";
+                Error += "The quantity is too high : ";
             }
             //return any appropraite error messages
             return Error;
