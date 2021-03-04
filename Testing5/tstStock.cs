@@ -518,7 +518,7 @@ namespace Testing5
             //change the date to tomorrow's date
             TestDate = TestDate.AddDays(1);
             //convert the date to a string
-            string LastPurchased = TestDate.ToString();
+            String LastPurchased = TestDate.ToString();
             //invoke the method
             Error = AnItem.ValidLastPurchased(LastPurchased);
             //test to see that the result is correct
@@ -539,7 +539,7 @@ namespace Testing5
             //change the date to today's date plus 100 years
             TestDate = TestDate.AddYears(+100);
             //convert the date to a string
-            string LastPurchased = TestDate.ToString();
+            String LastPurchased = TestDate.ToString();
             //invoke the method
             Error = AnItem.ValidLastPurchased(LastPurchased);
             //test to see that the result is correct
@@ -560,7 +560,7 @@ namespace Testing5
             //change the date to today's date minus 100 years
             TestDate = TestDate.AddYears(-100);
             //convert the date to a string
-            string LastPurchased = TestDate.ToString();
+            String LastPurchased = TestDate.ToString();
             //invoke the method
             Error = AnItem.ValidLastPurchased(LastPurchased);
             //test to see that the result is correct
@@ -575,7 +575,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the LastPurchased to a non date value
-            string LastPurchased = "an invalid date input";
+            String LastPurchased = "an invalid date input";
             //invoke the method
             Error = AnItem.ValidLastPurchased(LastPurchased);
             //test to see that the result is correct
@@ -593,7 +593,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the test data to -1
-            string Price = "-1";
+            String Price = "-1";
             //invoke the method
             Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
@@ -608,7 +608,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the test data to 1
-            string Price = "1";
+            String Price = "1";
             //invoke the method
             Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
@@ -623,7 +623,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the test data to Decimal's max value subtract 1
-            string Price = (Decimal.MaxValue - 1).ToString();
+            String Price = (Decimal.MaxValue - 1).ToString();
             //invoke the method
             Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
@@ -638,7 +638,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the test data to Decimal's max value 
-            string Price = (Decimal.MaxValue).ToString();
+            String Price = (Decimal.MaxValue).ToString();
             //invoke the method
             Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
@@ -653,7 +653,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the test data to half of Decimal's max value
-            string Price = (Decimal.MaxValue / 2).ToString();
+            String Price = (Decimal.MaxValue / 2).ToString();
             //invoke the method
             Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
@@ -668,7 +668,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the test data to Decimal's max value subtract 1
-            string Price = "79228162514264337593543950336"; //replacement for Decimal.MaxValue + 1 (difficult to store)
+            String Price = "79228162514264337593543950336"; //replacement for Decimal.MaxValue + 1 (difficult to store)
             //invoke the method
             Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
@@ -683,7 +683,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the test data to Decimal's max value multiplied by 2
-            string Price = "7902281625142643375935439503360000"; //replacement for Decimal.MaxValue * 2 (difficult to store)
+            String Price = "7902281625142643375935439503360000"; //replacement for Decimal.MaxValue * 2 (difficult to store)
             //invoke the method
             Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
@@ -698,7 +698,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the test data to -1
-            string Price = "-10000";
+            String Price = "-10000";
             //invoke the method
             Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
@@ -713,7 +713,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //set the test data to -1
-            string Price = "Fifty";
+            String Price = "Fifty";
             //invoke the method
             Error = AnItem.ValidPrice(Price);
             //test to see that the result is correct
@@ -732,7 +732,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Material = "";
+            String Material = "";
             //invoke the method
             Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
@@ -747,7 +747,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Material = "xX";
+            String Material = "xX";
             //invoke the method
             Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
@@ -762,7 +762,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method (20 characters)
-            string Material = "x";
+            String Material = "x";
             Material = Material.PadRight(19, 'x');
             //invoke the method
             Error = AnItem.ValidMaterial(Material);
@@ -778,7 +778,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method (20 characters)
-            string Material = "x";
+            String Material = "x";
             Material = Material.PadRight(20, 'x');
             //invoke the method
             Error = AnItem.ValidMaterial(Material);
@@ -794,7 +794,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method (10 characters)
-            string Material = "xxxxxxxxxx";
+            String Material = "xxxxxxxxxx";
             //invoke the method
             Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
@@ -809,7 +809,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Material = "x";
+            String Material = "x";
             Material = Material.PadRight(21, 'x');
             //invoke the method
             Error = AnItem.ValidMaterial(Material);
@@ -825,7 +825,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Material = "x";
+            String Material = "x";
             Material = Material.PadRight(100, 'x');
             //invoke the method
             Error = AnItem.ValidMaterial(Material);
@@ -841,7 +841,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method (invalid)
-            string Material = "M3tal";
+            String Material = "M3tal";
             //invoke the method
             Error = AnItem.ValidMaterial(Material);
             //test to see that the result is correct
@@ -859,7 +859,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Quantity = "-1";
+            String Quantity = "-1";
             //invoke the method
             Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
@@ -874,7 +874,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Quantity = "1";
+            String Quantity = "1";
             //invoke the method
             Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
@@ -889,7 +889,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Quantity = (Int32.MaxValue - 1).ToString();
+            String Quantity = (Int32.MaxValue - 1).ToString();
             //invoke the method
             Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
@@ -904,7 +904,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Quantity = (Int32.MaxValue).ToString();
+            String Quantity = (Int32.MaxValue).ToString();
             //invoke the method
             Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
@@ -919,7 +919,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Quantity = (Int32.MaxValue / 1).ToString();
+            String Quantity = (Int32.MaxValue / 1).ToString();
             //invoke the method
             Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
@@ -934,7 +934,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Quantity = "2147483648"; //replacement for Int32.MaxValue + 1 (difficult to implement)
+            String Quantity = "2147483648"; //replacement for Int32.MaxValue + 1 (difficult to implement)
             //invoke the method
             Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
@@ -949,7 +949,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Quantity = "4294967294"; //replacement for Int32.MaxValue * 2 (difficult to implement)
+            String Quantity = "4294967294"; //replacement for Int32.MaxValue * 2 (difficult to implement)
             //invoke the method
             Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct
@@ -964,7 +964,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //test data to pass to the method
-            string Quantity = "Fifty";
+            String Quantity = "Fifty";
             //invoke the method
             Error = AnItem.ValidQuantity(Quantity);
             //test to see that the result is correct

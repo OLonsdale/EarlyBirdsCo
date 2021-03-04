@@ -170,7 +170,7 @@ namespace ClassLibrary
             //store error message
             String Error = "";
             //temporary variable to hold price data
-            Decimal PriceTemp = -1;
+            Decimal PriceTemp = 0;
 
 
             //if no price is input
@@ -212,23 +212,17 @@ namespace ClassLibrary
                 //record the error
                 Error += "The material must be less than 20 characters : ";
             }
-            //if material input contains any numbers
-            if (material.Any(char.IsDigit))
+            //if material input contains any non-alphabetical characters
+            if (material.All(char.IsLetter) == false)
             {
                 //record the error
-                Error += "The material cannot contain any numbers : ";
-
-            }
-            if (material.Any(char.IsSymbol))
-            {
-                //record the error
-                Error += "The material cannot contain any symbols : ";
+                Error += "The material must contain only alphabetical letters : ";
             }
             return Error;
         }
 
-        
-        public string ValidLastPurchased(string lastPurchased) 
+
+        public string ValidLastPurchased(string lastPurchased)
         {
             //store error message
             String Error = "";
@@ -237,6 +231,17 @@ namespace ClassLibrary
             //store minimum date
             DateTime MinimumDate = Convert.ToDateTime("2015-01-01");
 
+            if (lastPurchased.Length == 0)
+            {
+                //do nothing since NULL values are allowed
+            }
+            return Error;
+        }
+
+           /* if (lastPurchased.Length == 0)
+            {
+                //do nothing since NULL values are allowed
+            }
             try
             {
                 DateTemp = Convert.ToDateTime(lastPurchased);
@@ -250,7 +255,7 @@ namespace ClassLibrary
                 if (DateTemp < MinimumDate)
                 {
                     //record the error
-                    Error += "The date must not be earlier than 2015-01-01 : ";
+                    Error += "The date must not be earlier than 01-01-2015 : ";
                 }
             }
             catch
@@ -260,16 +265,15 @@ namespace ClassLibrary
             }
             try
             {
-                DateTime DateInput = DateTime.Parse(lastPurchased);
+                DateTime DateInput = Convert.ToDateTime(lastPurchased);
             }
             catch
             {
                 //record the error
-                Error += "The date is not in a valid format (Year-Month-Day) : ";
-            }
-                    
+                Error += "The date is not in a valid format (Day-Month-Year) : ";
+            }    
             return Error;
-        } 
+        } */
 
 
         public string ValidQuantity(string quantity)

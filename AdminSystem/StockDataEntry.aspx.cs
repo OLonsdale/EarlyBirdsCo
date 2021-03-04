@@ -16,15 +16,18 @@ public partial class _1_DataEntry : System.Web.UI.Page
     //OK button
     protected void btnOK_Click(object sender, EventArgs e)
     {
+        //reset error message
+        lblError.Text = "";
+
         //create a new instance of clsStock
         clsStock AnItem = new clsStock();
 
         //obtain the item's properties
-        string ItemName = txtItemName.Text;
-        string Price = txtPrice.Text;
-        string Material = txtMaterial.Text;
-        string LastPurchased = txtLastPurchased.Text;
-        string Quantity = txtQuantity.Text;
+        String ItemName = txtItemName.Text;
+        String Price = txtPrice.Text;
+        String Material = txtMaterial.Text;
+        String LastPurchased = txtLastPurchased.Text;
+        String Quantity = txtQuantity.Text;
 
         //validate data
         if (AnItem.Valid(ItemName, Price, Material, LastPurchased, Quantity) == false)
@@ -32,7 +35,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblError.Text += AnItem.ValidItemName(ItemName);
             lblError.Text += AnItem.ValidPrice(Price);
             lblError.Text += AnItem.ValidMaterial(Material);
-            lblError.Text += AnItem.ValidMaterial(LastPurchased);
+            lblError.Text += AnItem.ValidLastPurchased(LastPurchased);
             lblError.Text += AnItem.ValidQuantity(Quantity);
         }
         else
@@ -41,14 +44,21 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnItem.ItemName = ItemName;
             AnItem.Price = Decimal.Parse(Price);
             AnItem.Material = Material;
-            AnItem.LastPurchased = Convert.ToDateTime(LastPurchased);
+            if (LastPurchased.Length == 0)
+            {
+                LastPurchased = null;
+            }
+            else
+            {
+                AnItem.LastPurchased = Convert.ToDateTime(LastPurchased);
+            }
             AnItem.Quantity = Int32.Parse(Quantity);
+            AnItem.InStock = chkInStock.Checked;
             //store the properties in the session object
             Session["AnItem"] = AnItem;
             //navigate to the viewer page
             Response.Redirect("StockViewer.aspx");
         }
-
     }
 
     //Find button
