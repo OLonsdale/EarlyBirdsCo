@@ -178,7 +178,7 @@ namespace ClassLibrary
             {
                 Error += "The price cannot be blank : ";
             }
-            try
+            else try
             {
                 PriceTemp = Decimal.Parse(price);
             }
@@ -235,64 +235,32 @@ namespace ClassLibrary
             {
                 //do nothing since NULL values are allowed
             }
-            try
+            else
             {
-                DateTemp = Convert.ToDateTime(lastPurchased);
-                //if date input is in the future
-                if (DateTemp > DateTime.Now.Date)
+                if (lastPurchased.Any(char.IsLetter) == true)
                 {
-                    //record the error
-                    Error += "The date cannot be in the future : ";
+                    Error += "The date is not in a valid format (Day-Month-Year) : ";
                 }
-                //if date input is earlier than the minimum date
-                if (DateTemp < MinimumDate)
+                else
                 {
-                    //record the error
-                    Error += "The date must not be earlier than 01-01-2015 : ";
+                    DateTemp = Convert.ToDateTime(lastPurchased);
+                    //if date input is in the future
+                    if (DateTemp > DateTime.Now.Date)
+                    {
+                        //record the error
+                        Error += "The date cannot be in the future : ";
+                    }
+                    //if date input is earlier than the minimum date
+                    if (DateTemp < MinimumDate)
+                    {
+                        //record the error
+                        Error += "The date must not be earlier than 01-01-2015 : ";
+                    }
                 }
-            }
-            catch
-            {
-                //record the error
-                Error += "The date is not a valid date : ";
-            }
+            }      
             return Error;
         }
-
-           /* 
-            try
-            {
-                DateTemp = Convert.ToDateTime(lastPurchased);
-                //if date input is in the future
-                if (DateTemp > DateTime.Now.Date)
-                {
-                    //record the error
-                    Error += "The date cannot be in the future : ";
-                }
-                //if date input is earlier than the minimum date
-                if (DateTemp < MinimumDate)
-                {
-                    //record the error
-                    Error += "The date must not be earlier than 01-01-2015 : ";
-                }
-            }
-            catch
-            {
-                //record the error
-                Error += "The date is not a valid date : ";
-            }
-            try
-            {
-                DateTime DateInput = Convert.ToDateTime(lastPurchased);
-            }
-            catch
-            {
-                //record the error
-                Error += "The date is not in a valid format (Day-Month-Year) : ";
-            }    
-            return Error;
-        } */
-
+        
 
         public string ValidQuantity(string quantity)
         {
@@ -307,21 +275,25 @@ namespace ClassLibrary
                 //record the error
                 Error += "The quantity cannot be left blank : ";
             }
-            //if any non-integer value(s) are input
-            if (quantity.All(char.IsDigit) == false)
+            else
             {
-                //record the error
-                Error += "The quantity must be an integer : ";
-            }
-            try
-            {
-                QuantityTemp = Int32.Parse(quantity);
-            }
-            catch
-            {
-                //record the error
-                Error += "The quantity is in invalid format or too large : ";
-            }
+                //if any non-integer value(s) are input
+                if (quantity.All(char.IsDigit) == false)
+                {
+                    //record the error
+                    Error += "The quantity must be an integer : ";
+                }
+                else try
+                {
+                    QuantityTemp = Int32.Parse(quantity);
+                }
+                catch
+                {
+                    //record the error
+                    Error += "The quantity is in invalid format or too large : ";
+                }
+            }  
+
             return Error;
         }
 
@@ -335,8 +307,8 @@ namespace ClassLibrary
             Error += ValidItemName(itemName);
             Error += ValidPrice(price);
             Error += ValidMaterial(material);
-            Error += ValidLastPurchased(lastPurchased);
             Error += ValidQuantity(quantity);
+            Error += ValidLastPurchased(lastPurchased);
 
             if (Error == "")
             {

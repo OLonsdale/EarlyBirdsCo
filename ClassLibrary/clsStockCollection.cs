@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using ClassLibrary;
 
-namespace Testing5
+namespace ClassLibrary
 {
     public class clsStockCollection
     {
+        //private data member for the list
+        List<clsStock> mStockList = new List<clsStock>();
+
+        //constructor
         public clsStockCollection()
         {
             //variable for the index
@@ -38,10 +41,6 @@ namespace Testing5
             }
         }
 
-        //private data member for the list
-        List<clsStock> mStockList = new List<clsStock>();
-        clsStock mThisItem = new clsStock();
-
         //public property for the stock list
         public List<clsStock> StockList
         {
@@ -72,16 +71,6 @@ namespace Testing5
         }
         
         //public property for an item
-        public clsStock ThisItem
-        {
-            get
-            {
-                return mThisItem;
-            }
-            set
-            {
-                mThisItem = value;
-            }
-        } 
+        public clsStock ThisItem { get; set; }
     }
 }
