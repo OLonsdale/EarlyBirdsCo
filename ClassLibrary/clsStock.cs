@@ -235,13 +235,31 @@ namespace ClassLibrary
             {
                 //do nothing since NULL values are allowed
             }
+            try
+            {
+                DateTemp = Convert.ToDateTime(lastPurchased);
+                //if date input is in the future
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error += "The date cannot be in the future : ";
+                }
+                //if date input is earlier than the minimum date
+                if (DateTemp < MinimumDate)
+                {
+                    //record the error
+                    Error += "The date must not be earlier than 01-01-2015 : ";
+                }
+            }
+            catch
+            {
+                //record the error
+                Error += "The date is not a valid date : ";
+            }
             return Error;
         }
 
-           /* if (lastPurchased.Length == 0)
-            {
-                //do nothing since NULL values are allowed
-            }
+           /* 
             try
             {
                 DateTemp = Convert.ToDateTime(lastPurchased);
