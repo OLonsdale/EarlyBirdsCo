@@ -22,7 +22,5 @@ public partial class _1Viewer : System.Web.UI.Page
         Response.Write(AnItem.Material);
         Response.Write(AnItem.LastPurchased);
         Response.Write(AnItem.InStock);
-       
-        
     }
 }
