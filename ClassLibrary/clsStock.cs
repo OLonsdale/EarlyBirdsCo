@@ -134,7 +134,14 @@ namespace ClassLibrary
                 mItemName = Convert.ToString(DB.DataTable.Rows[0]["ItemName"]);
                 mPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["Price"]);
                 mMaterial = Convert.ToString(DB.DataTable.Rows[0]["Material"]);
-                mLastPurchased = Convert.ToDateTime(DB.DataTable.Rows[0]["LastPurchased"]);
+                if (DB.DataTable.Rows[0]["LastPurchased"] == DBNull.Value)
+                {
+                    //do nothing since NULL values are allowed
+                } 
+                else
+                {
+                    mLastPurchased = Convert.ToDateTime(DB.DataTable.Rows[0]["LastPurchased"]);
+                }
                 mQuantity = Convert.ToInt32(DB.DataTable.Rows[0]["Quantity"]);
                 mInStock = Convert.ToBoolean(DB.DataTable.Rows[0]["InStock"]);
                 //return that everything worked ok
