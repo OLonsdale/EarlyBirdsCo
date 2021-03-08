@@ -95,7 +95,7 @@ namespace Testing5
             //create an instance of clsStock
             clsStock AnItem = new clsStock();
             //create some test data to assign to the propety
-            DateTime TestData = DateTime.Now.Date;
+            Nullable<DateTime> TestData = DateTime.Now.Date;
             //assign the data to the propety
             AnItem.LastPurchased = TestData;
             //test to see that the two values are the same
