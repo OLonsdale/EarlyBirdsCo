@@ -31,7 +31,14 @@ namespace ClassLibrary
                 AnItem.ItemName = Convert.ToString(DB.DataTable.Rows[Index]["ItemName"]);
                 AnItem.Price = Convert.ToDecimal(DB.DataTable.Rows[Index]["Price"]);
                 AnItem.Material = Convert.ToString(DB.DataTable.Rows[Index]["Material"]);
-                AnItem.LastPurchased = Convert.ToDateTime(DB.DataTable.Rows[Index]["LastPurchased"]);
+                if (DB.DataTable.Rows[Index]["LastPurchased"] == DBNull.Value)
+                {
+                    //do nothing since NULL values are allowed
+                } 
+                else
+                {
+                    AnItem.LastPurchased = Convert.ToDateTime(DB.DataTable.Rows[Index]["LastPurchased"]);
+                }      
                 AnItem.Quantity = Convert.ToInt32(DB.DataTable.Rows[Index]["Quantity"]);
                 AnItem.InStock = Convert.ToBoolean(DB.DataTable.Rows[Index]["InStock"]);
                 //add record to private data member
