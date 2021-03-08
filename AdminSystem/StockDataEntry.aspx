@@ -20,14 +20,14 @@
         <asp:Label ID="lblItemName" runat="server" Text="Item Name" width="88px"></asp:Label>
 &nbsp;<asp:TextBox ID="txtItemName" runat="server"></asp:TextBox>
         <br />
-        <asp:Label ID="lblQuantity" runat="server" Text="Quantity" width="93px"></asp:Label>
-        <asp:TextBox ID="txtQuantity" runat="server"></asp:TextBox>
-        <br />
         <asp:Label ID="lblPrice" runat="server" Text="Price" width="93px"></asp:Label>
         <asp:TextBox ID="txtPrice" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="lblMaterial" runat="server" Text="Material" width="93px"></asp:Label>
         <asp:TextBox ID="txtMaterial" runat="server"></asp:TextBox>
+        <br />
+        <asp:Label ID="lblQuantity" runat="server" Text="Quantity" width="93px" style="margin-bottom: 0px"></asp:Label>
+        <asp:TextBox ID="txtQuantity" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="lblLastPurchased" runat="server" Text="Last Purchased"></asp:Label>
         <asp:TextBox ID="txtLastPurchased" runat="server"></asp:TextBox>

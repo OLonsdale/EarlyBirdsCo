@@ -11,7 +11,7 @@ namespace ClassLibrary
         private Decimal mPrice;
         private string mMaterial;
         private Boolean mInStock;
-        private DateTime mLastPurchased;
+        private Nullable<DateTime> mLastPurchased;
         private Int32 mQuantity;
 
         //public property for ItemId
@@ -90,7 +90,7 @@ namespace ClassLibrary
         }
 
         //public property for LastPurchased
-        public DateTime LastPurchased
+        public Nullable<DateTime> LastPurchased
         {
             get
             {
@@ -227,9 +227,9 @@ namespace ClassLibrary
             //store error message
             String Error = "";
             //temporary variable to hold date data
-            DateTime DateTemp;
+            Nullable<DateTime> DateTemp;
             //store minimum date
-            DateTime MinimumDate = Convert.ToDateTime("2015-01-01");
+            Nullable<DateTime> MinimumDate = Convert.ToDateTime("2015-01-01");
 
             if (lastPurchased.Length == 0)
             {
