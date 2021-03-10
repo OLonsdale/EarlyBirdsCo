@@ -10,18 +10,18 @@ public partial class _1_List : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (IsPostBack)
+        if (IsPostBack == false)
         {
             DisplayCustomers();
         }
+    }
 
-        void DisplayCustomers()
-        {
-            clsCustomerCollection Customers = new clsCustomerCollection();
-            lstCustomerList.DataSource = Customers.CustomerList;
-            lstCustomerList.DataValueField = "CustomerId";
-            lstCustomerList.DataTextField = "Email";
-            lstCustomerList.DataBind();
-        }
+    void DisplayCustomers()
+    {
+        clsCustomerCollection Customers = new clsCustomerCollection();
+        lstCustomerList.DataSource = Customers.CustomerList;
+        lstCustomerList.DataValueField = "CustomerId";
+        lstCustomerList.DataTextField = "Email";
+        lstCustomerList.DataBind();
     }
 }
