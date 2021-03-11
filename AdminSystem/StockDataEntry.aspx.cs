@@ -54,10 +54,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
             }
             AnItem.Quantity = Int32.Parse(Quantity);
             AnItem.InStock = chkInStock.Checked;
-            //store the properties in the session object
-            Session["AnItem"] = AnItem;
-            //navigate to the viewer page
-            Response.Redirect("StockViewer.aspx");
+            //create new instance of clsStockCollection
+            clsStockCollection StockList = new clsStockCollection();
+            //set ThisItem property
+            StockList.ThisItem = AnItem;
+            //add new record
+            StockList.Add();
+            //redirect back to list page
+            Response.Redirect("StockList.aspx");
         }
     }
 

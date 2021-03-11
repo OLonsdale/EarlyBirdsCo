@@ -7,6 +7,7 @@ namespace ClassLibrary
     {
         //private data member for the list
         List<clsStock> mStockList = new List<clsStock>();
+        clsStock mThisItem = new clsStock();
 
         //constructor
         public clsStockCollection()
@@ -78,6 +79,36 @@ namespace ClassLibrary
         }
         
         //public property for an item
-        public clsStock ThisItem { get; set; }
+        public clsStock ThisItem
+        {
+            get
+            {
+                //return private data
+                return mThisItem;
+            }
+            set
+            {
+                //set private data
+                mThisItem = value;
+            }
+        }
+
+
+        public int Add()
+        {
+            //add new record basedon values of mThisItem
+            //connect to database
+            clsDataConnection DB = new clsDataConnection();
+            //set parameters for the stored procedure
+            DB.AddParameter("@ItemName", mThisItem.ItemId);
+            DB.AddParameter("@Price", mThisItem.Price);
+            DB.AddParameter("@Material", mThisItem.Material);
+            DB.AddParameter("@LastPurchased", mThisItem.LastPurchased);
+            DB.AddParameter("@Quantity", mThisItem.Quantity);
+            DB.AddParameter("@InStock", mThisItem.InStock);
+            //execute query returning primary key
+            return DB.Execute("sproc_tblStock_Insert");
+
+        }
     }
 }
