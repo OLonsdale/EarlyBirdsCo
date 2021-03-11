@@ -90,5 +90,33 @@ namespace Testing5
             //test to see values are the same
             Assert.AreEqual(AllStock.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            //create an instance of clsStockCollection
+            clsStockCollection AllStock = new clsStockCollection();
+            //create item of test data
+            clsStock TestItem = new clsStock();
+            //store primary key
+            Int32 PrimaryKey = 0;
+            //set its properties
+            TestItem.ItemId = 1;
+            TestItem.ItemName = "Keycap";
+            TestItem.Price = 12.75m;
+            TestItem.Material = "Metal";
+            TestItem.LastPurchased = DateTime.Now.Date;
+            TestItem.Quantity = 15;
+            //set ThisItem to test data
+            AllStock.ThisItem = TestItem;
+            //add record
+            PrimaryKey = AllStock.Add();
+            //set primary key of test data
+            TestItem.ItemId = PrimaryKey;
+            //find record
+            AllStock.ThisItem.Find(PrimaryKey);
+            //test to see values are same
+            Assert.AreEqual(AllStock.ThisItem, TestItem);
+        }
     }
 }
