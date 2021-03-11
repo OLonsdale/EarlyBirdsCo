@@ -100,10 +100,17 @@ namespace ClassLibrary
             //connect to database
             clsDataConnection DB = new clsDataConnection();
             //set parameters for the stored procedure
-            DB.AddParameter("@ItemName", mThisItem.ItemId);
+            DB.AddParameter("@ItemName", mThisItem.ItemName);
             DB.AddParameter("@Price", mThisItem.Price);
             DB.AddParameter("@Material", mThisItem.Material);
-            DB.AddParameter("@LastPurchased", mThisItem.LastPurchased);
+            if (mThisItem.LastPurchased == null)
+            {
+                DB.AddParameter("@LastPurchased", DBNull.Value);
+            }
+            else
+            {
+                DB.AddParameter("@LastPurchased", mThisItem.LastPurchased);
+            }
             DB.AddParameter("@Quantity", mThisItem.Quantity);
             DB.AddParameter("@InStock", mThisItem.InStock);
             //execute query returning primary key
