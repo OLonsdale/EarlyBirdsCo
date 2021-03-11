@@ -128,7 +128,7 @@ namespace Testing5
             //create item of test data
             clsStock TestItem = new clsStock();
             //store primary key
-            Int32 PrimaryKey = 0;
+            Int32 PrimaryKey = 0;       
             //set its properties
             TestItem.ItemId = 1;
             TestItem.ItemName = "Keycap";
@@ -187,6 +187,8 @@ namespace Testing5
             AllStock.ThisItem.Find(PrimaryKey);
             //delete record
             AllStock.Delete();
+            //find record now
+            Boolean Found = AllStock.ThisItem.Find(PrimaryKey);
             //test to see record was not found
             Assert.IsFalse(Found);
         }
