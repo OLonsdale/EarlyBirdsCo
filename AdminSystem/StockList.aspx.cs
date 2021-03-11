@@ -60,4 +60,25 @@ public partial class _1_List : System.Web.UI.Page //_1_List
             lblError.Text = "Please select a record to delete from the list.";
         }
     }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        //store primary key
+        Int32 ItemId;
+        //if record has been selected from list 
+        if (lstStock.SelectedIndex != -1)
+        {
+            //get primary key of record to delete
+            ItemId = Convert.ToInt32(lstStock.SelectedValue);
+            //store data in session
+            Session["ItemId"] = ItemId;
+            //redirect to delete page
+            Response.Redirect("StockConfirmDelete.aspx");
+        }
+        else //if no record has been selected
+        {
+            //display error
+            lblError.Text = "Please select a record to delete from the list.";
+        }
+    }
 }
