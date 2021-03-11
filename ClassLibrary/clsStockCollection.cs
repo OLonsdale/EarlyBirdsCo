@@ -115,7 +115,30 @@ namespace ClassLibrary
             DB.AddParameter("@InStock", mThisItem.InStock);
             //execute query returning primary key
             return DB.Execute("sproc_tblStock_Insert");
+        }
 
+        public void Update()
+        {
+            //update existing record based on values of ThisItem
+            //connect to datavase
+            clsDataConnection DB = new clsDataConnection();
+            //set parameters
+            DB.AddParameter("@ItemId", mThisItem.ItemId);
+            DB.AddParameter("@ItemName", mThisItem.ItemName);
+            DB.AddParameter("@Price", mThisItem.Price);
+            DB.AddParameter("@Material", mThisItem.Material);
+            if (mThisItem.LastPurchased == null)
+            {
+                DB.AddParameter("@LastPurchased", DBNull.Value);
+            }
+            else
+            {
+                DB.AddParameter("@LastPurchased", mThisItem.LastPurchased);
+            }
+            DB.AddParameter("@Quantity", mThisItem.Quantity);
+            DB.AddParameter("@InStock", mThisItem.InStock);
+            //execute stored procedure
+            DB.Execute("sproc_tblStock_Update");
         }
     }
 }

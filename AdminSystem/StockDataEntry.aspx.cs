@@ -8,9 +8,22 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    //store primary key with page level scope
+    Int32 ItemId;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //get number of the item to be processed
+        ItemId = Convert.ToInt32(Session["ItemId"]);
+        if (IsPostBack == false)
+        {
+            //if this is not a new record
+            if (ItemId != -1)
+            {
+                //display current data for record
+                DisplayAddress();
+            }
+        }
     }
 
     //OK button
@@ -41,6 +54,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         else
         {
             //capture the properties
+            AnItem.ItemId = ItemId;
             AnItem.ItemName = ItemName;
             AnItem.Price = Decimal.Parse(Price);
             AnItem.Material = Material;
@@ -56,10 +70,23 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnItem.InStock = chkInStock.Checked;
             //create new instance of clsStockCollection
             clsStockCollection StockList = new clsStockCollection();
-            //set ThisItem property
-            StockList.ThisItem = AnItem;
-            //add new record
-            StockList.Add();
+            if (ItemId == -1)
+            {
+                 //set ThisItem property
+                 StockList.ThisItem = AnItem;
+                 //add new record
+                 StockList.Add();
+            }
+           //otherwise update
+           else
+           {
+                //find record to update
+                StockList.ThisItem.Find(ItemId);
+                //set ThisItem property
+                StockList.ThisItem = AnItem;
+                //update record
+                StockList.Update();
+           }
             //redirect back to list page
             Response.Redirect("StockList.aspx");
         }
@@ -112,5 +139,22 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //output an error message
             lblError.Text = "Error! No Such Item Exists.";
         }
+    }
+
+    void DisplayAddress()
+    {
+        //create an instance of clsStockCollection
+        clsStockCollection Stock = new clsStockCollection();
+        //find record to update
+        Stock.ThisItem.Find(ItemId);
+        //display data for record
+        txtItemId.Text = Stock.ThisItem.ItemId.ToString();
+        txtItemName.Text = Stock.ThisItem.ItemName;
+        txtPrice.Text = Stock.ThisItem.Price.ToString();
+        txtMaterial.Text = Stock.ThisItem.Material;
+        txtQuantity.Text = Stock.ThisItem.Quantity.ToString();
+        txtLastPurchased.Text = Stock.ThisItem.LastPurchased.ToString();
+        chkInStock.Checked = Stock.ThisItem.InStock;
+
     }
 }
