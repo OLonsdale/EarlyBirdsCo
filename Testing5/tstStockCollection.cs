@@ -107,6 +107,7 @@ namespace Testing5
             TestItem.Material = "Metal";
             TestItem.LastPurchased = DateTime.Now.Date;
             TestItem.Quantity = 15;
+            TestItem.InStock = true;
             //set ThisItem to test data
             AllStock.ThisItem = TestItem;
             //add record
@@ -116,6 +117,46 @@ namespace Testing5
             //find record
             AllStock.ThisItem.Find(PrimaryKey);
             //test to see values are same
+            Assert.AreEqual(AllStock.ThisItem, TestItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            //create an instance of clsStockCollection
+            clsStockCollection AllStock = new clsStockCollection();
+            //create item of test data
+            clsStock TestItem = new clsStock();
+            //store primary key
+            Int32 PrimaryKey = 0;
+            //set its properties
+            TestItem.ItemId = 1;
+            TestItem.ItemName = "Keycap";
+            TestItem.Price = 12.75m;
+            TestItem.Material = "Metal";
+            TestItem.LastPurchased = DateTime.Now.Date;
+            TestItem.Quantity = 15;
+            TestItem.InStock = true;
+            //set ThisItem to test data
+            AllStock.ThisItem = TestItem;
+            //add record
+            PrimaryKey = AllStock.Add();
+            //set primary key of test data
+            TestItem.ItemId = PrimaryKey;
+            //modify test data
+            TestItem.ItemName = "Keycap 2";
+            TestItem.Price = 10m;
+            TestItem.Material = "Resin";
+            TestItem.LastPurchased = DateTime.Now.Date;
+            TestItem.Quantity = 0;
+            TestItem.InStock = false;
+            //set record based on new test data
+            AllStock.ThisItem = TestItem;
+            //update record
+            AllStock.Update();
+            //find record
+            AllStock.ThisItem.Find(PrimaryKey);
+            //test to see ThisItem matches test data
             Assert.AreEqual(AllStock.ThisItem, TestItem);
         }
     }
