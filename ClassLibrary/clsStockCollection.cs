@@ -20,6 +20,8 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
             //executed stored procedure
             DB.Execute("sproc_tblStock_SelectAll");
+            //populate array with data table
+            PopulateArray(DB);
             //get count of records
             RecordCount = DB.Count;
             //while there are records to process
@@ -150,6 +152,50 @@ namespace ClassLibrary
             DB.AddParameter("@ItemId", mThisItem.ItemId);
             //execute stored procedure
             DB.Execute("sproc_tblStock_Delete");
+        }
+
+        public void ReportByItemName(string ItemName)
+        {
+            //filter record based on material
+            //connect to database
+            clsDataConnection DB = new clsDataConnection();
+            //send the Material parameter to the database
+            DB.AddParameter("@ItemName", ItemName);
+            //execute stored procedure
+            DB.Execute("sproc_tblStock_FilterByItemName");
+            //populate array with data table
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            //ppopulates array based on the data table in parameter DB
+            //index
+            Int32 Index = 0;
+            //store record count
+            Int32 RecordCount;
+            //get count of records
+            RecordCount = DB.Count;
+            //clear private array list
+            mStockList = new List<clsStock>();
+            //while there are records to process
+            while (Index < RecordCount)
+            {
+                //create blank item
+                clsStock AnItem = new clsStock();
+                //read in fields from current record
+                AnItem.ItemId = Convert.ToInt32(DB.DataTable.Rows[Index]["ItemId"]);
+                AnItem.ItemName = Convert.ToString(DB.DataTable.Rows[Index]["ItemName"]);
+                AnItem.Price = Convert.ToDecimal(DB.DataTable.Rows[Index]["Price"]);
+                AnItem.Material = Convert.ToString(DB.DataTable.Rows[Index]["Material"]);
+                AnItem.LastPurchased = Convert.ToDateTime(DB.DataTable.Rows[Index]["LastPurchased"]);
+                AnItem.Quantity = Convert.ToInt32(DB.DataTable.Rows[Index]["Quantity"]);
+                AnItem.InStock = Convert.ToBoolean(DB.DataTable.Rows[Index]["InStock"]);
+                //add record to private data member
+                mStockList.Add(AnItem);
+                //point at next record
+                Index++;
+            }
         }
     }
 }
