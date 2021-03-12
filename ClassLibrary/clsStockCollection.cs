@@ -20,9 +20,9 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
             //executed stored procedure
             DB.Execute("sproc_tblStock_SelectAll");
-            /*
-            PopulateArray(DB);
-             * */
+                  
+            //PopulateArray(DB);
+             
             //get count of records
             RecordCount = DB.Count;
             //while there are records to process
@@ -155,15 +155,15 @@ namespace ClassLibrary
             DB.Execute("sproc_tblStock_Delete");
         }
 
-        public void ReportByItemName(string ItemName)
+        public void ReportByMaterial(string Material)
         {
             //filter record based on keyword of item name
             //connect to database
             clsDataConnection DB = new clsDataConnection();
             //send the ItemName parameter to the database
-            DB.AddParameter("@ItemName", ItemName);
+            DB.AddParameter("@Material", Material);
             //execute stored procedure
-            DB.Execute("sproc_tblStock_FilterByItemName");
+            DB.Execute("sproc_tblStock_FilterByMaterial");
             //populate array with data table
             PopulateArray(DB);
         }

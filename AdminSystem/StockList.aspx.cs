@@ -57,7 +57,7 @@ public partial class _1_List : System.Web.UI.Page //_1_List
         else //if no record has been selected
         {
             //display error
-            lblError.Text = "Please select a record to delete from the list.";
+            lblError.Text = "Please select a record to update.";
         }
     }
 
@@ -86,7 +86,7 @@ public partial class _1_List : System.Web.UI.Page //_1_List
     {
         //create an instance of clsStockCollection
         clsStockCollection Stock = new clsStockCollection();
-        Stock.ReportByItemName(txtFilter.Text);
+        Stock.ReportByMaterial(txtFilter.Text);
         lstStock.DataSource = Stock.StockList;
         //set name of primary key
         lstStock.DataValueField = "ItemId";
@@ -100,7 +100,7 @@ public partial class _1_List : System.Web.UI.Page //_1_List
     {
         //create an instance of clsStockCollection
         clsStockCollection Stock = new clsStockCollection();
-        Stock.ReportByItemName("");
+        Stock.ReportByMaterial("");
         //reset filter textbox for tidyness
         txtFilter.Text = "";
         lstStock.DataSource = Stock.StockList;
