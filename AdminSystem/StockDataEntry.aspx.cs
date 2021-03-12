@@ -21,7 +21,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             if (ItemId != -1)
             {
                 //display current data for record
-                DisplayAddress();
+                DisplayItem();
             }
         }
     }
@@ -141,7 +141,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
     }
 
-    void DisplayAddress()
+    void DisplayItem()
     {
         //create an instance of clsStockCollection
         clsStockCollection Stock = new clsStockCollection();

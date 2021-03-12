@@ -194,7 +194,7 @@ namespace Testing5
         }
 
         [TestMethod]
-        public void ReportByMaterialMethodOK()
+        public void ReportByItemNameMethodOK()
         {
             //create an instance of clsStockCollection containing no filter
             clsStockCollection AllStock = new clsStockCollection();
@@ -212,7 +212,7 @@ namespace Testing5
             //create an instace of filtered data
             clsStockCollection FilteredStock = new clsStockCollection();
             //apply an item name that does not exist
-            FilteredStock.ReportByItemName("xxxxxx");
+            FilteredStock.ReportByItemName("xx xx xx");
             //test to see there are no records
             Assert.AreEqual(0, FilteredStock.Count);
         }
@@ -224,18 +224,18 @@ namespace Testing5
             clsStockCollection FilteredStock = new clsStockCollection();
             //store outcome
             Boolean OK = true;
-            //apply a material that does not exist
-            FilteredStock.ReportByItemName("xxxxxx");
+            //apply an item name that does not exist
+            FilteredStock.ReportByItemName("xx xx xx");
             //check that correct number of records are found
             if (FilteredStock.Count == 2)
             {
                 //check that first record is ID .....
-                if (FilteredStock.StockList[0].ItemId != 1)
+                if (FilteredStock.StockList[0].ItemId != 16)
                 {
                     OK = false;
                 }
-                //check that first record is ID .....
-                if (FilteredStock.StockList[1].ItemId != 2)
+                //check that second record is ID .....
+                if (FilteredStock.StockList[1].ItemId != 17)
                 {
                     OK = false;
                 }
