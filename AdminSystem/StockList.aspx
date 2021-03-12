@@ -6,7 +6,7 @@
 <head runat="server">
     <title></title>
 </head>
-<body style="height: 536px">
+<body style="height: 575px">
     <form id="form1" runat="server">
         <div>
             <asp:ListBox ID="lstStock" runat="server" Height="399px" Width="449px"></asp:ListBox>
@@ -16,11 +16,13 @@
         <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" />
         <br />
         <br />
-        Enter a keyword:
+        <br />
+        Search for Keycaps based on a Material:
         <asp:TextBox ID="txtFilter" runat="server"></asp:TextBox>
         <br />
         <asp:Button ID="btnApply" runat="server" OnClick="btnApply_Click" Text="Apply" />
         <asp:Button ID="btnClear" runat="server" OnClick="btnClear_Click" Text="Clear" />
+        <br />
         <br />
         <br />
         <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>

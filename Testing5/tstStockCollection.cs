@@ -91,7 +91,7 @@ namespace Testing5
             Assert.AreEqual(AllStock.Count, TestList.Count);
         }
 
-        [TestMethod]
+       /* [TestMethod]
         public void AddMethodOK()
         {
             //create an instance of clsStockCollection
@@ -158,7 +158,7 @@ namespace Testing5
             AllStock.ThisItem.Find(PrimaryKey);
             //test to see ThisItem matches test data
             Assert.AreEqual(AllStock.ThisItem, TestItem);
-        }
+        } 
 
         [TestMethod]
         public void DeleteMethodOK()
@@ -191,41 +191,41 @@ namespace Testing5
             Boolean Found = AllStock.ThisItem.Find(PrimaryKey);
             //test to see record was not found
             Assert.IsFalse(Found);
-        }
+        } */
 
         [TestMethod]
-        public void ReportByItemNameMethodOK()
+        public void ReportByMaterialMethodOK()
         {
             //create an instance of clsStockCollection containing no filter
             clsStockCollection AllStock = new clsStockCollection();
             //create an instace of filtered data
             clsStockCollection FilteredStock = new clsStockCollection();
             //apply blank string (to return all records)
-            FilteredStock.ReportByItemName("");
+            FilteredStock.ReportByMaterial("");
             //test to see two values are same
             Assert.AreEqual(AllStock.Count, FilteredStock.Count);
         }
 
         [TestMethod]
-        public void ReportByItemNameNoneFound()
+        public void ReportByMaterialNoneFound()
         {
             //create an instace of filtered data
             clsStockCollection FilteredStock = new clsStockCollection();
             //apply an item name that does not exist
-            FilteredStock.ReportByItemName("xx xx xx");
+            FilteredStock.ReportByMaterial("xx xx xx");
             //test to see there are no records
             Assert.AreEqual(0, FilteredStock.Count);
         }
 
         [TestMethod]
-        public void ReportByItemNameTestDataFound()
+        public void ReportByMaterialTestDataFound()
         {
             //create an instance of filtered data
             clsStockCollection FilteredStock = new clsStockCollection();
             //store outcome
             Boolean OK = true;
-            //apply an item name that does not exist
-            FilteredStock.ReportByItemName("xx xx xx");
+            //apply an item name that does exist
+            FilteredStock.ReportByMaterial("ZZZZZZ");
             //check that correct number of records are found
             if (FilteredStock.Count == 2)
             {
@@ -244,7 +244,7 @@ namespace Testing5
             {
                 OK = false;
             }
-            //test to see there are no records
+            //test to see there are records
             Assert.IsTrue(OK);
         }
     }

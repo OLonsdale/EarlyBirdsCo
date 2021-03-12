@@ -157,4 +157,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
         chkInStock.Checked = Stock.ThisItem.InStock;
 
     }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        //redirect to main page
+        Response.Redirect("StockList.aspx");
+    }
 }
