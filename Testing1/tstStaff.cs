@@ -224,7 +224,6 @@ namespace Testing1
         ////Testing the validation method
 
         //Valid Data
-        string StaffNumber = "10000";
         string FirstName = "James";
         string LastName = "Bond";
         string StartDate = "2018-01-01";
