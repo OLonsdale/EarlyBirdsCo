@@ -16,7 +16,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnOk_Click(object sender, EventArgs e)
     {
         clsCustomer ACustomer = new clsCustomer();
-
+        
         string Name = txtName.Text;
         string DateOfBirth = txtDateOfBirth.Text;
         string Address = txtAddress.Text;
@@ -27,15 +27,17 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         if (Error == "")
         {
-            ACustomer.CustomerId = Convert.ToInt32(txtCustomerId.Text);
             ACustomer.Name = Name;
             ACustomer.DateOfBirth = Convert.ToDateTime(DateOfBirth);
             ACustomer.Address = Address;
             ACustomer.Email = Email;
             ACustomer.IsMember = chkIsMember.Checked;
 
-            Session["ACustomer"] = ACustomer;
-            Response.Redirect("CustomerViewer.aspx");
+            clsCustomerCollection CustomerList = new clsCustomerCollection();
+            CustomerList.ThisCustomer = ACustomer;
+            CustomerList.Add();
+
+            Response.Redirect("CustomerList.aspx");
         }
         else
         {

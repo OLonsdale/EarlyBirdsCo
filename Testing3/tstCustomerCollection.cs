@@ -72,5 +72,27 @@ namespace Testing3
 
             Assert.AreEqual(AllCustomers.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomer TestItem = new clsCustomer();
+            Int32 PrimaryKey = 0;
+
+            TestItem.Name = "Wallace Breen";
+            TestItem.DateOfBirth = new DateTime(1955, 2, 20);
+            TestItem.Address = "8 Citadel Road";
+            TestItem.Email = "wallaceb@citadel.com";
+            TestItem.IsMember = true;
+
+            AllCustomers.ThisCustomer = TestItem;
+            PrimaryKey = AllCustomers.Add();
+            TestItem.CustomerId = PrimaryKey;
+
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
+        }
     }
 }
