@@ -8,9 +8,38 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 CustomerId;
     protected void Page_Load(object sender, EventArgs e)
     {
+        CustomerId = Convert.ToInt32(Session["CustomerId"]);
 
+        if (IsPostBack == false)
+        {
+            if (CustomerId != -1)
+            {
+                DisplayCustomers();
+            }
+        }
+    }
+
+    void DisplayCustomers()
+    {
+        clsCustomerCollection Customers = new clsCustomerCollection();
+        Customers.ThisCustomer.Find(CustomerId);
+
+        txtCustomerId.Text = Customers.ThisCustomer.CustomerId.ToString();
+        txtName.Text = Customers.ThisCustomer.Name;
+        txtDateOfBirth.Text = Customers.ThisCustomer.DateOfBirth.ToString();
+        txtAddress.Text = Customers.ThisCustomer.Address;
+        txtEmail.Text = Customers.ThisCustomer.Email;
+        if (Customers.ThisCustomer.IsMember)
+        {
+            chkIsMember.Checked = true;
+        }
+        else
+        {
+            chkIsMember.Checked = false;
+        }
     }
 
     protected void btnOk_Click(object sender, EventArgs e)
@@ -27,6 +56,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         if (Error == "")
         {
+            ACustomer.CustomerId = CustomerId;
             ACustomer.Name = Name;
             ACustomer.DateOfBirth = Convert.ToDateTime(DateOfBirth);
             ACustomer.Address = Address;
@@ -34,9 +64,18 @@ public partial class _1_DataEntry : System.Web.UI.Page
             ACustomer.IsMember = chkIsMember.Checked;
 
             clsCustomerCollection CustomerList = new clsCustomerCollection();
-            CustomerList.ThisCustomer = ACustomer;
-            CustomerList.Add();
 
+            if (CustomerId  == -1)
+            {
+                CustomerList.ThisCustomer = ACustomer;
+                CustomerList.Add();
+            }
+            else
+            {
+                CustomerList.ThisCustomer.Find(CustomerId);
+                CustomerList.ThisCustomer = ACustomer;
+                CustomerList.Update();
+            }
             Response.Redirect("CustomerList.aspx");
         }
         else
