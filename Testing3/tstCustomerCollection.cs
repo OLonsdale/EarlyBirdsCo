@@ -124,5 +124,30 @@ namespace Testing3
 
             Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
         }
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomer TestItem = new clsCustomer();
+            Int32 PrimaryKey = 0;
+
+            TestItem.CustomerId = 50;
+            TestItem.Name = "Wallace Breen";
+            TestItem.DateOfBirth = new DateTime(1955, 2, 20);
+            TestItem.Address = "17 City Street";
+            TestItem.Email = "wallaceb@citadel.com";
+            TestItem.IsMember = false;
+
+            AllCustomers.ThisCustomer = TestItem;
+            PrimaryKey = AllCustomers.Add();
+            TestItem.CustomerId = PrimaryKey;
+
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            AllCustomers.Delete();
+            Boolean Found = AllCustomers.ThisCustomer.Find(PrimaryKey);
+
+            Assert.IsFalse(Found);
+        }
     }
 }
