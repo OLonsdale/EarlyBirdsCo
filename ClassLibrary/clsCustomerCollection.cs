@@ -44,29 +44,9 @@ namespace ClassLibrary
 
         public clsCustomerCollection()
         {
-            Int32 Index = 0;
-            Int32 RecordCount = 0;
-
             clsDataConnection DB = new clsDataConnection();
             DB.Execute("sproc_tblCustomer_SelectAll");
-
-            RecordCount = DB.Count;
-
-            while (Index < RecordCount)
-            {
-                clsCustomer ACustomer = new clsCustomer();
-
-                ACustomer.CustomerId = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerId"]);
-                ACustomer.Name = Convert.ToString(DB.DataTable.Rows[Index]["Name"]);
-                ACustomer.DateOfBirth = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateOfBirth"]);
-                ACustomer.Address = Convert.ToString(DB.DataTable.Rows[Index]["Address"]);
-                ACustomer.Email = Convert.ToString(DB.DataTable.Rows[Index]["Email"]);
-                ACustomer.IsMember = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsMember"]);
-
-                mCustomerList.Add(ACustomer);
-
-                Index++;
-            }
+            PopulateArray(DB);
         }
 
         public int Add()
@@ -100,6 +80,37 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@CustomerId", mThisCustomer.CustomerId);
             DB.Execute("sproc_tblCustomer_Delete");
+        }
+
+        public void ReportByName(string Name)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Name", Name);
+            DB.Execute("sproc_tblCustomer_FilterByName");
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            Int32 Index = 0;
+            Int32 RecordCount;
+            RecordCount = DB.Count;
+            mCustomerList = new List<clsCustomer>();
+
+            while (Index < RecordCount)
+            {
+                clsCustomer ACustomer = new clsCustomer();
+
+                ACustomer.CustomerId = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerId"]);
+                ACustomer.Name = Convert.ToString(DB.DataTable.Rows[Index]["Name"]);
+                ACustomer.DateOfBirth = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateOfBirth"]);
+                ACustomer.Address = Convert.ToString(DB.DataTable.Rows[Index]["Address"]);
+                ACustomer.Email = Convert.ToString(DB.DataTable.Rows[Index]["Email"]);
+                ACustomer.IsMember = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsMember"]);
+
+                mCustomerList.Add(ACustomer);
+                Index++;
+            }
         }
     }
 }

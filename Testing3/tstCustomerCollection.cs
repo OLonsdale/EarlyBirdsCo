@@ -149,5 +149,47 @@ namespace Testing3
 
             Assert.IsFalse(Found);
         }
+
+        [TestMethod]
+        public void ReportByNameMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            FilteredCustomers.ReportByName("");
+            Assert.AreEqual(AllCustomers.Count, FilteredCustomers.Count);
+        }
+
+        [TestMethod]
+        public void ReportByNameNoneFound()
+        {
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            FilteredCustomers.ReportByName("Alyx Vance");
+            Assert.AreEqual(0, FilteredCustomers.Count);
+        }
+
+        [TestMethod]
+        public void ReportByNameTestDataFound()
+        {
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            Boolean OK = true;
+            FilteredCustomers.ReportByName("Adrian Shephard");
+
+            if (FilteredCustomers.Count == 2)
+            {
+                if (FilteredCustomers.CustomerList[0].CustomerId != 57)
+                {
+                    OK = false;
+                }
+                if (FilteredCustomers.CustomerList[1].CustomerId != 58)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
     }
 }
