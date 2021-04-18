@@ -148,8 +148,8 @@ namespace Testing1
             clsStaff TestItem = new clsStaff();
             int PrimaryKey = 0;
 
-            TestItem.FirstName = "Testing-update";
-            TestItem.LastName = "update-method-test";
+            TestItem.FirstName = "should-never-show-in-database";
+            TestItem.LastName = "because-by-end-of-test-should-change";
             TestItem.StartDate = DateTime.Parse("2018-01-01");
             TestItem.PhoneNumber = "07492278399";
             TestItem.HourlyRate = 8.90M;
@@ -157,15 +157,18 @@ namespace Testing1
             AllStaff.ThisStaff = TestItem;
             PrimaryKey = AllStaff.Add();
 
-            AllStaff.Update();
+            TestItem.StaffNumber = PrimaryKey;            
 
-            AllStaff.ThisStaff.Find(PrimaryKey);
-
-            TestItem.FirstName = "update-tested";
+            TestItem.FirstName = "this-is-ok";
             TestItem.LastName = "update-method-tested";
             TestItem.StartDate = DateTime.Parse("2019-01-01");
             TestItem.PhoneNumber = "07492278310";
             TestItem.HourlyRate = 9.90M;
+
+            AllStaff.ThisStaff = TestItem;
+            AllStaff.Update();
+
+            AllStaff.ThisStaff.Find(PrimaryKey);
 
             Assert.AreEqual(AllStaff.ThisStaff, TestItem);
         }

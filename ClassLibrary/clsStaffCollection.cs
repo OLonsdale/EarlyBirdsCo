@@ -112,6 +112,8 @@ namespace ClassLibrary
             DB.AddParameter("@PhoneNumber", mThisStaff.PhoneNumber);
             DB.AddParameter("@IsManager", mThisStaff.IsManager);
             DB.AddParameter("@HourlyRate", mThisStaff.HourlyRate);
+
+            DB.Execute("sproc_tblStaff_Update");
         }
     }
 }

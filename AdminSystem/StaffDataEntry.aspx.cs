@@ -21,6 +21,21 @@ public partial class _1_DataEntry : System.Web.UI.Page
             }
         }
     }
+
+    void DisplayStaff()
+    {
+        clsStaffCollection AllStaff = new clsStaffCollection();
+        AllStaff.ThisStaff.Find(StaffNumber);
+
+        txtStaffNumber.Text = AllStaff.ThisStaff.StaffNumber.ToString();
+        txtFirstName.Text = AllStaff.ThisStaff.FirstName;
+        txtLastName.Text = AllStaff.ThisStaff.LastName;
+        txtHourlyRate.Text = AllStaff.ThisStaff.HourlyRate.ToString();
+        txtPhoneNumber.Text = AllStaff.ThisStaff.PhoneNumber;
+        txtStartDate.Text = AllStaff.ThisStaff.StartDate.ToString();
+        chkIsManager.Checked = AllStaff.ThisStaff.IsManager;
+    }
+
     protected void chkIsManager_CheckedChanged(object sender, EventArgs e){}
 
     //When the OK button is clicked
@@ -77,21 +92,15 @@ public partial class _1_DataEntry : System.Web.UI.Page
         
     }
 
-    void DisplayStaff()
-    {
-        clsStaffCollection AllStaff = new clsStaffCollection();
-        AllStaff.ThisStaff.Find(StaffNumber);
+    ////To fix: Cancle button leads to an immidiate redirect back to the current page. back button in broswer does the same////
 
-        txtStaffNumber.Text = AllStaff.ThisStaff.StaffNumber.ToString();
-        txtFirstName.Text = AllStaff.ThisStaff.FirstName;
-        txtLastName.Text = AllStaff.ThisStaff.LastName;
-        txtHourlyRate.Text = AllStaff.ThisStaff.HourlyRate.ToString();
-        txtPhoneNumber.Text = AllStaff.ThisStaff.PhoneNumber;
-        txtStartDate.Text = AllStaff.ThisStaff.StartDate.ToString();
-        chkIsManager.Checked = AllStaff.ThisStaff.IsManager;
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StaffList.aspx");
     }
 
-    protected void btnFind_Click(object sender, EventArgs e)
+
+        protected void btnFind_Click(object sender, EventArgs e)
     {
         //creates new instance of staff class
         clsStaff StaffMember = new clsStaff();
