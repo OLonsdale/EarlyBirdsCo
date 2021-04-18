@@ -8,9 +8,34 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
-
+    int StaffNumber;
     //When the page loads and when the manager box is ticked.
-    protected void Page_Load(object sender, EventArgs e){}
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        StaffNumber = Convert.ToInt32(Session["StaffNumber"]);
+        if(IsPostBack == false)
+        {
+            if (StaffNumber != -1)
+            {
+                DisplayStaff();
+            }
+        }
+    }
+
+    void DisplayStaff()
+    {
+        clsStaffCollection AllStaff = new clsStaffCollection();
+        AllStaff.ThisStaff.Find(StaffNumber);
+
+        txtStaffNumber.Text = AllStaff.ThisStaff.StaffNumber.ToString();
+        txtFirstName.Text = AllStaff.ThisStaff.FirstName;
+        txtLastName.Text = AllStaff.ThisStaff.LastName;
+        txtHourlyRate.Text = AllStaff.ThisStaff.HourlyRate.ToString();
+        txtPhoneNumber.Text = AllStaff.ThisStaff.PhoneNumber;
+        txtStartDate.Text = AllStaff.ThisStaff.StartDate.ToString();
+        chkIsManager.Checked = AllStaff.ThisStaff.IsManager;
+    }
+
     protected void chkIsManager_CheckedChanged(object sender, EventArgs e){}
 
     //When the OK button is clicked
@@ -19,24 +44,27 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         clsStaff StaffMember = new clsStaff();
 
-        string staffNum = txtStaffNumber.Text;
+        //capture the data from the text input boxes
         string firstName = txtFirstName.Text;
         string lastName = txtLastName.Text;
         string hourlyRate = txtHourlyRate.Text;
         string phoneNumber = txtPhoneNumber.Text;
         string startDate = txtStartDate.Text;
 
+        //if there are errors
         if (StaffMember.Valid(firstName, lastName, phoneNumber, hourlyRate, startDate) == false)
         {
+            //add the error messages to their relevent boxes
             lblFirstNameError.Text = StaffMember.ValidName(firstName);
             lblLastNameError.Text = StaffMember.ValidName(lastName);
             lblHourlyRateError.Text = StaffMember.ValidHourlyRate(hourlyRate);
             lblPhoneNumberError.Text = StaffMember.ValidPhoneNumber(phoneNumber);
             lblStartDateError.Text = StaffMember.ValidStartDate(startDate);
         }
+        //or, store the captured data in an instance of the class
         else
         {
-            StaffMember.StaffNumber = int.Parse(staffNum);
+            StaffMember.StaffNumber = StaffNumber;
             StaffMember.FirstName = firstName;
             StaffMember.LastName = lastName;
             StaffMember.HourlyRate = decimal.Parse(hourlyRate);
@@ -44,13 +72,35 @@ public partial class _1_DataEntry : System.Web.UI.Page
             StaffMember.PhoneNumber = phoneNumber;
             StaffMember.StartDate = DateTime.Parse(startDate);
 
-            Session["StaffMember"] = StaffMember;
-            Response.Redirect("StaffViewer.aspx");
+            clsStaffCollection StaffList = new clsStaffCollection();
+
+            if (StaffNumber == -1)
+            {
+                StaffList.ThisStaff = StaffMember;
+                StaffList.Add();
+            }
+
+            else
+            {
+                StaffList.ThisStaff.Find(StaffNumber);
+                StaffList.ThisStaff = StaffMember;
+                StaffList.Update();
+            }
+
+            Response.Redirect("StaffList.aspx");
         }
         
     }
 
-    protected void btnFind_Click(object sender, EventArgs e)
+    ////To fix: Cancle button leads to an immidiate redirect back to the current page. back button in broswer does the same////
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StaffList.aspx");
+    }
+
+
+        protected void btnFind_Click(object sender, EventArgs e)
     {
         //creates new instance of staff class
         clsStaff StaffMember = new clsStaff();

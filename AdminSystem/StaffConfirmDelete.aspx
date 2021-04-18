@@ -8,8 +8,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
+        <div>Delete the selected record?</div>
+        <asp:Button ID="btnYes" runat="server" Text="Yes" OnClick="btnYes_Click" />
+        <asp:Button ID="btnNo" runat="server" Text="No" OnClick="btnNo_Click" />
     </form>
 </body>
 </html>

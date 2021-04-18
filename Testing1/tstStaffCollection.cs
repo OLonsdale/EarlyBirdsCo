@@ -91,5 +91,96 @@ namespace Testing1
 
         }
 
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            clsStaff TestItem = new clsStaff();
+            int PrimaryKey = 0;
+            TestItem.FirstName = "Add-Method-Test";
+            TestItem.LastName = "Testing-Add-Method";
+            TestItem.StartDate = DateTime.Parse("2018-01-01");
+            TestItem.PhoneNumber = "07492278399";
+            TestItem.HourlyRate = 8.90M;
+
+            AllStaff.ThisStaff = TestItem;
+
+            PrimaryKey = AllStaff.Add();
+
+            TestItem.StaffNumber = PrimaryKey;
+
+            AllStaff.ThisStaff.Find(PrimaryKey);
+
+            Assert.AreEqual(AllStaff.ThisStaff, TestItem);
+        }
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            clsStaff TestItem = new clsStaff();
+            int PrimaryKey = 0;
+            TestItem.FirstName = "Add-Method-Test";
+            TestItem.LastName = "Testing-Add-Method";
+            TestItem.StartDate = DateTime.Parse("2018-01-01");
+            TestItem.PhoneNumber = "07492278399";
+            TestItem.HourlyRate = 8.90M;
+
+            AllStaff.ThisStaff = TestItem;
+
+            PrimaryKey = AllStaff.Add();
+
+            TestItem.StaffNumber = PrimaryKey;
+
+            AllStaff.ThisStaff.Find(PrimaryKey);
+
+            AllStaff.Delete();
+
+            bool Found = AllStaff.ThisStaff.Find(PrimaryKey);
+
+            Assert.IsFalse(Found);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            clsStaff TestItem = new clsStaff();
+            int PrimaryKey = 0;
+
+            TestItem.FirstName = "should-never-show-in-database";
+            TestItem.LastName = "because-by-end-of-test-should-change";
+            TestItem.StartDate = DateTime.Parse("2018-01-01");
+            TestItem.PhoneNumber = "07492278399";
+            TestItem.HourlyRate = 8.90M;
+
+            AllStaff.ThisStaff = TestItem;
+            PrimaryKey = AllStaff.Add();
+
+            TestItem.StaffNumber = PrimaryKey;            
+
+            TestItem.FirstName = "this-is-ok";
+            TestItem.LastName = "update-method-tested";
+            TestItem.StartDate = DateTime.Parse("2019-01-01");
+            TestItem.PhoneNumber = "07492278310";
+            TestItem.HourlyRate = 9.90M;
+
+            AllStaff.ThisStaff = TestItem;
+            AllStaff.Update();
+
+            AllStaff.ThisStaff.Find(PrimaryKey);
+
+            Assert.AreEqual(AllStaff.ThisStaff, TestItem);
+        }
+
+        [TestMethod]
+        public void ReportByFirstNameOK()
+        {
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            clsStaffCollection FilteredStaff = new clsStaffCollection();
+            FilteredStaff.ReportByFirstName("");
+            Assert.AreEqual(AllStaff.Count, FilteredStaff.Count);
+        }
+
     }
 }
