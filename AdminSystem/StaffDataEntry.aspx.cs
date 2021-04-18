@@ -19,6 +19,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         clsStaff StaffMember = new clsStaff();
 
+        //capture the data from the text input boxes
         string staffNum = txtStaffNumber.Text;
         string firstName = txtFirstName.Text;
         string lastName = txtLastName.Text;
@@ -26,17 +27,20 @@ public partial class _1_DataEntry : System.Web.UI.Page
         string phoneNumber = txtPhoneNumber.Text;
         string startDate = txtStartDate.Text;
 
+        //if there are errors
         if (StaffMember.Valid(firstName, lastName, phoneNumber, hourlyRate, startDate) == false)
         {
+            //add the error messages to their relevent boxes
             lblFirstNameError.Text = StaffMember.ValidName(firstName);
             lblLastNameError.Text = StaffMember.ValidName(lastName);
             lblHourlyRateError.Text = StaffMember.ValidHourlyRate(hourlyRate);
             lblPhoneNumberError.Text = StaffMember.ValidPhoneNumber(phoneNumber);
             lblStartDateError.Text = StaffMember.ValidStartDate(startDate);
         }
+        //or, store the captured data in an instance of the class
         else
         {
-            StaffMember.StaffNumber = int.Parse(staffNum);
+
             StaffMember.FirstName = firstName;
             StaffMember.LastName = lastName;
             StaffMember.HourlyRate = decimal.Parse(hourlyRate);
@@ -44,8 +48,12 @@ public partial class _1_DataEntry : System.Web.UI.Page
             StaffMember.PhoneNumber = phoneNumber;
             StaffMember.StartDate = DateTime.Parse(startDate);
 
-            Session["StaffMember"] = StaffMember;
-            Response.Redirect("StaffViewer.aspx");
+            clsStaffCollection StaffList = new clsStaffCollection();
+
+            StaffList.ThisStaff = StaffMember;
+            StaffList.Add();
+            
+            Response.Redirect("StaffList.aspx");
         }
         
     }

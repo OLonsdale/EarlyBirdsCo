@@ -91,5 +91,28 @@ namespace Testing1
 
         }
 
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            clsStaff TestItem = new clsStaff();
+            int PrimaryKey = 0;
+            TestItem.FirstName = "Add-Method-Test";
+            TestItem.LastName = "Testing-Add-Method";
+            TestItem.StartDate = DateTime.Parse("2018-01-01");
+            TestItem.PhoneNumber = "07492278399";
+            TestItem.HourlyRate = 8.90M;
+
+            AllStaff.ThisStaff = TestItem;
+
+            PrimaryKey = AllStaff.Add();
+
+            TestItem.StaffNumber = PrimaryKey;
+
+            AllStaff.ThisStaff.Find(PrimaryKey);
+
+            Assert.AreEqual(AllStaff.ThisStaff, TestItem);
+        }
+
     }
 }
