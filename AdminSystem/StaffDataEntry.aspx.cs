@@ -8,9 +8,19 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
-
+    int StaffNumber;
     //When the page loads and when the manager box is ticked.
-    protected void Page_Load(object sender, EventArgs e){}
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        StaffNumber = Convert.ToInt32(Session["StaffNumber"]);
+        if(IsPostBack == false)
+        {
+            if (StaffNumber != -1)
+            {
+                DisplayStaff();
+            }
+        }
+    }
     protected void chkIsManager_CheckedChanged(object sender, EventArgs e){}
 
     //When the OK button is clicked
@@ -20,7 +30,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsStaff StaffMember = new clsStaff();
 
         //capture the data from the text input boxes
-        string staffNum = txtStaffNumber.Text;
         string firstName = txtFirstName.Text;
         string lastName = txtLastName.Text;
         string hourlyRate = txtHourlyRate.Text;
@@ -40,7 +49,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //or, store the captured data in an instance of the class
         else
         {
-
+            StaffMember.StaffNumber = StaffNumber;
             StaffMember.FirstName = firstName;
             StaffMember.LastName = lastName;
             StaffMember.HourlyRate = decimal.Parse(hourlyRate);
@@ -50,12 +59,36 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
             clsStaffCollection StaffList = new clsStaffCollection();
 
-            StaffList.ThisStaff = StaffMember;
-            StaffList.Add();
-            
+            if (StaffNumber == -1)
+            {
+                StaffList.ThisStaff = StaffMember;
+                StaffList.Add();
+            }
+
+            else
+            {
+                StaffList.ThisStaff.Find(StaffNumber);
+                StaffList.ThisStaff = StaffMember;
+                StaffList.Update();
+            }
+
             Response.Redirect("StaffList.aspx");
         }
         
+    }
+
+    void DisplayStaff()
+    {
+        clsStaffCollection AllStaff = new clsStaffCollection();
+        AllStaff.ThisStaff.Find(StaffNumber);
+
+        txtStaffNumber.Text = AllStaff.ThisStaff.StaffNumber.ToString();
+        txtFirstName.Text = AllStaff.ThisStaff.FirstName;
+        txtLastName.Text = AllStaff.ThisStaff.LastName;
+        txtHourlyRate.Text = AllStaff.ThisStaff.HourlyRate.ToString();
+        txtPhoneNumber.Text = AllStaff.ThisStaff.PhoneNumber;
+        txtStartDate.Text = AllStaff.ThisStaff.StartDate.ToString();
+        chkIsManager.Checked = AllStaff.ThisStaff.IsManager;
     }
 
     protected void btnFind_Click(object sender, EventArgs e)

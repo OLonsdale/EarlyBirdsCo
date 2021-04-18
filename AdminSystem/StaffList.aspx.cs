@@ -8,25 +8,18 @@ using ClassLibrary;
 
 public partial class _1_List : System.Web.UI.Page
 {
-    int StaffNumber;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (IsPostBack == false)
-        {
-            if (StaffNumber != -1)
-            {
-                DisplayStaff();
-            }
-        }
+        if (IsPostBack == false) DisplayStaff();
     }
 
     void DisplayStaff()
     {
         clsStaffCollection StaffMembers = new clsStaffCollection();
-        lstStaffNumberList.DataSource = StaffMembers.StaffList;
-        lstStaffNumberList.DataValueField = "StaffNumber";
-        lstStaffNumberList.DataTextField  = "FirstName";
-        lstStaffNumberList.DataBind();
+        lstStaffList.DataSource = StaffMembers.StaffList;
+        lstStaffList.DataValueField = "StaffNumber";
+        lstStaffList.DataTextField  = "FirstName";
+        lstStaffList.DataBind();
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)
@@ -35,7 +28,36 @@ public partial class _1_List : System.Web.UI.Page
         Response.Redirect("StaffDataEntry.aspx");
     }
 
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        int StaffNumber;
+        if (lstStaffList.SelectedIndex != -1)
+        {
+            StaffNumber = Convert.ToInt32(lstStaffList.SelectedValue);
+            Session["StaffNumber"] = StaffNumber;
+            Response.Redirect("StaffDataEntry.aspx");
+        }
+        else
+        {
+            lblError.Text = "No record selected";
+        }
+    }
 
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        int StaffNumber;
+
+        if(lstStaffList.SelectedIndex != -1)
+        {
+            StaffNumber = Convert.ToInt32(lstStaffList.SelectedValue);
+            Session["StaffNumber"] = StaffNumber;
+            Response.Redirect("StaffConfirmDelete.aspx");
+        }
+        else
+        {
+            lblError.Text = "No record selected";
+        }
+    }
 
     protected void lstStaffNumberList_SelectedIndexChanged(object sender, EventArgs e)
     {

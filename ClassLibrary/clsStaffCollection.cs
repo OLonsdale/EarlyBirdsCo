@@ -1,12 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using ClassLibrary;
 
 namespace ClassLibrary
 {
     public class clsStaffCollection
     {
-
+        List<clsStaff> mStaffList = new List<clsStaff>();
         clsStaff mThisStaff = new clsStaff();
+
+        public List<clsStaff> StaffList
+        {
+            get
+            {
+                return mStaffList;
+            }
+            set
+            {
+                mStaffList = value;
+            }
+        }
+
+        public int Count
+        {
+            get
+            {
+                return mStaffList.Count;
+            }
+
+            set
+            {
+
+            }
+
+        }
+
         public clsStaff ThisStaff
         {
             get
@@ -19,54 +47,36 @@ namespace ClassLibrary
             }
         }
 
-        //private field list of staff
-        private List<clsStaff> mStaffList = new List<clsStaff>();
-        public List<clsStaff> StaffList {
-            get
-            {
-                return mStaffList;
-            }
-            set
-            {
-                mStaffList = value;
-            }
-        }
 
-        public int Count {
-            get
-            {
-                return mStaffList.Count;
-            }
-
-            set
-            {
-                //TODO
-            }
-
-         }
-
-        //constructors
         public clsStaffCollection()
         {
-            int i = 0;
-            int RecordCount = 0;
             clsDataConnection DB = new clsDataConnection();
             DB.Execute("sproc_tblStaff_SelectAll");
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            int Index = 0;
+            int RecordCount;
             RecordCount = DB.Count;
-            while (i < RecordCount)
+            mStaffList = new List<clsStaff>();
+
+            while (Index < RecordCount)
             {
                 clsStaff StaffMember = new clsStaff();
 
-                StaffMember.FirstName = Convert.ToString(DB.DataTable.Rows[i]["FirstName"]);
-                StaffMember.LastName = Convert.ToString(DB.DataTable.Rows[i]["LastName"]);
-                StaffMember.StartDate = Convert.ToDateTime(DB.DataTable.Rows[i]["StartDate"]);
-                StaffMember.PhoneNumber = Convert.ToString(DB.DataTable.Rows[i]["PhoneNumber"]);
-                StaffMember.IsManager = Convert.ToBoolean(DB.DataTable.Rows[i]["IsManager"]);
-                StaffMember.HourlyRate = Convert.ToDecimal(DB.DataTable.Rows[i]["HourlyRate"]);
+                StaffMember.StaffNumber = Convert.ToInt32(DB.DataTable.Rows[Index]["StaffNumber"]);
+                StaffMember.FirstName = Convert.ToString(DB.DataTable.Rows[Index]["FirstName"]);
+                StaffMember.LastName = Convert.ToString(DB.DataTable.Rows[Index]["LastName"]);
+                StaffMember.StartDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["StartDate"]);
+                StaffMember.PhoneNumber = Convert.ToString(DB.DataTable.Rows[Index]["PhoneNumber"]);
+                StaffMember.IsManager = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsManager"]);
+                StaffMember.HourlyRate = Convert.ToDecimal(DB.DataTable.Rows[Index]["HourlyRate"]);
 
                 mStaffList.Add(StaffMember);
 
-                i++;
+                Index++;
             }
         }
 
@@ -84,16 +94,24 @@ namespace ClassLibrary
             return DB.Execute("sproc_tblStaff_Insert");
         }
 
-        //methods
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@StaffNumber", mThisStaff.StaffNumber);
+            DB.Execute("sproc_tblStaff_Delete");
+        }
 
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
 
-
-
-
-
-
-
-
-
+            DB.AddParameter("@StaffNumber", mThisStaff.StaffNumber);
+            DB.AddParameter("@FirstName", mThisStaff.FirstName);
+            DB.AddParameter("@LastName", mThisStaff.LastName);
+            DB.AddParameter("@StartDate", mThisStaff.StartDate);
+            DB.AddParameter("@PhoneNumber", mThisStaff.PhoneNumber);
+            DB.AddParameter("@IsManager", mThisStaff.IsManager);
+            DB.AddParameter("@HourlyRate", mThisStaff.HourlyRate);
+        }
     }
 }
