@@ -15,6 +15,13 @@
             <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" />
             <br />
             <asp:Label ID="lblError" runat="server"></asp:Label>
-    </form>
+    
+        <p>
+            Filter by first name:
+            <asp:TextBox ID="txtFirstNameFilter" runat="server"></asp:TextBox>
+        </p>
+        <asp:Button ID="btnApply" runat="server" OnClick="btnApply_Click" Text="Apply" />
+        <asp:Button ID="btnClear" runat="server" OnClick="btnClear_Click" Text="Clear" />
+        </form>
 </body>
 </html>

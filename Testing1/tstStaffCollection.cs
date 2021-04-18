@@ -173,5 +173,14 @@ namespace Testing1
             Assert.AreEqual(AllStaff.ThisStaff, TestItem);
         }
 
+        [TestMethod]
+        public void ReportByFirstNameOK()
+        {
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            clsStaffCollection FilteredStaff = new clsStaffCollection();
+            FilteredStaff.ReportByFirstName("");
+            Assert.AreEqual(AllStaff.Count, FilteredStaff.Count);
+        }
+
     }
 }

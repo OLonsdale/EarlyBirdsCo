@@ -115,5 +115,13 @@ namespace ClassLibrary
 
             DB.Execute("sproc_tblStaff_Update");
         }
+
+        public void ReportByFirstName(string FirstName)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FirstName", FirstName);
+            DB.Execute("sproc_tblStaff_FilterByFirstName");
+            PopulateArray(DB);
+        }
     }
 }

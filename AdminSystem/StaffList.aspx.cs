@@ -8,6 +8,9 @@ using ClassLibrary;
 
 public partial class _1_List : System.Web.UI.Page
 {
+
+    protected void lstStaffNumberList_SelectedIndexChanged(object sender, EventArgs e){}
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (IsPostBack == false)
@@ -62,8 +65,25 @@ public partial class _1_List : System.Web.UI.Page
         }
     }
 
-    protected void lstStaffNumberList_SelectedIndexChanged(object sender, EventArgs e)
+    protected void btnApply_Click(object sender, EventArgs e)
     {
-
+        clsStaffCollection Staff = new clsStaffCollection();
+        Staff.ReportByFirstName(txtFirstNameFilter.Text);
+        lstStaffList.DataSource = Staff.StaffList;
+        lstStaffList.DataValueField = "StaffNumber";
+        lstStaffList.DataTextField = "FirstName";
+        lstStaffList.DataBind();
     }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        clsStaffCollection Staff = new clsStaffCollection();
+        Staff.ReportByFirstName("");
+        txtFirstNameFilter.Text = "";
+        lstStaffList.DataSource = Staff.StaffList;
+        lstStaffList.DataValueField = "StaffNumber";
+        lstStaffList.DataTextField = "FirstName";
+        lstStaffList.DataBind();
+    }
+
 }
