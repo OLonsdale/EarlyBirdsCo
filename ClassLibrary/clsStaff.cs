@@ -136,11 +136,11 @@ namespace ClassLibrary
             if (phoneNum[0] == '+')
             {
                 string substring = phoneNum.Substring(1);
-                if (substring.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +. error a";
+                if (substring.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +.";
             }
             else
             {
-                if (phoneNum.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +. error b";
+                if (phoneNum.All(char.IsDigit) == false) errorMessage += "Phone number contains a symbol other than a leading +.";
             }
 
             return errorMessage;
