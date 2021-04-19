@@ -13,6 +13,7 @@
             <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
             <asp:Button ID="btnEdit" runat="server" Text="Edit" OnClick="btnEdit_Click" />
             <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" />
+            <asp:Button ID="btnConfirmDelete" runat="server" Text="Confirm Delete" OnClick="btnConfirmDelete_Click" Visible="False" />
             <br />
             <asp:Label ID="lblError" runat="server"></asp:Label>
     

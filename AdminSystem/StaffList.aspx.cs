@@ -13,6 +13,8 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        btnConfirmDelete.Visible = false;
+
         if (IsPostBack == false)
         {
             DisplayStaff();
@@ -51,18 +53,23 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void btnDelete_Click(object sender, EventArgs e)
     {
-        int StaffNumber;
-
         if(lstStaffList.SelectedIndex != -1)
         {
-            StaffNumber = Convert.ToInt32(lstStaffList.SelectedValue);
-            Session["StaffNumber"] = StaffNumber;
-            Response.Redirect("StaffConfirmDelete.aspx");
+            btnConfirmDelete.Visible = true;
         }
         else
         {
             lblError.Text = "No record selected";
         }
+    }
+
+    protected void btnConfirmDelete_Click(object sender, EventArgs e)
+    {
+        clsStaffCollection StaffList = new clsStaffCollection();
+        StaffList.ThisStaff.Find(Convert.ToInt32(lstStaffList.SelectedValue));
+        StaffList.Delete();
+        btnConfirmDelete.Visible = false;
+        Response.Redirect("StaffList.aspx");
     }
 
     protected void btnApply_Click(object sender, EventArgs e)
