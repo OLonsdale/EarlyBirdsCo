@@ -55,7 +55,14 @@ public partial class _1_List : System.Web.UI.Page
     {
         if(lstStaffList.SelectedIndex != -1)
         {
-            btnConfirmDelete.Visible = true;
+            if (btnConfirmDelete.Visible == false)
+            {
+                btnConfirmDelete.Visible = true;
+            }
+            else if (btnConfirmDelete.Visible == true)
+            {
+                btnConfirmDelete.Visible = false;
+            }
         }
         else
         {

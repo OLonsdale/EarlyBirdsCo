@@ -11,4 +11,29 @@ public partial class _Home_Page : System.Web.UI.Page
     {
 
     }
+
+    protected void btnCustomer_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CustomerList.aspx");
+    }
+
+    protected void btnOrder_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("OrderList.aspx");
+    }
+
+    protected void btnStaff_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StaffList.aspx");
+    }
+
+    protected void btnStock_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StockList.aspx");
+    }
+
+    protected void btnShipping_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("ShippingList.aspx");
+    }
 }

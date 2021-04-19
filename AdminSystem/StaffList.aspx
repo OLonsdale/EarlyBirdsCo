@@ -8,6 +8,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        
+        <a href="http://localhost:54436/!Home%20Page.aspx">
+         <img alt="Home" src="https://cdn.discordapp.com/attachments/803986527822282783/833697654658826260/bird-logo-with-name-and-five-pixel-blue-border.png"
+         width=100" height="100" align="right">
+      </a>
+            
         <asp:ListBox ID="lstStaffList" runat="server" Height="515px" OnSelectedIndexChanged="lstStaffNumberList_SelectedIndexChanged" Width="685px"></asp:ListBox>
             <br />
             <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
