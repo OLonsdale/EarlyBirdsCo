@@ -5,23 +5,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Early Birds Co.</title>
+    <style type="text/css">
+        .auto-style1 {height: 867px;}
+        .center{display: block; margin-left: auto; margin-right:auto; width:50%;}
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="height: 201px">
-            <asp:Image ID="logo" runat="server" ImageAlign="Right" Height="100" Width="100" ImageUrl="https://cdn.discordapp.com/attachments/803986527822282783/833697634455388230/bird-logo-with-border-no-name.png" />
-            <strong>Early Birds Co.</strong><br />
-            Backend Home Page<br />
+        <div class="auto-style1">
+            <asp:Image ID="title" runat="server" Height="100px" ImageAlign="Middle" ImageUrl="https://i.imgur.com/h2MmLfB.png" Width="300px" class="center" />
+            <asp:Image ID="logo" runat="server" ImageAlign="Middle" Height="100" Width="100" ImageUrl="https://i.imgur.com/cTFGWuM.png" class="center" />
             <br />
-            <asp:Button ID="btnCustomer" runat="server" OnClick="btnCustomer_Click" Text="Customer Management" Width="160px"/>
+            <asp:ImageButton ID="btnCustomer" runat="server" Height="100px" ImageAlign="Middle" ImageUrl="https://i.imgur.com/aT8sDWQ.png" OnClick="ImageButton1_Click" Width="300px" BorderColor="#3589DE" BorderStyle="Solid" BorderWidth="3px" class="center" />
             <br />
-            <asp:Button ID="btnOrder" runat="server" Text="Order Management" Width="160px" OnClick="btnOrder_Click" />
+            <asp:ImageButton ID="btnStaff" runat="server" Height="100px" ImageAlign="Middle" ImageUrl="https://i.imgur.com/6EDBvmj.png" OnClick="ImageButton5_Click" Width="300px" BorderColor="#3589DE" BorderStyle="Solid" BorderWidth="3px" class="center" />
             <br />
-            <asp:Button ID="btnStaff" runat="server" Text="Staff Management" Width="160px" OnClick="btnStaff_Click" />
+            <asp:ImageButton ID="btnOrder" runat="server" Height="100px" ImageAlign="Middle" ImageUrl="https://i.imgur.com/ec4z8hG.png" OnClick="ImageButton2_Click" Width="300px" BorderColor="#3589DE" BorderStyle="Solid" BorderWidth="3px" class="center" />
             <br />
-            <asp:Button ID="btnStock" runat="server" Text="Stock Management" Width="160px" OnClick="btnStock_Click" />
+            <asp:ImageButton ID="btnStock" runat="server" Height="100px" ImageAlign="Middle" ImageUrl="https://i.imgur.com/Mx3jKHp.png" OnClick="ImageButton4_Click" Width="300px" BorderColor="#3589DE" BorderStyle="Solid" BorderWidth="3px" class="center" />
             <br />
-            <asp:Button ID="btnShipping" runat="server" Text="Shipping Management" Width="160px" OnClick="btnShipping_Click" />
+            <asp:ImageButton ID="btnShipping" runat="server" Height="100px" ImageAlign="Middle" ImageUrl="https://i.imgur.com/sx5qjk7.png" OnClick="ImageButton3_Click" Width="300px" BorderColor="#3589DE" BorderStyle="Solid" BorderWidth="3px" class="center" />
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
     </form>
 </body>

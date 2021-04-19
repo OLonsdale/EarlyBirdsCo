@@ -123,5 +123,13 @@ namespace ClassLibrary
             DB.Execute("sproc_tblStaff_FilterByFirstName");
             PopulateArray(DB);
         }
+
+        public void ReportByManagers(bool IsManager)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@IsManager", IsManager);
+            DB.Execute("sproc_tblStaff_FilterByIsManager");
+            PopulateArray(DB);
+        }
     }
 }

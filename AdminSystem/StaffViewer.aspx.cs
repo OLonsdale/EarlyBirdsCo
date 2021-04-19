@@ -11,12 +11,23 @@ public partial class _1Viewer : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         clsStaff StaffMember = new clsStaff();
-        StaffMember = (clsStaff)Session["StaffMember"];
-        Response.Write(StaffMember.StaffNumber);
+        StaffMember.Find(Convert.ToInt32(Session["StaffNumber"]));
+
+        StaffNumber.Text = StaffMember.StaffNumber.ToString();
+        FirstName.Text = StaffMember.FirstName;
+        LastName.Text = StaffMember.LastName;
+        HourlyRate.Text = StaffMember.HourlyRate.ToString();
+        PhoneNumber.Text = StaffMember.PhoneNumber;
+        StartDate.Text = StaffMember.StartDate.ToString();
+        if (StaffMember.IsManager == true)
+        {
+            IsManager.Text = "Yes";
+        }
+        else IsManager.Text = "No";
     }
 
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void btnOK_Click(object sender, EventArgs e)
     {
-        Response.Redirect("StaffDataEntry.aspx");
+        Response.Redirect("StaffList.aspx");
     }
 }

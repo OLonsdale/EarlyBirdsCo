@@ -9,7 +9,7 @@ using ClassLibrary;
 public partial class _1_List : System.Web.UI.Page
 {
 
-    protected void lstStaffNumberList_SelectedIndexChanged(object sender, EventArgs e){}
+    protected void lstStaffNumberList_SelectedIndexChanged(object sender, EventArgs e) { }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -26,7 +26,7 @@ public partial class _1_List : System.Web.UI.Page
         clsStaffCollection StaffMembers = new clsStaffCollection();
         lstStaffList.DataSource = StaffMembers.StaffList;
         lstStaffList.DataValueField = "StaffNumber";
-        lstStaffList.DataTextField  = "FirstName";
+        lstStaffList.DataTextField = "FirstName";
         lstStaffList.DataBind();
     }
 
@@ -53,7 +53,7 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void btnDelete_Click(object sender, EventArgs e)
     {
-        if(lstStaffList.SelectedIndex != -1)
+        if (lstStaffList.SelectedIndex != -1)
         {
             if (btnConfirmDelete.Visible == false)
             {
@@ -100,4 +100,19 @@ public partial class _1_List : System.Web.UI.Page
         lstStaffList.DataBind();
     }
 
+
+    protected void btnView_Click(object sender, EventArgs e)
+    {
+        int StaffNumber;
+        if (lstStaffList.SelectedIndex != -1)
+        {
+            StaffNumber = Convert.ToInt32(lstStaffList.SelectedValue);
+            Session["StaffNumber"] = StaffNumber;
+            Response.Redirect("StaffViewer.aspx");
+        }
+        else
+        {
+            lblError.Text = "No record selected";
+        }
+    }
 }

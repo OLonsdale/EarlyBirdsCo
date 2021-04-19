@@ -62,7 +62,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblStartDateError.Text = StaffMember.ValidStartDate(startDate);
         }
         //or, store the captured data in an instance of the class
-        else
+        else if (StaffMember.Valid(firstName, lastName, phoneNumber, hourlyRate, startDate) == true)
         {
             StaffMember.StaffNumber = StaffNumber;
             StaffMember.FirstName = firstName;
