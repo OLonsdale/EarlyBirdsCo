@@ -67,7 +67,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
                 AnItem.LastPurchased = Convert.ToDateTime(LastPurchased);
             }
             AnItem.Quantity = Int32.Parse(Quantity);
-            AnItem.InStock = chkInStock.Checked;
+            if (AnItem.Quantity > 0)
+            {
+                AnItem.InStock = true;
+            }
+            else
+            {
+                AnItem.InStock = false;
+            }
             //create new instance of clsStockCollection
             clsStockCollection StockList = new clsStockCollection();
             if (ItemId == -1)
@@ -124,7 +131,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
             {
                 txtLastPurchased.Text = AnItem.LastPurchased.ToString();
             }
-            chkInStock.Checked = AnItem.InStock;
         }
         //if record does not exist...
         else
@@ -135,7 +141,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtPrice.Text = "";
             txtMaterial.Text = "";
             txtLastPurchased.Text = "";
-            chkInStock.Checked = false;
+            //chkInStock.Checked = false;
             //output an error message
             lblError.Text = "Error! No Such Item Exists.";
         }
@@ -154,7 +160,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
         txtMaterial.Text = Stock.ThisItem.Material;
         txtQuantity.Text = Stock.ThisItem.Quantity.ToString();
         txtLastPurchased.Text = Stock.ThisItem.LastPurchased.ToString();
-        chkInStock.Checked = Stock.ThisItem.InStock;
 
     }
 

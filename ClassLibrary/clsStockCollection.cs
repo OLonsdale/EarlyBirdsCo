@@ -114,7 +114,6 @@ namespace ClassLibrary
 
         public void Delete()
         {
-            //delete record pointed to by ThisItem
             //connect to database
             clsDataConnection DB = new clsDataConnection();
             //set parameters
@@ -123,15 +122,24 @@ namespace ClassLibrary
             DB.Execute("sproc_tblStock_Delete");
         }
 
-        public void ReportByMaterial(string Material)
+        public void clearFilter()
         {
-            //filter record based on keyword of item name
             //connect to database
             clsDataConnection DB = new clsDataConnection();
-            //send the ItemName parameter to the database
-            DB.AddParameter("@Material", Material);
             //execute stored procedure
-            DB.Execute("sproc_tblStock_FilterByMaterial");
+            DB.Execute("sproc_tblStock_SelectAll");
+            //populate array with data table
+            PopulateArray(DB);
+        }
+
+        public void ReportByAvailability(bool InStock)
+        {
+            //connect to database
+            clsDataConnection DB = new clsDataConnection();
+            //send the InStocketer to the database
+            DB.AddParameter("@InStock", InStock);
+            //execute stored procedure
+            DB.Execute("sproc_tblStock_FilterByAvailability");
             //populate array with data table
             PopulateArray(DB);
         }

@@ -33,9 +33,6 @@
         <asp:TextBox ID="txtLastPurchased" runat="server"></asp:TextBox>
         <br />
         <br />
-        <asp:CheckBox ID="chkInStock" runat="server" Text="In Stock" />
-        <br />
-        <br />
         <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
         <br />
         <br />
