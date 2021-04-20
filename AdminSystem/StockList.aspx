@@ -8,6 +8,8 @@
 </head>
 <body style="height: 575px">
     <form id="form1" runat="server">
+        <a href="!Home Page.aspx">
+    <img alt="Home" src="https://i.imgur.com/HpX3Z3E.png" width="100" height="100" align="right"/>
         <div>
             <asp:ListBox ID="lstStock" runat="server" Height="399px" Width="449px"></asp:ListBox>
         </div>
