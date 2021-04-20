@@ -128,7 +128,7 @@ namespace Testing5
             //create item of test data
             clsStock TestItem = new clsStock();
             //store primary key
-            Int32 PrimaryKey = 0;       
+            Int32 PrimaryKey = 0;
             //set its properties
             TestItem.ItemId = 1;
             TestItem.ItemName = "Keycap";
@@ -158,7 +158,7 @@ namespace Testing5
             AllStock.ThisItem.Find(PrimaryKey);
             //test to see ThisItem matches test data
             Assert.AreEqual(AllStock.ThisItem, TestItem);
-        } 
+        }
 
         [TestMethod]
         public void DeleteMethodOK()
@@ -194,53 +194,16 @@ namespace Testing5
         }
 
         [TestMethod]
-        public void ReportByMaterialMethodOK()
+        public void ReportByAvailabilityOK()
         {
             //create an instance of clsStockCollection containing no filter
             clsStockCollection AllStock = new clsStockCollection();
-            //create an instace of filtered data
-            clsStockCollection FilteredStock = new clsStockCollection();
-            //apply blank string (to return all records)
-            FilteredStock.ReportByMaterial("");
-            //test to see two values are same
-            Assert.AreEqual(AllStock.Count, FilteredStock.Count);
-        }
-
-        [TestMethod]
-        public void ReportByMaterialNoneFound()
-        {
-            //create an instace of filtered data
-            clsStockCollection FilteredStock = new clsStockCollection();
-            //apply an item name that does not exist
-            FilteredStock.ReportByMaterial("xx xx xx");
-            //test to see there are no records
-            Assert.AreEqual(0, FilteredStock.Count);
-        }
-
-        [TestMethod]
-        public void ReportByMaterialTestDataFound()
-        {
             //create an instance of filtered data
             clsStockCollection FilteredStock = new clsStockCollection();
-            //store outcome
-            Boolean OK = true;
-            //apply an item name that does exist
-            FilteredStock.ReportByMaterial("ZZZZZZ");
-            //check that correct number of records are found
-            if (FilteredStock.Count == 1)
-            {
-                //check that first record is ID .....
-                if (FilteredStock.StockList[0].ItemId != 16)
-                {
-                    OK = false;
-                }
-            }
-            else
-            {
-                OK = false;
-            }
-            //test to see there are records
-            Assert.IsTrue(OK);
+            //apply true value (will be different from original list)
+            FilteredStock.ReportByAvailability(true);
+            //test to see two values are not the same
+            Assert.AreNotEqual(AllStock.Count, FilteredStock.Count);
         }
     }
 }

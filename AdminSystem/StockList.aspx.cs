@@ -82,11 +82,11 @@ public partial class _1_List : System.Web.UI.Page //_1_List
         }
     }
 
-    protected void btnApply_Click(object sender, EventArgs e)
+    protected void btnInStock_Click(object sender, EventArgs e)
     {
         //create an instance of clsStockCollection
         clsStockCollection Stock = new clsStockCollection();
-        Stock.ReportByMaterial(txtFilter.Text);
+        Stock.ReportByAvailability(true);
         lstStock.DataSource = Stock.StockList;
         //set name of primary key
         lstStock.DataValueField = "ItemId";
@@ -96,13 +96,11 @@ public partial class _1_List : System.Web.UI.Page //_1_List
         lstStock.DataBind();
     }
 
-    protected void btnClear_Click(object sender, EventArgs e)
+    protected void btnAllStock_Click(object sender, EventArgs e)
     {
         //create an instance of clsStockCollection
         clsStockCollection Stock = new clsStockCollection();
-        Stock.ReportByMaterial("");
-        //reset filter textbox for tidyness
-        txtFilter.Text = "";
+        Stock.clearFilter();
         lstStock.DataSource = Stock.StockList;
         //set name of primary key
         lstStock.DataValueField = "ItemId";
