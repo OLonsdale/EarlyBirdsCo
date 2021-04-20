@@ -12,44 +12,12 @@ namespace ClassLibrary
         //constructor
         public clsStockCollection()
         {
-            //variable for the index
-            Int32 Index = 0;
-            //variable to store record count
-            Int32 RecordCount = 0;
             //object for data connection
             clsDataConnection DB = new clsDataConnection();
             //executed stored procedure
             DB.Execute("sproc_tblStock_SelectAll");
-                  
-            //PopulateArray(DB);
-             
-            //get count of records
-            RecordCount = DB.Count;
-            //while there are records to process
-            while (Index < RecordCount)
-            {
-                //create blank item
-                clsStock AnItem = new clsStock();
-                //read in the fields from current record
-                AnItem.ItemId = Convert.ToInt32(DB.DataTable.Rows[Index]["ItemId"]);
-                AnItem.ItemName = Convert.ToString(DB.DataTable.Rows[Index]["ItemName"]);
-                AnItem.Price = Convert.ToDecimal(DB.DataTable.Rows[Index]["Price"]);
-                AnItem.Material = Convert.ToString(DB.DataTable.Rows[Index]["Material"]);
-                if (DB.DataTable.Rows[Index]["LastPurchased"] == DBNull.Value)
-                {
-                    //do nothing since NULL values are allowed
-                }
-                else
-                {
-                    AnItem.LastPurchased = Convert.ToDateTime(DB.DataTable.Rows[Index]["LastPurchased"]);
-                }
-                AnItem.Quantity = Convert.ToInt32(DB.DataTable.Rows[Index]["Quantity"]);
-                AnItem.InStock = Convert.ToBoolean(DB.DataTable.Rows[Index]["InStock"]);
-                //add record to private data member
-                mStockList.Add(AnItem);
-                //point at next record
-                Index++;
-            }
+            //populate the database      
+            PopulateArray(DB);          
         }
 
         //public property for the stock list

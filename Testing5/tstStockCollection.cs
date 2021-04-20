@@ -91,7 +91,7 @@ namespace Testing5
             Assert.AreEqual(AllStock.Count, TestList.Count);
         }
 
-       /* [TestMethod]
+        [TestMethod]
         public void AddMethodOK()
         {
             //create an instance of clsStockCollection
@@ -191,7 +191,7 @@ namespace Testing5
             Boolean Found = AllStock.ThisItem.Find(PrimaryKey);
             //test to see record was not found
             Assert.IsFalse(Found);
-        } */
+        }
 
         [TestMethod]
         public void ReportByMaterialMethodOK()
@@ -227,15 +227,10 @@ namespace Testing5
             //apply an item name that does exist
             FilteredStock.ReportByMaterial("ZZZZZZ");
             //check that correct number of records are found
-            if (FilteredStock.Count == 2)
+            if (FilteredStock.Count == 1)
             {
                 //check that first record is ID .....
                 if (FilteredStock.StockList[0].ItemId != 16)
-                {
-                    OK = false;
-                }
-                //check that second record is ID .....
-                if (FilteredStock.StockList[1].ItemId != 17)
                 {
                     OK = false;
                 }
