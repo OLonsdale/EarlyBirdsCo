@@ -11,7 +11,7 @@
         <div style="height: 242px">
             <asp:Label ID="lblShipping" runat="server" Text="Shipping ID" width="102px"></asp:Label>
             <asp:TextBox ID="txtShippingId" runat="server" width="102px"></asp:TextBox>
-            <asp:Button ID="btnFind" runat="server" Text="Find" />
+            <asp:Button ID="btnFind" runat="server" Text="Find" OnClick="btnFind_Click" />
             <br />
             <asp:Label ID="lblShippingType" runat="server" Text="Shipping Type" width="102px"></asp:Label>
             <asp:TextBox ID="txtShippingType" runat="server" width="102px"></asp:TextBox>
