@@ -58,5 +58,90 @@ namespace Testing4
             AShipment.ShippingType = TestData;
             Assert.AreEqual(AShipment.ShippingType, TestData);
         }
+
+        [TestMethod]
+        public void FindOK()
+        {
+            clsShipping AShipment = new clsShipping();
+            Boolean Found = false;
+            int ShippingId = 2;
+            Found = AShipment.Find(ShippingId);
+            Assert.IsTrue(Found);
+        }
+
+        [TestMethod]
+        public void TestShippingIdFound()
+        {
+            clsShipping AShipment = new clsShipping();
+            Boolean Found = false;
+            Boolean OK = true;
+            int ShippingId = 2;
+            Found = AShipment.Find(ShippingId);
+            if (AShipment.ShippingId != 2)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestDateOfDispatchFound()
+        {
+            clsShipping AShipment = new clsShipping();
+            Boolean Found = false;
+            Boolean OK = true;
+            int ShippingId = 2;
+            Found = AShipment.Find(ShippingId);
+            if (AShipment.DateOfDispatch != Convert.ToDateTime("20/01/2020"))
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestShippingTypeFound()
+        {
+            clsShipping AShipment = new clsShipping();
+            Boolean Found = false;
+            Boolean OK = true;
+            int ShippingId = 2;
+            Found = AShipment.Find(ShippingId);
+            if (AShipment.ShippingType != "Standard")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPriceFound()
+        {
+            clsShipping AShipment = new clsShipping();
+            Boolean Found = false;
+            Boolean OK = true;
+            int ShippingId = 2;
+            Found = AShipment.Find(ShippingId);
+            if (AShipment.Price != 4.99m)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestDispatchedFound()
+        {
+            clsShipping AShipment = new clsShipping();
+            Boolean Found = false;
+            Boolean OK = true;
+            int ShippingId = 2;
+            Found = AShipment.Find(ShippingId);
+            if (AShipment.Dispatched != true)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
     }
 }
