@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tstShipping.cs" />
+    <Compile Include="tstShippingCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
