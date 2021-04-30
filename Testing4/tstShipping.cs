@@ -5,8 +5,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Testing4
 {
     [TestClass]
-    public class tstStock
+    public class tstShipping
     {
+        string ShippingType = "Standard";
+        string Price = "4.99";
+        string DateOfDispatch = DateTime.Now.Date.ToString();
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -143,5 +147,16 @@ namespace Testing4
             }
             Assert.IsTrue(OK);
         }
+
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            clsShipping AShipment = new clsShipping();
+            String Error = "";
+            Error = AShipment.Valid(ShippingType, Price, DateOfDispatch);
+            Assert.AreEqual(Error, "");
+        }
     }
+
+   
 }

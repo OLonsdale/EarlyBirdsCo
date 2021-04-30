@@ -75,5 +75,10 @@ namespace ClassLibrary
             mDispatched = true;
             return true;
         }
+
+        public string Valid(string shippingType, string price, string dateOfDispatch)
+        {
+            return "";
+        }
     }
 }
