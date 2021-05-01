@@ -109,6 +109,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsStock AnItem = new clsStock();
         //variable to store the primary key
         Int32 ItemId;
+        DateTime LastPurchasedInput = Convert.ToDateTime(txtLastPurchased.Text);
+        String LastPurchasedFormatted = LastPurchasedInput.ToShortDateString();
         //variable to store the result of the find operation
         Boolean Found = false;
         //get the primary key entered by the user
@@ -129,7 +131,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             } 
             else
             {
-                txtLastPurchased.Text = AnItem.LastPurchased.ToString();
+                txtLastPurchased.Text = LastPurchasedFormatted;
             }
         }
         //if record does not exist...
