@@ -6,9 +6,10 @@ namespace ClassLibrary
     public class clsShipping
     {
         private Int32 mShippingId;
+        private Int32 mTrackingNum;
         private String mShippingType;
         private Decimal mPrice;
-        private DateTime mDateOfDispatch;
+        private Nullable<DateTime> mDateOfDispatch;
         public Boolean mDispatched;
 
         public Int32 ShippingId
@@ -22,6 +23,19 @@ namespace ClassLibrary
                 mShippingId = value;
             }
         }
+
+        public Int32 TrackingNum
+        {
+            get
+            {
+                return mTrackingNum;
+            }
+            set
+            {
+                mTrackingNum = value;
+            }
+        }
+
         public String ShippingType
         {
             get
@@ -44,7 +58,7 @@ namespace ClassLibrary
                 mPrice = value;
             }
         }
-        public DateTime DateOfDispatch
+        public Nullable<DateTime> DateOfDispatch
         {
             get
             {
@@ -69,12 +83,30 @@ namespace ClassLibrary
         }
         public bool Find(int ShippingId)
         {
-            mShippingId = 2;
-            mDateOfDispatch = Convert.ToDateTime("20/01/2020");
-            mShippingType = "Standard";
-            mPrice = 4.99m;
-            mDispatched = true;
-            return true;
+            clsDataConnection DB = new clsDataConnection();
+            //add the parameter for the item to search for
+            DB.AddParameter("@ShippingId", ShippingId);
+            DB.Execute("sproc_tblShipping_FilterByShippingId");
+            if (DB.Count == 1)
+            {
+                mShippingId = Convert.ToInt32(DB.DataTable.Rows[0]["ShippingId"]);
+                mShippingType = Convert.ToString(DB.DataTable.Rows[0]["ShippingType"]);
+                mPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["Price"]);
+                if (DB.DataTable.Rows[0]["DateOfDispatch"] == DBNull.Value)
+                {
+                    //do nothing since NULL values are allowed
+                }
+                else
+                {
+                    mDateOfDispatch = Convert.ToDateTime(DB.DataTable.Rows[0]["DateOfDispatch"]);
+                }
+                mDispatched = Convert.ToBoolean(DB.DataTable.Rows[0]["Dispatched"]);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public string Valid(string dateOfDispatch)

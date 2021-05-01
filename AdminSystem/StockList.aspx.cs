@@ -100,7 +100,7 @@ public partial class _1_List : System.Web.UI.Page //_1_List
     {
         //create an instance of clsStockCollection
         clsStockCollection Stock = new clsStockCollection();
-        Stock.clearFilter();
+        Stock.ClearFilter();
         lstStock.DataSource = Stock.StockList;
         //set name of primary key
         lstStock.DataValueField = "ItemId";
