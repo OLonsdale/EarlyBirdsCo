@@ -8,17 +8,20 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="height: 560px">
+        <div style="height: 616px">
             <asp:ListBox ID="lstShippingList" runat="server" Height="404px" Width="440px"></asp:ListBox>
             <br />
-            <asp:Button ID="btnAdd" runat="server" Text="Add" />
-            <asp:Button ID="btnEdit" runat="server" Text="Edit" />
-            <asp:Button ID="btnDelete" runat="server" Text="Delete" />
+            <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+            <asp:Button ID="btnEdit" runat="server" Text="Edit" OnClick="btnEdit_Click" />
+            <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" />
             <br />
             <br />
             <br />
-            Filter by Tracking Number:
-            <asp:TextBox ID="txtFilterByTrackingNo" runat="server"></asp:TextBox>
+&nbsp;<asp:Label ID="txtFilter" runat="server" Font-Size="Larger" Text="Dispatched Status"></asp:Label>
+            <br />
+            <asp:Button ID="btnDispatched" runat="server" OnClick="btnDispatched_Click" Text="Dispatched Orders" height="26px" width="164px" />
+            <br />
+            <asp:Button ID="btnAllOrders" runat="server" height="26px" OnClick="btnAllOrders_Click" Text="All Orders" width="164px" />
             <br />
             <br />
             <br />

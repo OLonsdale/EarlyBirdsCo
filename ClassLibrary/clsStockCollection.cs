@@ -45,7 +45,7 @@ namespace ClassLibrary
             }
             set
             {
-                //do later
+                
             }
         }
 
@@ -91,7 +91,7 @@ namespace ClassLibrary
         public void Update()
         {
             //update existing record based on values of ThisItem
-            //connect to datavase
+            //connect to database
             clsDataConnection DB = new clsDataConnection();
             //set parameters
             DB.AddParameter("@ItemId", mThisItem.ItemId);
@@ -122,7 +122,7 @@ namespace ClassLibrary
             DB.Execute("sproc_tblStock_Delete");
         }
 
-        public void clearFilter()
+        public void ClearFilter()
         {
             //connect to database
             clsDataConnection DB = new clsDataConnection();

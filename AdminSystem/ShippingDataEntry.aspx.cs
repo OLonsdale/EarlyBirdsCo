@@ -8,9 +8,18 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 ShippingId;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        ShippingId = Convert.ToInt32(Session["ShippingId"]);
+        if (IsPostBack == false)
+        {
+            if (ShippingId != 1)
+            {
+                DisplayShipment();
+            }
+        }
     }
 
     protected void lstShippingType_SelectedIndexChanged(object sender, EventArgs e)
@@ -34,13 +43,16 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
+
+        lblError.Text = "";
+
         clsShipping AShipment = new clsShipping();
-        string ShippingId = txtShippingId.Text;
+
         string ShippingType = lstShippingType.Text;
         string Price = txtPrice.Text;
-        string DateOfDispatch = txtDateOfDispatch.Text;
-        //AShipment.Dispatched = chkDispatched.Checked;
+        string DateOfDispatch = txtDateOfDispatch.Text; 
         
+        //Error message
         String Error = "";
         Error = AShipment.Valid(DateOfDispatch);
 
@@ -52,6 +64,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Error == "")
         {
             //capture properties
+            AShipment.ShippingId = ShippingId;
             AShipment.ShippingType = ShippingType;
             //populate Price field based on Shipping Type selection
             if (lstShippingType.SelectedIndex == 1 || lstShippingType.SelectedIndex == 2) {
@@ -68,28 +81,75 @@ public partial class _1_DataEntry : System.Web.UI.Page
                 AShipment.DateOfDispatch = Convert.ToDateTime(DateOfDispatch);
                 AShipment.Dispatched = true;
             }
-            Session["AShipment"] = AShipment;
-            Response.Redirect("ShippingViewer.aspx");
+
+            clsShippingCollection ShippingList = new clsShippingCollection();
+
+            if (ShippingId == -1)
+            {
+                ShippingList.ThisShipment = AShipment;
+                ShippingList.Add();
+            }
+            else
+            {
+                ShippingList.ThisShipment.Find(ShippingId);
+                ShippingList.ThisShipment = AShipment;
+                ShippingList.Update();
+            }
+            Response.Redirect("ShippingList.aspx");
         } else
         {
             lblError.Text = Error;
         }
 
     }
-
     protected void btnFind_Click(object sender, EventArgs e)
     {
+        lblError.Text = "";
+
         clsShipping AShipment = new clsShipping();
+
         Int32 ShippingId;
         Boolean Found = false;
+
         ShippingId = Convert.ToInt32(txtShippingId.Text);
+
         Found = AShipment.Find(ShippingId);
-        if (Found == true) {
-            txtShippingId.Text = AShipment.ShippingId.ToString();
-            lstShippingType.Text = AShipment.ShippingType;
+
+        if (Found == true)
+        {
+            lstShippingType.SelectedValue = AShipment.ShippingType;
             txtPrice.Text = AShipment.Price.ToString();
-            txtDateOfDispatch.Text = AShipment.DateOfDispatch.ToString();
+            if (txtDateOfDispatch.Text == null)
+            {
+                //do nothing
+            }
+            else
+            {
+                txtDateOfDispatch.Text = AShipment.DateOfDispatch.ToString();
+            }
         }
+        else
+        {
+            //reset the text boxes to empty
+            txtShippingId.Text = "";
+            lstShippingType.SelectedIndex = 0;
+            txtPrice.Text = "";
+            txtDateOfDispatch.Text = "";
+            //output an error message
+            lblError.Text = "Error! Item does not exist";
+        }
+    }
+
+    private void DisplayShipment()
+    {
+        clsShippingCollection AllShipments = new clsShippingCollection();
+
+        AllShipments.ThisShipment.Find(ShippingId);
+
+        txtShippingId.Text = AllShipments.ThisShipment.ShippingId.ToString();
+        lstShippingType.SelectedValue = AllShipments.ThisShipment.ShippingType;
+        txtPrice.Text = AllShipments.ThisShipment.Price.ToString();
+        txtDateOfDispatch.Text = AllShipments.ThisShipment.DateOfDispatch.ToString();
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)

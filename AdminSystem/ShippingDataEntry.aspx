@@ -31,12 +31,7 @@
             <asp:Label ID="lblDateOfDispatchNull" runat="server" Font-Size="Small" Text="(Leave blank if order has not been dispatched)"></asp:Label>
             <br />
             <br />
-            <asp:Label ID="lblTrackingNo" runat="server" Text="Tracking No" width="102px" Font-Italic="True" Visible="False"></asp:Label>
-            <asp:TextBox ID="txtTrackingNo" runat="server" ReadOnly="True" width="102px" Visible="False"></asp:TextBox>
-            <br />
-            <br />
             <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
-            <br />
             <br />
             <br />
             <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" />
