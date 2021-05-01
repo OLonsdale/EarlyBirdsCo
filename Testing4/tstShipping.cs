@@ -7,8 +7,7 @@ namespace Testing4
     [TestClass]
     public class tstShipping
     {
-        string ShippingType = "Standard";
-        string Price = "4.99";
+       
         string DateOfDispatch = DateTime.Now.Date.ToString();
 
         [TestMethod]
@@ -153,10 +152,24 @@ namespace Testing4
         {
             clsShipping AShipment = new clsShipping();
             String Error = "";
-            Error = AShipment.Valid(ShippingType, Price, DateOfDispatch);
+            Error = AShipment.Valid(DateOfDispatch);
             Assert.AreEqual(Error, "");
         }
+
+
+     /*   [TestMethod]
+        public void DateOfDispatchMinLessOne()
+        {
+            clsShipping AShipment = new clsShipping();
+            String Error = "";
+            //store the minimum date
+            DateTime MinimumDate = Convert.ToDateTime("2015-01-01");
+            //set date to MinimumDate subtract 1 day
+            String DateOfDispatch = MinimumDate.AddDays(-1).ToString();
+            Error = AShipment.Valid(DateOfDispatch);
+            Assert.AreNotEqual(Error, ""); //should fail
+        }*/
     }
 
-   
 }
+
