@@ -8,7 +8,21 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div style="height: 560px">
+            <asp:ListBox ID="lstShippingList" runat="server" Height="404px" Width="440px"></asp:ListBox>
+            <br />
+            <asp:Button ID="btnAdd" runat="server" Text="Add" />
+            <asp:Button ID="btnEdit" runat="server" Text="Edit" />
+            <asp:Button ID="btnDelete" runat="server" Text="Delete" />
+            <br />
+            <br />
+            <br />
+            Filter by Tracking Number:
+            <asp:TextBox ID="txtFilterByTrackingNo" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <br />
+            <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
         </div>
     </form>
 </body>
