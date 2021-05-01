@@ -7,7 +7,6 @@ namespace Testing4
     [TestClass]
     public class tstShipping
     {
-       
         string DateOfDispatch = DateTime.Now.Date.ToString();
 
         [TestMethod]
@@ -157,7 +156,7 @@ namespace Testing4
         }
 
 
-     /*   [TestMethod]
+        [TestMethod]
         public void DateOfDispatchMinLessOne()
         {
             clsShipping AShipment = new clsShipping();
@@ -168,8 +167,129 @@ namespace Testing4
             String DateOfDispatch = MinimumDate.AddDays(-1).ToString();
             Error = AShipment.Valid(DateOfDispatch);
             Assert.AreNotEqual(Error, ""); //should fail
-        }*/
-    }
+        }
 
+        [TestMethod]
+        public void DateOfDispatchMinPlusOne()
+        {
+            clsShipping AShipment = new clsShipping();
+            String Error = "";
+            //store the minimum date
+            DateTime MinimumDate = Convert.ToDateTime("2015-01-01");
+            //set date to MinimumDate plus 1 day.
+            String DateOfDispatch = MinimumDate.AddDays(1).ToString();
+            Error = AShipment.Valid(DateOfDispatch);
+            Assert.AreEqual(Error, ""); //should pass           
+        }
+
+        [TestMethod]
+        public void DateOfDispatchMaxLessOne()
+        {
+            clsShipping AShipment = new clsShipping();
+            String Error = "";
+            //create test data to pass to the method
+            DateTime TestDate;
+            //set date to Today's date
+            TestDate = DateTime.Now.Date;
+            //change the date to yesterday's date
+            TestDate = TestDate.AddDays(-1);
+            //convert the date to a string
+            String DateOfDispatch = TestDate.ToString();
+            Error = AShipment.Valid(DateOfDispatch);
+            Assert.AreEqual(Error, ""); //should pass
+        }
+
+        [TestMethod]
+        public void DateOfDispatchMax()
+        {
+            clsShipping AShipment = new clsShipping();
+            String Error = "";
+            //create test data to pass to the method
+            DateTime TestDate;
+            //set date to Today's date
+            TestDate = DateTime.Now.Date;
+            //convert the date to a string
+            String DateOfDispatch = TestDate.ToString();
+            Error = AShipment.Valid(DateOfDispatch);
+            Assert.AreEqual(Error, ""); //should pass
+        }
+
+        [TestMethod]
+        public void DateOfDispatchMid()
+        {
+            clsShipping AShipment = new clsShipping();
+            String Error = "";
+            //create test data to pass to the method
+            DateTime TestDate;
+            //set date to Today's date
+            TestDate = DateTime.Now.Date;
+            //set the date to a bit in the past
+            TestDate = TestDate.AddYears(-5);
+            Error = AShipment.Valid(DateOfDispatch);
+            Assert.AreEqual(Error, ""); //should pass
+        }
+
+        [TestMethod]
+        public void DateOfDispatchMaxPlusOne()
+        {
+            clsShipping AShipment = new clsShipping();
+            String Error = "";
+            //create test data to pass to the method
+            DateTime TestDate;
+            //set date to Today's date
+            TestDate = DateTime.Now.Date;
+            //change the date to tomorrow's date
+            TestDate = TestDate.AddDays(1);
+            //convert the date to a string
+            String DateOfDispatch = TestDate.ToString();
+            Error = AShipment.Valid(DateOfDispatch);
+            Assert.AreNotEqual(Error, ""); //should fail
+        }
+
+        [TestMethod]
+        public void DateOfDispatchExtremeMax()
+        {
+            clsShipping AShipment = new clsShipping();
+            String Error = "";
+            //create test data to pass to the method
+            DateTime TestDate;
+            //set date to Today's date
+            TestDate = DateTime.Now.Date;
+            //change the date to + 100 years
+            TestDate = TestDate.AddDays(100);
+            //convert the date to a string
+            String DateOfDispatch = TestDate.ToString();
+            Error = AShipment.Valid(DateOfDispatch);
+            Assert.AreNotEqual(Error, ""); //should fail
+        }
+
+        [TestMethod]
+        public void DateOfDispatchExtremeMin()
+        {
+            clsShipping AShipment = new clsShipping();
+            String Error = "";
+            //create test data to pass to the method
+            DateTime TestDate;
+            //set date to Today's date
+            TestDate = DateTime.Now.Date;
+            //change the date to - 100 years
+            TestDate = TestDate.AddYears(-100);
+            //convert the date to a string
+            String DateOfDispatch = TestDate.ToString();
+            Error = AShipment.Valid(DateOfDispatch);
+            Assert.AreNotEqual(Error, ""); //should fail
+        }
+
+        [TestMethod]
+        public void DateOfDispatchInvalidData()
+        {
+            clsShipping AShipment = new clsShipping();
+            String Error = "";
+            //set the DateOfDispatch to a non date value
+            String DateOfDispatch = "invalid input";
+            Error = AShipment.Valid(DateOfDispatch);
+            Assert.AreNotEqual(Error, ""); //should fail
+        }
+    }
 }
 
