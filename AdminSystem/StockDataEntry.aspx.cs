@@ -109,14 +109,15 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsStock AnItem = new clsStock();
         //variable to store the primary key
         Int32 ItemId;
-        DateTime LastPurchasedInput = Convert.ToDateTime(txtLastPurchased.Text);
-        String LastPurchasedFormatted = LastPurchasedInput.ToShortDateString();
         //variable to store the result of the find operation
         Boolean Found = false;
         //get the primary key entered by the user
         ItemId = Convert.ToInt32(txtItemId.Text);
         //Find the record
         Found = AnItem.Find(ItemId);
+        //Format the date so its DAY/MONTH/YEAR (removes unnecessary time)
+        DateTime LastPurchasedInput = Convert.ToDateTime(AnItem.LastPurchased);
+        String LastPurchasedFormatted = LastPurchasedInput.ToShortDateString();
         //if found...
         if (Found)
         { 
@@ -155,13 +156,16 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsStockCollection Stock = new clsStockCollection();
         //find record to update
         Stock.ThisItem.Find(ItemId);
+        //format DateTime so it removes the unnecessary time
+        DateTime LastPurchasedValue = Convert.ToDateTime(Stock.ThisItem.LastPurchased);
+        String LastPurchasedFormatted = LastPurchasedValue.ToShortDateString();
         //display data for record
         txtItemId.Text = Stock.ThisItem.ItemId.ToString();
         txtItemName.Text = Stock.ThisItem.ItemName;
         txtPrice.Text = Stock.ThisItem.Price.ToString();
         txtMaterial.Text = Stock.ThisItem.Material;
         txtQuantity.Text = Stock.ThisItem.Quantity.ToString();
-        txtLastPurchased.Text = Stock.ThisItem.LastPurchased.ToString();
+        txtLastPurchased.Text = LastPurchasedFormatted;
 
     }
 
