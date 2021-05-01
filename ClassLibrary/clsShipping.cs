@@ -76,9 +76,15 @@ namespace ClassLibrary
             return true;
         }
 
-        public string Valid(string shippingType, string price, string dateOfDispatch)
+        public string Valid(string dateOfDispatch)
         {
-            return "";
+            String Error = "";
+            if (dateOfDispatch.Length == 0)
+            {
+                Error = Error + "The date of dispatch may not be blank";
+            }
+
+            return Error;
         }
     }
 }
