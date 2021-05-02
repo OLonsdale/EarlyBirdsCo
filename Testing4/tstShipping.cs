@@ -66,7 +66,7 @@ namespace Testing4
         {
             clsShipping AShipment = new clsShipping();
             Boolean Found = false;
-            int ShippingId = 2;
+            int ShippingId = 5;
             Found = AShipment.Find(ShippingId);
             Assert.IsTrue(Found);
         }
@@ -77,9 +77,9 @@ namespace Testing4
             clsShipping AShipment = new clsShipping();
             Boolean Found = false;
             Boolean OK = true;
-            int ShippingId = 2;
+            int ShippingId = 5;
             Found = AShipment.Find(ShippingId);
-            if (AShipment.ShippingId != 2)
+            if (AShipment.ShippingId != 5)
             {
                 OK = false;
             }
@@ -92,9 +92,9 @@ namespace Testing4
             clsShipping AShipment = new clsShipping();
             Boolean Found = false;
             Boolean OK = true;
-            int ShippingId = 2;
+            int ShippingId = 8;
             Found = AShipment.Find(ShippingId);
-            if (AShipment.DateOfDispatch != Convert.ToDateTime("20/01/2020"))
+            if (AShipment.DateOfDispatch != Convert.ToDateTime("20/04/2021"))
             {
                 OK = false;
             }
@@ -107,7 +107,7 @@ namespace Testing4
             clsShipping AShipment = new clsShipping();
             Boolean Found = false;
             Boolean OK = true;
-            int ShippingId = 2;
+            int ShippingId = 5;
             Found = AShipment.Find(ShippingId);
             if (AShipment.ShippingType != "Standard")
             {
@@ -122,7 +122,7 @@ namespace Testing4
             clsShipping AShipment = new clsShipping();
             Boolean Found = false;
             Boolean OK = true;
-            int ShippingId = 2;
+            int ShippingId = 5;
             Found = AShipment.Find(ShippingId);
             if (AShipment.Price != 4.99m)
             {
@@ -137,7 +137,7 @@ namespace Testing4
             clsShipping AShipment = new clsShipping();
             Boolean Found = false;
             Boolean OK = true;
-            int ShippingId = 2;
+            int ShippingId = 8;
             Found = AShipment.Find(ShippingId);
             if (AShipment.Dispatched != true)
             {
