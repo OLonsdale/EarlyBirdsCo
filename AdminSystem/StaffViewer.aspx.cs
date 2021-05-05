@@ -16,9 +16,9 @@ public partial class _1Viewer : System.Web.UI.Page
         StaffNumber.Text = StaffMember.StaffNumber.ToString();
         FirstName.Text = StaffMember.FirstName;
         LastName.Text = StaffMember.LastName;
-        HourlyRate.Text = StaffMember.HourlyRate.ToString();
+        HourlyRate.Text = Math.Round(StaffMember.HourlyRate, 2).ToString();
         PhoneNumber.Text = StaffMember.PhoneNumber;
-        StartDate.Text = StaffMember.StartDate.ToString();
+        StartDate.Text = Convert.ToDateTime(StaffMember.StartDate).ToShortDateString();
         if (StaffMember.IsManager == true)
         {
             IsManager.Text = "Yes";

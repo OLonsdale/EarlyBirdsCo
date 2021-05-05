@@ -30,9 +30,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
         txtStaffNumber.Text = AllStaff.ThisStaff.StaffNumber.ToString();
         txtFirstName.Text = AllStaff.ThisStaff.FirstName;
         txtLastName.Text = AllStaff.ThisStaff.LastName;
-        txtHourlyRate.Text = AllStaff.ThisStaff.HourlyRate.ToString();
+        txtHourlyRate.Text = Math.Round(AllStaff.ThisStaff.HourlyRate,2).ToString();
         txtPhoneNumber.Text = AllStaff.ThisStaff.PhoneNumber;
-        txtStartDate.Text = AllStaff.ThisStaff.StartDate.ToString();
+        txtStartDate.Text = Convert.ToDateTime(AllStaff.ThisStaff.StartDate).ToShortDateString();
         chkIsManager.Checked = AllStaff.ThisStaff.IsManager;
     }
 
@@ -92,14 +92,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
         
     }
 
-    ////To fix: Cancle button leads to an immidiate redirect back to the current page. back button in broswer does the same////
-
-    protected void btnCancel_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("StaffList.aspx");
-    }
-
-
         protected void btnFind_Click(object sender, EventArgs e)
     {
         //creates new instance of staff class
@@ -126,5 +118,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
                 chkIsManager.Checked = StaffMember.IsManager;
             }
         }
+    }
+
+    protected void btnCancel_Click1(object sender, EventArgs e)
+    {
+        Response.Redirect("StaffList.aspx");
     }
 }

@@ -8,7 +8,6 @@ using ClassLibrary;
 
 public partial class _1_List : System.Web.UI.Page
 {
-
     protected void lstStaffNumberList_SelectedIndexChanged(object sender, EventArgs e) { }
 
     protected void Page_Load(object sender, EventArgs e)
@@ -58,6 +57,7 @@ public partial class _1_List : System.Web.UI.Page
             if (btnConfirmDelete.Visible == false)
             {
                 btnConfirmDelete.Visible = true;
+                btnAbortDelete.Visible = true;
             }
             else if (btnConfirmDelete.Visible == true)
             {
@@ -114,5 +114,11 @@ public partial class _1_List : System.Web.UI.Page
         {
             lblError.Text = "No record selected";
         }
+    }
+
+    protected void btnAbortDelete_Click(object sender, EventArgs e)
+    {
+        btnConfirmDelete.Visible = false;
+        btnAbortDelete.Visible = false;
     }
 }
