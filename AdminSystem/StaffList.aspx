@@ -20,6 +20,7 @@
         <asp:Button ID="btnEdit" runat="server" Text="Edit" OnClick="btnEdit_Click" UseSubmitBehavior="False" />
         <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" UseSubmitBehavior="False" />
         <asp:Button ID="btnConfirmDelete" runat="server" Text="Confirm Delete" OnClick="btnConfirmDelete_Click" Visible="False" UseSubmitBehavior="False" />
+        <asp:Button ID="btnAbortDelete" runat="server" Text="Abort Delete" OnClick="btnAbortDelete_Click" Visible="False" UseSubmitBehavior="False" />
         <br />
         <asp:Label ID="lblError" runat="server"></asp:Label>
 
