@@ -6,7 +6,6 @@ namespace ClassLibrary
     public class clsShipping
     {
         private Int32 mShippingId;
-        private Int32 mTrackingNum;
         private String mShippingType;
         private Decimal mPrice;
         private Nullable<DateTime> mDateOfDispatch;
@@ -24,18 +23,8 @@ namespace ClassLibrary
             }
         }
 
-        public Int32 TrackingNum
-        {
-            get
-            {
-                return mTrackingNum;
-            }
-            set
-            {
-                mTrackingNum = value;
-            }
-        }
-
+       
+    
         public String ShippingType
         {
             get
